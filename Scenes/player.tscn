@@ -1,13 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=5 format=3 uid="uid://dbocxh517g6jj"]
 
 [ext_resource type="Script" uid="uid://dlvgfm1bljojv" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://327v7y0jacx1" path="res://Assets/PNG/player_temp.png" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://bw7x8pepak5a7" path="res://Scenes/wall_dust.tscn" id="2_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
+walk_speed = null
+jump_speed = null
+number_of_jumps = null
+
+[node name="WallDustRight" parent="." instance=ExtResource("2_6t5aa")]
+unique_name_in_owner = true
+position = Vector2(16, 0)
+emitting = false
+
+[node name="WallDustLeft" parent="." instance=ExtResource("2_6t5aa")]
+unique_name_in_owner = true
+position = Vector2(-16, 0)
+emitting = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v0iea")
