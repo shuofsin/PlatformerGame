@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw7x8pepak5a7"]
+
+[ext_resource type="Texture2D" uid="uid://327v7y0jacx1" path="res://Assets/PNG/player_temp.png" id="1_why1w"]
+
+[sub_resource type="Curve" id="Curve_why1w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.639053, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ts161"]
+curve = SubResource("Curve_why1w")
+
+[sub_resource type="Curve" id="Curve_intvt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8454t"]
+curve = SubResource("Curve_intvt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oany2"]
+particle_flag_disable_z = true
+angle_min = -45.0
+angle_max = 45.0
+direction = Vector3(0, 0, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_8454t")
+color = Color(0.787759, 0.787759, 0.787759, 1)
+alpha_curve = SubResource("CurveTexture_ts161")
+
+[node name="Dust" type="GPUParticles2D"]
+amount = 3
+texture = ExtResource("1_why1w")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_oany2")

@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+#Nodes
 @onready var CoyoteTimer: Timer = %CoyoteTimer
 @onready var JumpBufferTimer: Timer = %JumpBufferTimer
-
-var coyote_time_activated: bool = false 
+@onready var Animations: AnimatedSprite2D = %Animations
+@onready var WallDust: GPUParticles2D = %WallDust
+@onready var RunDust: GPUParticles2D = %RunDust
+@onready var JumpDust: GPUParticles2D = %JumpDust
 
 # Vertical movement variables
 const JUMP_HEIGHT: float = -480.0
@@ -12,6 +15,7 @@ const MAX_GRAVITY: float = 14.5
 var gravity: float = MIN_GRAVITY
 const HEAD_NUDGE: float = 3.0
 const LEDGE_HOP_FACTOR: float = 7
+var coyote_time_activated: bool = false 
 
 # Horizontal movement variables
 const MAX_SPEED: float = 200.0
@@ -28,7 +32,7 @@ const WALL_JUMP_PUSH_FORCE: float = 200.0
 var wall_contact_coyote: float = 0.0
 const WALL_CONTACT_COYOTE_TIME: float = 0.2
 var wall_jump_lock: float = 0.0
-const WALL_JUMP_LOCK_TIME: float = 0.1
+const WALL_JUMP_LOCK_TIME: float = 0.5
 var look_dir_x: int = 1
 
 func _physics_process(delta: float) -> void: 
@@ -39,12 +43,11 @@ func _physics_process(delta: float) -> void:
 	# Handle horizontal velocity - accounting for wall jump
 	if wall_jump_lock > 0.0:
 		wall_jump_lock -= delta
-		# velocity.x = lerp(velocity.x, x_input * MAX_SPEED, x_velocity_weight * 0.25)
 	else: 
 		velocity.x = lerp(velocity.x, x_input * MAX_SPEED, x_velocity_weight)
 	
 	# Handle wall jump
-	if is_on_floor() or wall_contact_coyote > 0.0:
+	if wall_contact_coyote > 0.0:
 		if Input.is_action_just_pressed("move_jump"):
 			velocity.y = JUMP_HEIGHT
 			if wall_contact_coyote > 0.0: 
@@ -80,6 +83,8 @@ func _physics_process(delta: float) -> void:
 		CoyoteTimer.stop()
 		coyote_time_activated = true
 		jumps_completed += 1
+		if jumps_completed > 1 and !(wall_jump_lock > 0.0): 
+			JumpDust.emitting = true
 	
 	# Handle head nudge
 	if velocity.y < JUMP_HEIGHT/2.0: 
@@ -103,12 +108,38 @@ func _physics_process(delta: float) -> void:
 		look_dir_x = sign(velocity.x)
 		wall_contact_coyote = WALL_CONTACT_COYOTE_TIME
 		velocity.y = WALL_GRAVITY
-		jumps_completed = 0
 	else: 
 		wall_contact_coyote -= delta
 		# Please our Lord Newton
 		velocity.y += gravity
 	
-	# TODO: Handle wall dust
+	# TODO: Handle dust
+	if is_on_wall():
+		if sign(WallDust.position.x) != sign(look_dir_x):
+			WallDust.position.x *= -1
+		WallDust.emitting = true
+	else: 
+		WallDust.emitting = false
+	
+	if x_input and is_on_floor():
+		RunDust.emitting = true 
+	else: 
+		RunDust.emitting = false
+	
+	if is_on_floor(): 
+		JumpDust.emitting = false
+	
+	# Handle animations
+	Animations.flip_h = true if velocity.x < 0 else false
+	if x_input == 0 and is_on_floor(): 
+		Animations.play("idle")
+	elif x_input and is_on_floor():
+		Animations.play("walk")
+	elif !is_on_floor() and velocity.y > 0 and is_on_wall() and velocity.x != 0: 
+		Animations.play("wall")
+	elif !is_on_floor() and velocity.y < 0: 
+		Animations.play("jump")
+	elif !is_on_floor() and velocity.y > 0: 
+		Animations.play("fall")
 	
 	move_and_slide()

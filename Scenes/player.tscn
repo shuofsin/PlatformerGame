@@ -1,20 +1,119 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=19 format=3 uid="uid://dbocxh517g6jj"]
 
 [ext_resource type="Script" uid="uid://dlvgfm1bljojv" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://327v7y0jacx1" path="res://Assets/PNG/player_temp.png" id="1_v0iea"]
-[ext_resource type="PackedScene" uid="uid://bw7x8pepak5a7" path="res://Scenes/wall_dust.tscn" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://bw7x8pepak5a7" path="res://Scenes/dust.tscn" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://b0j83cml0ugu8" path="res://Assets/PNG/Player/player_fall.png" id="3_3smsa"]
+[ext_resource type="Texture2D" uid="uid://dq3kr0qmxqa4k" path="res://Assets/PNG/Player/player_idle.png" id="4_3smsa"]
+[ext_resource type="Texture2D" uid="uid://cwwodv0gul2t4" path="res://Assets/PNG/Player/player_jump.png" id="5_8erm5"]
+[ext_resource type="Texture2D" uid="uid://d4f2ucgvqj8ds" path="res://Assets/PNG/Player/player_walk.png" id="6_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://ga5t2ws4ufur" path="res://Scenes/jump_dust.tscn" id="7_8erm5"]
+[ext_resource type="Texture2D" uid="uid://crutqk0duqi1r" path="res://Assets/PNG/Player/player_wall.png" id="7_tx1dd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(32, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
+size = Vector2(14, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("6_f1ek2")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fs7ks"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3smsa")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3smsa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8erm5")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu2lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd4e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqcod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_tx1dd")
+}],
+"loop": true,
+"name": &"wall",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_v0iea")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cvnsp")
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_3smsa")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -27,49 +126,63 @@ wait_time = 0.12
 one_shot = true
 
 [node name="HeadNudgeLeftOne" type="RayCast2D" parent="."]
-position = Vector2(-15, -15)
+position = Vector2(-6, -13)
 target_position = Vector2(0, -3)
 hit_from_inside = true
 
 [node name="HeadNudgeLeftTwo" type="RayCast2D" parent="."]
-position = Vector2(-12, -15)
+position = Vector2(-4, -13)
 target_position = Vector2(0, -3)
 hit_from_inside = true
 
 [node name="HeadNudgeRightOne" type="RayCast2D" parent="."]
-position = Vector2(15, -15)
+position = Vector2(6, -13)
 target_position = Vector2(0, -3)
 hit_from_inside = true
 
 [node name="HeadNudgeRightTwo" type="RayCast2D" parent="."]
-position = Vector2(12, -15)
+position = Vector2(4, -13)
 target_position = Vector2(0, -3)
 hit_from_inside = true
 
 [node name="LedgeHopRightOne" type="RayCast2D" parent="."]
-position = Vector2(15, 14)
+position = Vector2(6, 14)
 target_position = Vector2(3, 0)
 hit_from_inside = true
 
 [node name="LedgeHopRightTwo" type="RayCast2D" parent="."]
-position = Vector2(15, 5)
+position = Vector2(6, 6)
 target_position = Vector2(3, 0)
 hit_from_inside = true
 
 [node name="LedgeHopLeftOne" type="RayCast2D" parent="."]
-position = Vector2(-15, 14)
+position = Vector2(-6, 14)
 target_position = Vector2(-3, 0)
 hit_from_inside = true
 
 [node name="LedgeHopLeftTwo" type="RayCast2D" parent="."]
-position = Vector2(-15, 5)
+position = Vector2(-6, 6)
 target_position = Vector2(-3, 0)
 hit_from_inside = true
 
-[node name="WallDustRight" parent="." instance=ExtResource("2_6t5aa")]
-position = Vector2(16, 0)
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_fs7ks")
+animation = &"walk"
+autoplay = "idle"
+frame = 4
+frame_progress = 0.718689
+
+[node name="JumpDust" parent="." instance=ExtResource("7_8erm5")]
+unique_name_in_owner = true
+position = Vector2(-2, 16)
+
+[node name="WallDust" parent="." instance=ExtResource("2_6t5aa")]
+unique_name_in_owner = true
+position = Vector2(7, -7)
 emitting = false
 
-[node name="WallDustLeft" parent="." instance=ExtResource("2_6t5aa")]
-position = Vector2(-16, 0)
+[node name="RunDust" parent="." instance=ExtResource("2_6t5aa")]
+unique_name_in_owner = true
+position = Vector2(-2, 16)
 emitting = false
