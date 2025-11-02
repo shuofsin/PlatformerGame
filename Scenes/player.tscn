@@ -9,22 +9,67 @@ size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
-walk_speed = null
-jump_speed = null
-number_of_jumps = null
-
-[node name="WallDustRight" parent="." instance=ExtResource("2_6t5aa")]
-unique_name_in_owner = true
-position = Vector2(16, 0)
-emitting = false
-
-[node name="WallDustLeft" parent="." instance=ExtResource("2_6t5aa")]
-unique_name_in_owner = true
-position = Vector2(-16, 0)
-emitting = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v0iea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cvnsp")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.12
+one_shot = true
+
+[node name="HeadNudgeLeftOne" type="RayCast2D" parent="."]
+position = Vector2(-15, -15)
+target_position = Vector2(0, -3)
+hit_from_inside = true
+
+[node name="HeadNudgeLeftTwo" type="RayCast2D" parent="."]
+position = Vector2(-12, -15)
+target_position = Vector2(0, -3)
+hit_from_inside = true
+
+[node name="HeadNudgeRightOne" type="RayCast2D" parent="."]
+position = Vector2(15, -15)
+target_position = Vector2(0, -3)
+hit_from_inside = true
+
+[node name="HeadNudgeRightTwo" type="RayCast2D" parent="."]
+position = Vector2(12, -15)
+target_position = Vector2(0, -3)
+hit_from_inside = true
+
+[node name="LedgeHopRightOne" type="RayCast2D" parent="."]
+position = Vector2(15, 14)
+target_position = Vector2(3, 0)
+hit_from_inside = true
+
+[node name="LedgeHopRightTwo" type="RayCast2D" parent="."]
+position = Vector2(15, 5)
+target_position = Vector2(3, 0)
+hit_from_inside = true
+
+[node name="LedgeHopLeftOne" type="RayCast2D" parent="."]
+position = Vector2(-15, 14)
+target_position = Vector2(-3, 0)
+hit_from_inside = true
+
+[node name="LedgeHopLeftTwo" type="RayCast2D" parent="."]
+position = Vector2(-15, 5)
+target_position = Vector2(-3, 0)
+hit_from_inside = true
+
+[node name="WallDustRight" parent="." instance=ExtResource("2_6t5aa")]
+position = Vector2(16, 0)
+emitting = false
+
+[node name="WallDustLeft" parent="." instance=ExtResource("2_6t5aa")]
+position = Vector2(-16, 0)
+emitting = false

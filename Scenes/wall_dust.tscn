@@ -23,7 +23,7 @@ scale_max = 0.1
 scale_curve = SubResource("CurveTexture_8454t")
 
 [node name="WallDust" type="GPUParticles2D"]
-amount = 20
+amount = 3
 texture = ExtResource("1_i2a4u")
-lifetime = 0.7
+lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_oany2")
