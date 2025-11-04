@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://561wiy4g0evu"]
 
 [ext_resource type="PackedScene" uid="uid://bwmcp4oytibbr" path="res://Scenes/temp_tile_map_layer.tscn" id="1_qxrlw"]
-[ext_resource type="Script" uid="uid://bop6j3lsla843" path="res://Scenes/game.gd" id="1_wrm1d"]
+[ext_resource type="Script" uid="uid://bop6j3lsla843" path="res://Scripts/game.gd" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://dbocxh517g6jj" path="res://Scenes/player.tscn" id="2_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://by0hyquymkthh" path="res://Scenes/moving_platform.tscn" id="4_3dryh"]
 
@@ -14,9 +14,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAQAAQAAAAA
 [node name="Player" parent="." instance=ExtResource("2_wrm1d")]
 unique_name_in_owner = true
 position = Vector2(101, 70)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
 
 [node name="DebugScreen" type="Label" parent="."]
 unique_name_in_owner = true

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=4 uid="uid://cw7cpyestxyym"]
+
+[ext_resource type="PackedScene" uid="uid://qq4odr15se45" path="res://Scenes/weapon.tscn" id="1_3dogw"]
+[ext_resource type="PackedScene" uid="uid://bwmcp4oytibbr" path="res://Scenes/temp_tile_map_layer.tscn" id="1_r5l72"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="TempTileMapLayer" parent="." instance=ExtResource("1_r5l72")]
+tile_map_data = PackedByteArray("AAAHAPf/AQAAAAAAAAAIAPf/AQAAAAAAAAAJAPf/AQAAAAAAAAAKAPf/AQAAAAAAAAALAPf/AQAAAAAAAAAMAPf/AQAAAAAAAAANAPf/AQAAAAAAAAAOAPf/AQAAAAAAAAAOAPn/AQAAAAAAAAAOAPr/AQAAAAAAAAAOAPv/AQAAAAAAAAAOAPz/AQAAAAAAAAAOAP3/AQAAAAAAAAAOAP7/AQAAAAAAAAAOAP//AQAAAAAAAAAOAAAAAQAAAAAAAAD9/wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD//wcAAQAAAAAAAAAAAAcAAQAAAAAAAAABAAcAAQAAAAAAAAACAAcAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAD0//r/AQAAAAAAAAD0//v/AQAAAAAAAAD0//z/AQAAAAAAAAD0//3/AQAAAAAAAAD0//7/AQAAAAAAAAD0////AQAAAAAAAAD0/wAAAQAAAAAAAAD6//f/AQAAAAAAAAD7//f/AQAAAAAAAAD8//f/AQAAAAAAAAD9//f/AQAAAAAAAAA=")
+
+[node name="Weapon" parent="." instance=ExtResource("1_3dogw")]
+
+[node name="Camera2D" type="Camera2D" parent="Weapon"]
+zoom = Vector2(2, 2)

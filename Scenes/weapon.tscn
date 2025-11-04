@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://qq4odr15se45"]
+
+[ext_resource type="Texture2D" uid="uid://myiep4agnasw" path="res://Assets/PNG/weapon.png" id="1_er6cq"]
+[ext_resource type="Script" uid="uid://b8qh65nn7yx0o" path="res://Scripts/weapon.gd" id="1_qv81b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv81b"]
+bg_color = Color(3.60981e-07, 0.595138, 0.249017, 1)
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_qv81b")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_er6cq")
+
+[node name="ChargeBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -18.0
+offset_right = 14.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_qv81b")
+show_percentage = false

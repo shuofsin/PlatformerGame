@@ -12,6 +12,7 @@ extends CharacterBody2D
 const JUMP_HEIGHT: float = -480.0
 const MIN_GRAVITY: float = 12.0
 const MAX_GRAVITY: float = 14.5 
+const GRAVITY_ACCELERATION: float = 12.0
 var gravity: float = MIN_GRAVITY
 const HEAD_NUDGE: float = 3.0
 const LEDGE_HOP_FACTOR: float = 7
@@ -69,7 +70,7 @@ func _physics_process(delta: float) -> void:
 		if (Input.is_action_just_released("move_jump") or is_on_ceiling()) and velocity.y < 0:
 			velocity.y *= 0.5
 		
-		gravity = lerp(gravity, MAX_GRAVITY, 12.0 * delta)
+		gravity = lerp(gravity, MAX_GRAVITY, GRAVITY_ACCELERATION * delta)
 	
 	# Handle jump input through buffer
 	if Input.is_action_just_pressed("move_jump"):

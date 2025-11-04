@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://br3d84gpqr40p"]
+
+[ext_resource type="Texture2D" uid="uid://ymeg3uy04mfg" path="res://Assets/PNG/arrow.png" id="1_2u0bd"]
+[ext_resource type="Script" uid="uid://cbnf8yci67twi" path="res://Scripts/arrow.gd" id="1_40cdi"]
+[ext_resource type="Texture2D" uid="uid://327v7y0jacx1" path="res://Assets/PNG/Player/player_temp.png" id="2_h5x2m"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_40cdi"]
+points = PackedVector2Array(9, 0, 5, 2, 5, -2)
+
+[sub_resource type="Curve" id="Curve_40cdi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xxsqv"]
+curve = SubResource("Curve_40cdi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yjaco"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0, 0.5, 0)
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.01
+color = Color(0.633757, 0.633757, 0.633757, 1)
+alpha_curve = SubResource("CurveTexture_xxsqv")
+
+[node name="Arrow" type="Area2D"]
+z_index = -1
+collision_mask = 2
+script = ExtResource("1_40cdi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-5, 0)
+texture = ExtResource("1_2u0bd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 0)
+shape = SubResource("ConvexPolygonShape2D_40cdi")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-11, 0)
+amount = 20
+texture = ExtResource("2_h5x2m")
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_yjaco")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://by0hyquymkthh"]
 
-[ext_resource type="Script" uid="uid://b272bshipbu34" path="res://Scenes/moving_platform.gd" id="1_anqd2"]
+[ext_resource type="Script" uid="uid://b272bshipbu34" path="res://Scripts/moving_platform.gd" id="1_anqd2"]
 [ext_resource type="Texture2D" uid="uid://csv1eknuhlgnq" path="res://Assets/PNG/Tiles/moving_platform.png" id="1_vvyo4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anqd2"]
