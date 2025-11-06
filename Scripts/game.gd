@@ -1,6 +1,6 @@
 extends Node2D
 
-var _debug: bool = false
+var _debug: bool = true
 @onready var Player: CharacterBody2D = %Player
 @onready var DebugScreen: Label = %DebugScreen
 
@@ -13,9 +13,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if _debug: 
-		DebugScreen.text = ("Player Y Velocity: " + str(Player.velocity.y) + 
-		"\nPlayer X Velocity: " + str(Player.velocity.x) + 
-		"\nJumps Completed: " + str(Player.jumps_completed) + 
-		"\nWall Lock Time: " + str(Player.wall_jump_lock))
+		DebugScreen.text = ("Player X Velocity: " + str(Player.velocity.x))
 	else: 
 		DebugScreen.text = ""

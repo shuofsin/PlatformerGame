@@ -166,15 +166,14 @@ position = Vector2(-6, 6)
 target_position = Vector2(-3, 0)
 hit_from_inside = true
 
-[node name="Weapon" parent="." instance=ExtResource("9_f1ek2")]
-
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_fs7ks")
-animation = &"walk"
+animation = &"wall"
 autoplay = "idle"
-frame = 4
-frame_progress = 0.718689
+
+[node name="Weapon" parent="." instance=ExtResource("9_f1ek2")]
+unique_name_in_owner = true
 
 [node name="JumpDust" parent="." instance=ExtResource("7_8erm5")]
 unique_name_in_owner = true
@@ -190,8 +189,9 @@ unique_name_in_owner = true
 position = Vector2(-2, 16)
 emitting = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(3, 3)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.3

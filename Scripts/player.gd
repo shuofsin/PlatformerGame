@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var WallDust: GPUParticles2D = %WallDust
 @onready var RunDust: GPUParticles2D = %RunDust
 @onready var JumpDust: GPUParticles2D = %JumpDust
+@onready var Weapon: Node2D = %Weapon
+@onready var Camera: Camera2D = %Camera
 
 # Vertical movement variables
 const JUMP_HEIGHT: float = -480.0
@@ -35,6 +37,11 @@ const WALL_CONTACT_COYOTE_TIME: float = 0.2
 var wall_jump_lock: float = 0.0
 const WALL_JUMP_LOCK_TIME: float = 0.5
 var look_dir_x: int = 1
+
+# Camera motion
+const MIN_ZOOM: float = 2.0
+const MAX_ZOOM: float = 3.0
+const ZOOM_RATE: float = 1.25
 
 func _physics_process(delta: float) -> void: 
 	# Horizontal movement calculations
@@ -114,6 +121,8 @@ func _physics_process(delta: float) -> void:
 		# Please our Lord Newton
 		velocity.y += gravity
 	
+	move_and_slide()
+
 	# TODO: Handle dust
 	if is_on_wall():
 		if sign(WallDust.position.x) != sign(look_dir_x):
@@ -131,16 +140,23 @@ func _physics_process(delta: float) -> void:
 		JumpDust.emitting = false
 	
 	# Handle animations
-	Animations.flip_h = true if velocity.x < 0 else false
+	if velocity.x > 0: 
+		Animations.flip_h = false 
+	if velocity.x < 0: 
+		Animations.flip_h = true
 	if x_input == 0 and is_on_floor(): 
 		Animations.play("idle")
 	elif x_input and is_on_floor():
 		Animations.play("walk")
-	elif !is_on_floor() and velocity.y > 0 and is_on_wall() and velocity.x != 0: 
+	elif !is_on_floor() and velocity.y > 0 and is_on_wall():
 		Animations.play("wall")
 	elif !is_on_floor() and velocity.y < 0: 
 		Animations.play("jump")
 	elif !is_on_floor() and velocity.y > 0: 
 		Animations.play("fall")
 	
-	move_and_slide()
+	# Handle zoom 
+	if Weapon.is_charging(): 
+		Camera.zoom = lerp(Camera.zoom, Vector2(MIN_ZOOM, MIN_ZOOM), ZOOM_RATE * delta) 
+	else: 
+		Camera.zoom = lerp(Camera.zoom, Vector2(MAX_ZOOM, MAX_ZOOM), ZOOM_RATE * delta)
