@@ -2,6 +2,6 @@
 Godot Platformer Project
 
 ## To-do:
-- Environment: Moving Platforms
-- Environment: Spikes
-- Environment: One-way platforms
+- Dash: Limit/Reset
+- Combat: Enemies
+- Visuals: Player overhaul

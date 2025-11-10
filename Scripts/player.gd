@@ -26,7 +26,7 @@ const ACCELERATION: float = 20.0
 const FRICTION: float = 15.0
 
 # Double jump
-const MAX_JUMPS: int = 2
+const MAX_JUMPS: int = 1
 var jumps_completed: int = 0
 
 # Wall sliding and jumping 
@@ -44,7 +44,7 @@ const MAX_ZOOM: float = 3.0
 const ZOOM_RATE: float = 1.25
 
 # Air Dash
-const DASH_AMOUNT: float = 300.0
+const DASH_AMOUNT: float = 500.0
 const DASH_TIME: float = 0.16
 
 var can_dash: bool = true
@@ -182,26 +182,23 @@ func _physics_process(delta: float) -> void:
 
 func _dash_logic(delta: float) -> void: 
 	
-	var input_dir: Vector2 = Vector2(
-		Input.get_axis("move_left", "move_right"),
-		Input.get_axis("move_up", "move_down")
-	).normalized() 
+	var input_direction: Vector2 = global_position.direction_to(get_global_mouse_position()).normalized()
 	
-	if input_dir.x != 0: 
-		dash_direction.x = input_dir.x
+	#if input_direction.x != 0: 
+	#	dash_direction.x = input_direction.x
 	
 	if can_dash and Input.is_action_just_pressed("move_dash"):
-		var final_dash_dir: Vector2 = dash_direction 
-		if input_dir.y != 0 and input_dir.x == 0: 
-			final_dash_dir.x = 0
-		final_dash_dir.y = input_dir.y 
+		var final_dash_direction: Vector2 = input_direction
+		#if input_direction.y != 0 and input_direction.x == 0: 
+		#	final_dash_direction.x = 0
+		#final_dash_direction.y = input_direction.y 
 		
 		can_dash = false 
 		is_dashing = true
 		dash_timer = DASH_TIME
 		
 		_update_dash_visuals()
-		velocity = final_dash_dir * DASH_AMOUNT
+		velocity = final_dash_direction * DASH_AMOUNT
 	
 	if is_dashing:
 		dash_timer -= delta 
