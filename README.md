@@ -5,3 +5,4 @@ Godot Platformer Project
 - Dash: Limit/Reset
 - Combat: Enemies
 - Visuals: Player overhaul
+- Code: REFACTOR
