@@ -181,7 +181,7 @@ position = Vector2(-2, 16)
 
 [node name="WallDust" parent="." instance=ExtResource("2_6t5aa")]
 unique_name_in_owner = true
-position = Vector2(7, -7)
+position = Vector2(7, 9)
 emitting = false
 
 [node name="RunDust" parent="." instance=ExtResource("2_6t5aa")]
