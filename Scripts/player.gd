@@ -43,16 +43,26 @@ const MIN_ZOOM: float = 2.0
 const MAX_ZOOM: float = 3.0
 const ZOOM_RATE: float = 1.25
 
+# Air Dash
+const DASH_AMOUNT: float = 300.0
+const DASH_TIME: float = 0.16
+
+var can_dash: bool = true
+var is_dashing: bool = false
+var dash_direction: Vector2 = Vector2.RIGHT
+var dash_timer: float = 0.0
+
 func _physics_process(delta: float) -> void: 
-	# Horizontal movement calculations
 	var x_input: float = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
-	var x_velocity_weight: float = delta * (ACCELERATION if x_input else FRICTION)
-	
-	# Handle horizontal velocity - accounting for wall jump
-	if wall_jump_lock > 0.0:
-		wall_jump_lock -= delta
-	else: 
-		velocity.x = lerp(velocity.x, x_input * MAX_SPEED, x_velocity_weight)
+	if !is_dashing: 
+		# Horizontal movement calculations
+		var x_velocity_weight: float = delta * (ACCELERATION if x_input else FRICTION)
+		
+		# Handle horizontal velocity - accounting for wall jump
+		if wall_jump_lock > 0.0:
+			wall_jump_lock -= delta
+		else: 
+			velocity.x = lerp(velocity.x, x_input * MAX_SPEED, x_velocity_weight)
 	
 	# Handle wall jump
 	if wall_contact_coyote > 0.0:
@@ -79,10 +89,11 @@ func _physics_process(delta: float) -> void:
 		
 		gravity = lerp(gravity, MAX_GRAVITY, GRAVITY_ACCELERATION * delta)
 	
-	# Handle jump input through buffer
-	if Input.is_action_just_pressed("move_jump"):
-		if JumpBufferTimer.is_stopped():
-			JumpBufferTimer.start()
+	if !is_dashing: 
+		# Handle jump input through buffer
+		if Input.is_action_just_pressed("move_jump"):
+			if JumpBufferTimer.is_stopped():
+				JumpBufferTimer.start()
 	
 	# Preform jump(s)
 	if !JumpBufferTimer.is_stopped() and (!CoyoteTimer.is_stopped() or is_on_floor() or jumps_completed < MAX_JUMPS):
@@ -111,20 +122,22 @@ func _physics_process(delta: float) -> void:
 		if $LedgeHopRightOne.is_colliding() and !$LedgeHopRightTwo.is_colliding() and velocity.x > 0:
 			velocity.y += JUMP_HEIGHT/LEDGE_HOP_FACTOR
 	
-	# Handle wall sliding 
-	if !is_on_floor() and velocity.y > 0 and is_on_wall() and velocity.x != 0:
-		look_dir_x = sign(velocity.x)
-		wall_contact_coyote = WALL_CONTACT_COYOTE_TIME
-		velocity.y = WALL_GRAVITY
-	else: 
-		wall_contact_coyote -= delta
-		# Please our Lord Newton
-		velocity.y += gravity
+	if !is_dashing:
+		# Handle wall sliding 
+		if !is_on_floor() and velocity.y > 0 and is_on_wall() and velocity.x != 0:
+			look_dir_x = sign(velocity.x)
+			wall_contact_coyote = WALL_CONTACT_COYOTE_TIME
+			velocity.y = WALL_GRAVITY
+		else: 
+			wall_contact_coyote -= delta
+			# Please our Lord Newton
+			velocity.y += gravity
 	
+	_dash_logic(delta)
 	move_and_slide()
 
 	# TODO: Handle dust
-	if is_on_wall():
+	if is_on_wall() and !is_on_floor():
 		if sign(WallDust.position.x) != sign(look_dir_x):
 			WallDust.position.x *= -1
 		WallDust.emitting = true
@@ -160,3 +173,43 @@ func _physics_process(delta: float) -> void:
 		Camera.zoom = lerp(Camera.zoom, Vector2(MIN_ZOOM, MIN_ZOOM), ZOOM_RATE * delta) 
 	else: 
 		Camera.zoom = lerp(Camera.zoom, Vector2(MAX_ZOOM, MAX_ZOOM), ZOOM_RATE * delta)
+	
+	# Handle dash
+	if is_on_floor(): 
+		if !is_dashing and !can_dash: 
+			can_dash = true
+			_update_dash_visuals()
+
+func _dash_logic(delta: float) -> void: 
+	
+	var input_dir: Vector2 = Vector2(
+		Input.get_axis("move_left", "move_right"),
+		Input.get_axis("move_up", "move_down")
+	).normalized() 
+	
+	if input_dir.x != 0: 
+		dash_direction.x = input_dir.x
+	
+	if can_dash and Input.is_action_just_pressed("move_dash"):
+		var final_dash_dir: Vector2 = dash_direction 
+		if input_dir.y != 0 and input_dir.x == 0: 
+			final_dash_dir.x = 0
+		final_dash_dir.y = input_dir.y 
+		
+		can_dash = false 
+		is_dashing = true
+		dash_timer = DASH_TIME
+		
+		_update_dash_visuals()
+		velocity = final_dash_dir * DASH_AMOUNT
+	
+	if is_dashing:
+		dash_timer -= delta 
+		if dash_timer <= 0.0:
+			is_dashing = false
+
+func _update_dash_visuals() -> void: 
+	if can_dash:
+		modulate = Color('ffffff')
+	else: 
+		modulate = Color('4757a7')
