@@ -5,11 +5,10 @@ extends Node2D
 @onready var ChargeBar: ProgressBar = %ChargeBar
 
 var direction: Vector2 = Vector2.RIGHT 
-var arrow_speed: float = 350
+var arrow_speed: float = 600
 var charge: float = 0
 var charge_rate: float = 100
 const MAX_CHARGE: float = 100
-
 
 func _process(delta: float) -> void:
 	direction = global_position.direction_to(get_global_mouse_position()).normalized()

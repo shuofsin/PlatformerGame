@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var CoyoteTimer: Timer = %CoyoteTimer
 @onready var JumpBufferTimer: Timer = %JumpBufferTimer
 @onready var Animations: AnimatedSprite2D = %Animations
+@onready var HeadSprite: Sprite2D = %HeadSprite
 @onready var WallDust: GPUParticles2D = %WallDust
 @onready var RunDust: GPUParticles2D = %RunDust
 @onready var JumpDust: GPUParticles2D = %JumpDust
@@ -167,6 +168,12 @@ func _physics_process(delta: float) -> void:
 		Animations.play("jump")
 	elif !is_on_floor() and velocity.y > 0: 
 		Animations.play("fall")
+	
+	HeadSprite.rotation = HeadSprite.global_position.direction_to(get_global_mouse_position()).angle()
+	if HeadSprite.rotation > (PI/2) or HeadSprite.rotation < (-PI/2):
+		HeadSprite.flip_v = true
+	else: 
+		HeadSprite.flip_v = false
 	
 	# Handle zoom 
 	if Weapon.is_charging(): 
