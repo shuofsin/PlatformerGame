@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://br3d84gpqr40p"]
 
-[ext_resource type="Texture2D" uid="uid://ymeg3uy04mfg" path="res://Assets/PNG/arrow.png" id="1_2u0bd"]
 [ext_resource type="Script" uid="uid://cbnf8yci67twi" path="res://Scripts/arrow.gd" id="1_40cdi"]
-[ext_resource type="Texture2D" uid="uid://327v7y0jacx1" path="res://Assets/PNG/Player/player_temp.png" id="2_h5x2m"]
+[ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Assets/Player/player_arrow.png" id="2_40cdi"]
+[ext_resource type="Texture2D" path="res://Assets/PNG/Player/player_temp.png" id="2_h5x2m"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_40cdi"]
-points = PackedVector2Array(9, 0, 5, 2, 5, -2)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40cdi"]
+size = Vector2(3, 4)
 
 [sub_resource type="Curve" id="Curve_40cdi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -34,11 +34,11 @@ script = ExtResource("1_40cdi")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-5, 0)
-texture = ExtResource("1_2u0bd")
+texture = ExtResource("2_40cdi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 0)
-shape = SubResource("ConvexPolygonShape2D_40cdi")
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_40cdi")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(-11, 0)

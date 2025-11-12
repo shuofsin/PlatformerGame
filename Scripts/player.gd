@@ -40,8 +40,8 @@ const WALL_JUMP_LOCK_TIME: float = 0.5
 var look_dir_x: int = 1
 
 # Camera motion
-const MIN_ZOOM: float = 2.0
-const MAX_ZOOM: float = 3.0
+const MIN_ZOOM: float = 3.0
+const MAX_ZOOM: float = 5.0
 const ZOOM_RATE: float = 1.25
 
 # Air Dash

@@ -1,17 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwmcp4oytibbr"]
+[gd_scene load_steps=4 format=3 uid="uid://dhhtyhycl3lao"]
 
-[ext_resource type="Texture2D" uid="uid://dfauqovgciswr" path="res://Assets/PNG/Tiles/tile_temp.png" id="1_jwive"]
+[ext_resource type="Texture2D" uid="uid://b5wnhyc55rfbw" path="res://Assets/temp_tile.png" id="1_jwive"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_maa6y"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwive"]
 texture = ExtResource("1_jwive")
-texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/texture_origin = Vector2i(-8, -8)
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 24, -8, 24, 24, -8, 24)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_fxrwg"]
+[sub_resource type="TileSet" id="TileSet_maa6y"]
 physics_layer_0/collision_layer = 3
-sources/1 = SubResource("TileSetAtlasSource_maa6y")
+sources/0 = SubResource("TileSetAtlasSource_jwive")
 
-[node name="TempTileMapLayer" type="TileMapLayer"]
-tile_set = SubResource("TileSet_fxrwg")
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_maa6y")
