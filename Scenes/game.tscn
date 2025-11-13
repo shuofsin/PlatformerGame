@@ -17,10 +17,10 @@ position = Vector2(101, 70)
 
 [node name="DebugScreen" type="Label" parent="Player"]
 unique_name_in_owner = true
-offset_left = -101.0
-offset_top = -70.0
-offset_right = -23.0
-offset_bottom = -47.0
+offset_left = -39.0
+offset_top = -36.0
+offset_right = 39.0
+offset_bottom = -13.0
 text = "Test! Test!"
 
 [node name="TutorialNodes" type="Node2D" parent="."]

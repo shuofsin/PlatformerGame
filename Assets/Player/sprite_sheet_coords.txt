@@ -1,0 +1,6 @@
+Idle: 0, 1, 2, 3, 4
+Walk: 6, 7, 8, 9, 10, 11
+Jump: 12
+Fall: 13
+Wall: 14
+Dash: 15

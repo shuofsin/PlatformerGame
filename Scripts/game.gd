@@ -13,6 +13,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if _debug: 
-		DebugScreen.text = str(Player.HeadSprite.rotation)
+		DebugScreen.text = str(Player.Sprites.rotation)
 	else: 
 		DebugScreen.text = ""

@@ -3,8 +3,10 @@ extends CharacterBody2D
 #Nodes
 @onready var CoyoteTimer: Timer = %CoyoteTimer
 @onready var JumpBufferTimer: Timer = %JumpBufferTimer
-@onready var Animations: AnimatedSprite2D = %Animations
+@onready var Animations: AnimationPlayer = %Animations
+@onready var Sprites: Sprite2D = %Sprites
 @onready var HeadSprite: Sprite2D = %HeadSprite
+@onready var BodySprite: Sprite2D = %BodySprite
 @onready var WallDust: GPUParticles2D = %WallDust
 @onready var RunDust: GPUParticles2D = %RunDust
 @onready var JumpDust: GPUParticles2D = %JumpDust
@@ -45,8 +47,8 @@ const MAX_ZOOM: float = 5.0
 const ZOOM_RATE: float = 1.25
 
 # Air Dash
-const DASH_AMOUNT: float = 500.0
-const DASH_TIME: float = 0.16
+const DASH_AMOUNT: float = 250.0
+const DASH_TIME: float = 0.25
 
 var can_dash: bool = true
 var is_dashing: bool = false
@@ -154,26 +156,42 @@ func _physics_process(delta: float) -> void:
 		JumpDust.emitting = false
 	
 	# Handle animations
-	if velocity.x > 0: 
-		Animations.flip_h = false 
-	if velocity.x < 0: 
-		Animations.flip_h = true
-	if x_input == 0 and is_on_floor(): 
-		Animations.play("idle")
-	elif x_input and is_on_floor():
-		Animations.play("walk")
-	elif !is_on_floor() and velocity.y > 0 and is_on_wall():
-		Animations.play("wall")
-	elif !is_on_floor() and velocity.y < 0: 
-		Animations.play("jump")
-	elif !is_on_floor() and velocity.y > 0: 
-		Animations.play("fall")
-	
-	HeadSprite.rotation = HeadSprite.global_position.direction_to(get_global_mouse_position()).angle()
-	if HeadSprite.rotation > (PI/2) or HeadSprite.rotation < (-PI/2):
-		HeadSprite.flip_v = true
+	if is_dashing: 
+		Animations.play("dash")
+		Sprites.rotation = dash_direction.angle() 
+		BodySprite.flip_h = false 
+		if Sprites.rotation > (PI/2) or Sprites.rotation < (-PI/2):
+			print("Triggering!")
+			BodySprite.flip_v = true
+			HeadSprite.flip_v = false
+		else: 
+			BodySprite.flip_v = false
+			HeadSprite.flip_v = false
+		Weapon.visible = false
 	else: 
-		HeadSprite.flip_v = false
+		Sprites.rotation = 0.0
+		BodySprite.flip_v = false
+		if velocity.x > 0: 
+			BodySprite.flip_h = false 
+		if velocity.x < 0: 
+			BodySprite.flip_h = true
+		if x_input == 0 and is_on_floor(): 
+			Animations.play("idle")
+		elif x_input and is_on_floor():
+			Animations.play("walk")
+		elif !is_on_floor() and velocity.y > 0 and is_on_wall():
+			Animations.play("wall")
+		elif !is_on_floor() and velocity.y < 0: 
+			Animations.play("jump")
+		elif !is_on_floor() and velocity.y > 0: 
+			Animations.play("fall")
+	
+	if (!is_dashing):
+		HeadSprite.rotation = HeadSprite.global_position.direction_to(get_global_mouse_position()).angle()
+		if HeadSprite.rotation > (PI/2) or HeadSprite.rotation < (-PI/2):
+			HeadSprite.flip_v = true
+		else: 
+			HeadSprite.flip_v = false
 	
 	# Handle zoom 
 	if Weapon.is_charging(): 
@@ -185,35 +203,21 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor(): 
 		if !is_dashing and !can_dash: 
 			can_dash = true
-			_update_dash_visuals()
 
 func _dash_logic(delta: float) -> void: 
 	
-	var input_direction: Vector2 = global_position.direction_to(get_global_mouse_position()).normalized()
-	
-	#if input_direction.x != 0: 
-	#	dash_direction.x = input_direction.x
+	dash_direction = global_position.direction_to(get_global_mouse_position()).normalized()
 	
 	if can_dash and Input.is_action_just_pressed("move_dash"):
-		var final_dash_direction: Vector2 = input_direction
-		#if input_direction.y != 0 and input_direction.x == 0: 
-		#	final_dash_direction.x = 0
-		#final_dash_direction.y = input_direction.y 
+		var final_dash_direction: Vector2 = dash_direction
 		
 		can_dash = false 
 		is_dashing = true
 		dash_timer = DASH_TIME
 		
-		_update_dash_visuals()
 		velocity = final_dash_direction * DASH_AMOUNT
 	
 	if is_dashing:
 		dash_timer -= delta 
 		if dash_timer <= 0.0:
 			is_dashing = false
-
-func _update_dash_visuals() -> void: 
-	if can_dash:
-		modulate = Color('ffffff')
-	else: 
-		modulate = Color('4757a7')
