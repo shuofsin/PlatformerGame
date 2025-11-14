@@ -1,12 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=14 format=3 uid="uid://dbocxh517g6jj"]
 
 [ext_resource type="Script" uid="uid://dlvgfm1bljojv" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://c0vsj2mex11rn" path="res://Assets/Player/player_sprite_sheet.png" id="2_3smsa"]
-[ext_resource type="PackedScene" uid="uid://bw7x8pepak5a7" path="res://Scenes/dust.tscn" id="2_6t5aa"]
-[ext_resource type="PackedScene" uid="uid://ga5t2ws4ufur" path="res://Scenes/jump_dust.tscn" id="7_8erm5"]
 [ext_resource type="Texture2D" uid="uid://d271mdjdom470" path="res://Assets/Player/player_head.png" id="7_h4iuc"]
 [ext_resource type="PackedScene" uid="uid://qq4odr15se45" path="res://Scenes/weapon.tscn" id="9_f1ek2"]
-[ext_resource type="Texture2D" uid="uid://b5wnhyc55rfbw" path="res://Assets/temp_tile.png" id="10_gymyn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
 size = Vector2(11, 17)
@@ -377,23 +374,7 @@ texture = ExtResource("7_h4iuc")
 
 [node name="Weapon" parent="." instance=ExtResource("9_f1ek2")]
 unique_name_in_owner = true
-visible = false
 z_index = 1
-
-[node name="JumpDust" parent="." instance=ExtResource("7_8erm5")]
-unique_name_in_owner = true
-position = Vector2(0, 8)
-texture = ExtResource("10_gymyn")
-
-[node name="WallDust" parent="." instance=ExtResource("2_6t5aa")]
-unique_name_in_owner = true
-position = Vector2(5, 5)
-emitting = false
-
-[node name="RunDust" parent="." instance=ExtResource("2_6t5aa")]
-unique_name_in_owner = true
-position = Vector2(0, 8)
-emitting = false
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true

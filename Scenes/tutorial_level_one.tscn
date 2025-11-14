@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=4 uid="uid://biv0ajuhtrxop"]
+
+[ext_resource type="PackedScene" uid="uid://du144nstua4bo" path="res://Scenes/forest_background.tscn" id="1_cldte"]
+[ext_resource type="PackedScene" uid="uid://25x8aeiu8ns0" path="res://Scenes/forest_tiles.tscn" id="1_fod47"]
+[ext_resource type="PackedScene" uid="uid://dbocxh517g6jj" path="res://Scenes/player.tscn" id="2_cldte"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fod47"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cldte"]
+normal = Vector2(-1, 0)
+
+[node name="TutorialWorld" type="Node2D"]
+
+[node name="ForestBackground" parent="." instance=ExtResource("1_cldte")]
+position = Vector2(0, 16)
+
+[node name="ForestTiles" parent="." instance=ExtResource("1_fod47")]
+tile_map_data = PackedByteArray("AADz/wEAAAABAAAAAAD0/wEAAAABAAAAAAD1/wEAAAABAAAAAAD2/wEAAAABAAAAAAD3/wEAAAABAAAAAAD4/wEAAAABAAAAAAD5/wEAAAABAAAAAAD6/wEAAAABAAAAAAD7/wEAAAABAAAAAAD8/wEAAAABAAAAAAD9/wEAAAABAAAAAAD+/wEAAAABAAAAAAD//wEAAAABAAAAAAAAAAEAAAABAAAAAAABAAEAAAABAAAAAAACAAEAAAABAAAAAAADAAEAAAABAAAAAAAEAAEAAAABAAAAAAAFAAEAAAABAAAAAAAGAAEAAAABAAAAAAAHAAEAAAABAAAAAAAIAAEAAAABAAAAAAAJAAEAAAABAAAAAAAKAAEAAAABAAAAAAALAAEAAAABAAAAAAAMAAEAAAABAAAAAAANAAEAAAABAAAAAAAOAAEAAAABAAAAAAAPAAEAAAABAAAAAAAQAAEAAAABAAAAAAARAAEAAAABAAAAAAASAAEAAAABAAAAAAATAAEAAAABAAAAAAAUAAEAAAABAAAAAAAVAAEAAAABAAAAAAAWAAEAAAABAAAAAAAXAAEAAAABAAAAAAAYAAEAAAABAAAAAAAZAAEAAAABAAAAAAAaAAEAAAABAAAAAAAbAAEAAAABAAAAAAAcAAEAAAABAAAAAAAdAAEAAAABAAAAAAAeAAEAAAABAAAAAAAfAAEAAAABAAAAAAAgAAEAAAABAAAAAAAhAAEAAAABAAAAAAAiAAEAAAABAAAAAAAjAAEAAAABAAAAAAAkAAEAAAABAAAAAAAlAAEAAAABAAAAAAAmAAEAAAABAAAAAAAnAAEAAAABAAAAAAAoAAEAAAABAAAAAAApAAEAAAABAAAAAAAqAAEAAAABAAAAAADy/wEAAAABAAAAAADx/wEAAAABAAAAAADw/wEAAAABAAAAAADv/wEAAAABAAAAAADu/wEAAAABAAAAAADt/wEAAAABAAAAAADs/wEAAAABAAAAAADr/wEAAAABAAAAAADq/wEAAAABAAAAAADp/wEAAAABAAAAAADo/wEAAAABAAAAAADn/wEAAAABAAAAAADm/wEAAAABAAAAAADl/wEAAAABAAAAAADk/wEAAAABAAAAAADj/wEAAAABAAAAAADi/wEAAAABAAAAAADh/wEAAAABAAAAAADg/wEAAAABAAAAAADf/wEAAAABAAAAAADe/wEAAAABAAAAAADd/wEAAAABAAAAAAA=")
+
+[node name="Player" parent="." instance=ExtResource("2_cldte")]
+
+[node name="BorderLeft" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderLeft"]
+position = Vector2(-200, 0)
+shape = SubResource("WorldBoundaryShape2D_fod47")
+
+[node name="BorderRight" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderRight"]
+position = Vector2(480, 0)
+shape = SubResource("WorldBoundaryShape2D_cldte")

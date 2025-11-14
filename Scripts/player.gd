@@ -7,34 +7,31 @@ extends CharacterBody2D
 @onready var Sprites: Sprite2D = %Sprites
 @onready var HeadSprite: Sprite2D = %HeadSprite
 @onready var BodySprite: Sprite2D = %BodySprite
-@onready var WallDust: GPUParticles2D = %WallDust
-@onready var RunDust: GPUParticles2D = %RunDust
-@onready var JumpDust: GPUParticles2D = %JumpDust
 @onready var Weapon: Node2D = %Weapon
 @onready var Camera: Camera2D = %Camera
 
 # Vertical movement variables
-const JUMP_HEIGHT: float = -480.0
-const MIN_GRAVITY: float = 12.0
-const MAX_GRAVITY: float = 14.5 
-const GRAVITY_ACCELERATION: float = 12.0
+const JUMP_HEIGHT: float = -300.0
+const MIN_GRAVITY: float = 9.0
+const MAX_GRAVITY: float = 12.5 
+const GRAVITY_ACCELERATION: float = 8.0
 var gravity: float = MIN_GRAVITY
-const HEAD_NUDGE: float = 3.0
+const HEAD_NUDGE: float = 1.5
 const LEDGE_HOP_FACTOR: float = 7
 var coyote_time_activated: bool = false 
 
 # Horizontal movement variables
-const MAX_SPEED: float = 200.0
-const ACCELERATION: float = 20.0
-const FRICTION: float = 15.0
+const MAX_SPEED: float = 150.0
+const ACCELERATION: float = 12.0
+const FRICTION: float = 10
 
 # Double jump
 const MAX_JUMPS: int = 1
 var jumps_completed: int = 0
 
 # Wall sliding and jumping 
-const WALL_GRAVITY: float = 15
-const WALL_JUMP_PUSH_FORCE: float = 200.0
+const WALL_GRAVITY: float = 7.5
+const WALL_JUMP_PUSH_FORCE: float = 125.0
 var wall_contact_coyote: float = 0.0
 const WALL_CONTACT_COYOTE_TIME: float = 0.2
 var wall_jump_lock: float = 0.0
@@ -105,8 +102,6 @@ func _physics_process(delta: float) -> void:
 		CoyoteTimer.stop()
 		coyote_time_activated = true
 		jumps_completed += 1
-		if jumps_completed > 1 and !(wall_jump_lock > 0.0): 
-			JumpDust.emitting = true
 	
 	# Handle head nudge
 	if velocity.y < JUMP_HEIGHT/2.0: 
@@ -138,22 +133,6 @@ func _physics_process(delta: float) -> void:
 	
 	_dash_logic(delta)
 	move_and_slide()
-
-	# TODO: Handle dust
-	if is_on_wall() and !is_on_floor():
-		if sign(WallDust.position.x) != sign(look_dir_x):
-			WallDust.position.x *= -1
-		WallDust.emitting = true
-	else: 
-		WallDust.emitting = false
-	
-	if x_input and is_on_floor():
-		RunDust.emitting = true 
-	else: 
-		RunDust.emitting = false
-	
-	if is_on_floor(): 
-		JumpDust.emitting = false
 	
 	# Handle animations
 	if is_dashing: 
