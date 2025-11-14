@@ -2,7 +2,7 @@
 Godot Platformer Project
 
 ## To-do:
+- Code: REFACTOR
 - Dash: Limit/Reset
 - Visuals: Player Dash Animation
-- Visuals: Refactor to AnimationPlayer
-- Code: REFACTOR
+- Visuals: Background extension 

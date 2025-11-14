@@ -44,12 +44,13 @@ const MAX_ZOOM: float = 5.0
 const ZOOM_RATE: float = 1.25
 
 # Air Dash
-const DASH_AMOUNT: float = 250.0
+const DASH_AMOUNT: float = 250
 const DASH_TIME: float = 0.25
 
 var can_dash: bool = true
 var is_dashing: bool = false
 var dash_direction: Vector2 = Vector2.RIGHT
+var final_dash_direction: Vector2 = Vector2.RIGHT
 var dash_timer: float = 0.0
 
 func _physics_process(delta: float) -> void: 
@@ -137,12 +138,13 @@ func _physics_process(delta: float) -> void:
 	# Handle animations
 	if is_dashing: 
 		Animations.play("dash")
-		Sprites.rotation = dash_direction.angle() 
+		Sprites.rotation = final_dash_direction.angle()
+		HeadSprite.rotation = 0
 		BodySprite.flip_h = false 
 		if Sprites.rotation > (PI/2) or Sprites.rotation < (-PI/2):
 			print("Triggering!")
 			BodySprite.flip_v = true
-			HeadSprite.flip_v = false
+			HeadSprite.flip_v = true
 		else: 
 			BodySprite.flip_v = false
 			HeadSprite.flip_v = false
@@ -150,6 +152,7 @@ func _physics_process(delta: float) -> void:
 	else: 
 		Sprites.rotation = 0.0
 		BodySprite.flip_v = false
+		Weapon.visible = true
 		if velocity.x > 0: 
 			BodySprite.flip_h = false 
 		if velocity.x < 0: 
@@ -188,7 +191,7 @@ func _dash_logic(delta: float) -> void:
 	dash_direction = global_position.direction_to(get_global_mouse_position()).normalized()
 	
 	if can_dash and Input.is_action_just_pressed("move_dash"):
-		var final_dash_direction: Vector2 = dash_direction
+		final_dash_direction = dash_direction
 		
 		can_dash = false 
 		is_dashing = true
