@@ -13,70 +13,70 @@ z_index = -2
 
 [node name="Layer0" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.2, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer0"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("1_4kwuc")
 centered = false
 
 [node name="Layer1" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.2, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer1"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("6_4mx64")
 centered = false
 
 [node name="Layer2" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.2, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer2"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("5_o3id4")
 centered = false
 
 [node name="Layer3" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.2, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer3"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("4_yr4g7")
 centered = false
 
 [node name="Layer4" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.25, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer4"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("3_12bcr")
 centered = false
 
 [node name="Layer5" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.25, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer5"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("2_vbbqu")
 centered = false
 
 [node name="Layer6" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.25, 1)
-repeat_size = Vector2(640, 0)
+repeat_size = Vector2(512, 0)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer6"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 texture = ExtResource("7_4kwuc")
 centered = false
