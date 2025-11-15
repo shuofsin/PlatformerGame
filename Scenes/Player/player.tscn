@@ -1,12 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=22 format=3 uid="uid://dbocxh517g6jj"]
 
-[ext_resource type="Script" uid="uid://dlvgfm1bljojv" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://dfhutr60wutgc" path="res://Scripts/Player/player.gd" id="1_dd0ac"]
 [ext_resource type="Texture2D" uid="uid://c0vsj2mex11rn" path="res://Assets/Player/player_sprite_sheet.png" id="2_3smsa"]
+[ext_resource type="Script" uid="uid://cm2qk1u4ps3qn" path="res://Scripts/Player/player_idle_state.gd" id="3_dd0ac"]
+[ext_resource type="Script" uid="uid://d08dojrdgk7o" path="res://Scripts/Player/player_walk_state.gd" id="4_0u5uq"]
+[ext_resource type="Script" uid="uid://cfw0sgedj31oj" path="res://Scripts/Player/player_state_machine.gd" id="5_htcer"]
+[ext_resource type="Script" uid="uid://8hcm3busisjt" path="res://Scripts/Player/player_jump_state.gd" id="5_jlvik"]
+[ext_resource type="Script" uid="uid://cs3uqoc4yd6si" path="res://Scripts/Player/player_air_state.gd" id="6_gk6dx"]
 [ext_resource type="Texture2D" uid="uid://d271mdjdom470" path="res://Assets/Player/player_head.png" id="7_h4iuc"]
-[ext_resource type="PackedScene" uid="uid://qq4odr15se45" path="res://Scenes/weapon.tscn" id="9_f1ek2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
-size = Vector2(11, 17)
+[ext_resource type="Script" uid="uid://bis2qlftmyus5" path="res://Scripts/Player/player_wall_slide_state.gd" id="7_jhyir"]
+[ext_resource type="Script" uid="uid://brxygfkjpbb6c" path="res://Scripts/Player/player_wall_jump_state.gd" id="8_74mp2"]
+[ext_resource type="PackedScene" uid="uid://qq4odr15se45" path="res://Scenes/Player/weapon.tscn" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://cq1tadttthn8h" path="res://Scripts/Player/player_dash_state.gd" id="9_oikmp"]
 
 [sub_resource type="Animation" id="Animation_1uthr"]
 length = 0.001
@@ -206,7 +211,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_4s4jn"]
 resource_name = "walk"
-length = 1.2
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -215,7 +220,7 @@ tracks/0/path = NodePath("Sprites/BodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9, 10, 11]
@@ -227,7 +232,7 @@ tracks/1/path = NodePath("Sprites/HeadSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8333334, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, -4), Vector2(0, -6), Vector2(0, -5), Vector2(0, -4), Vector2(0, -5), Vector2(0, -4)]
@@ -295,12 +300,70 @@ _data = {
 &"wall": SubResource("Animation_lpccl")
 }
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_cvnsp")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
+size = Vector2(11, 17)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
-shape = SubResource("RectangleShape2D_3smsa")
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dd0ac")
+
+[node name="Debug" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -69.0
+offset_top = -27.0
+offset_right = 70.0
+offset_bottom = -10.0
+theme_override_font_sizes/font_size = 12
+text = "debug"
+horizontal_alignment = 1
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(5, 5)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_right_margin = 0.3
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("5_htcer")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("3_dd0ac")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("4_0u5uq")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("5_jlvik")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_gk6dx")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="WallSlide" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("7_jhyir")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="WallJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_74mp2")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("9_oikmp")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -311,6 +374,26 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 0.12
 one_shot = true
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_khti1")
+}
+
+[node name="Sprites" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+
+[node name="BodySprite" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("2_3smsa")
+hframes = 6
+vframes = 3
+
+[node name="HeadSprite" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+texture = ExtResource("7_h4iuc")
 
 [node name="HeadNudgeLeftOne" type="RayCast2D" parent="."]
 position = Vector2(-5, -8)
@@ -352,35 +435,18 @@ position = Vector2(-5, 3)
 target_position = Vector2(-2, 0)
 hit_from_inside = true
 
-[node name="Animations" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_khti1")
-}
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_3smsa")
 
-[node name="Sprites" type="Sprite2D" parent="."]
+[node name="PlayerWeapon" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f1ek2")]
 unique_name_in_owner = true
+player = NodePath("..")
 
-[node name="BodySprite" type="Sprite2D" parent="Sprites"]
+[node name="ColorRect" type="ColorRect" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_3smsa")
-hframes = 6
-vframes = 3
-
-[node name="HeadSprite" type="Sprite2D" parent="Sprites"]
-unique_name_in_owner = true
-position = Vector2(0, -4)
-texture = ExtResource("7_h4iuc")
-
-[node name="Weapon" parent="." instance=ExtResource("9_f1ek2")]
-unique_name_in_owner = true
-visible = false
-z_index = 1
-
-[node name="Camera" type="Camera2D" parent="."]
-unique_name_in_owner = true
-zoom = Vector2(3, 3)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.3
-drag_right_margin = 0.3
+offset_left = -14.0
+offset_top = -22.0
+offset_right = 14.0
+offset_bottom = -19.0
+color = Color(0.2784314, 0.70980394, 0.45882353, 0.09803922)
