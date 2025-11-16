@@ -1,4 +1,5 @@
 extends Node2D
+class_name Weapon
 
 @onready var arrow_scene: PackedScene = preload("res://Scenes/Player/arrow.tscn")
 @onready var Animations: AnimatedSprite2D = %Animations

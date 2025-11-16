@@ -1,8 +1,8 @@
 extends Node
-class_name PlayerState
+class_name EnemyState
 
 signal transition
-@export var player: Player
+@export var enemy: Enemy
 
 func enter() -> void: 
 	pass

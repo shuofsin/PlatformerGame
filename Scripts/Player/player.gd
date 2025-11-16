@@ -12,7 +12,7 @@ class_name Player
 @onready var body_sprite: Sprite2D = %BodySprite
 @onready var head_sprite: Sprite2D = %HeadSprite
 @onready var debug: Label = %Debug
-@onready var test_rect: ColorRect = %ColorRect
+@onready var dash_charge_icon: Sprite2D = %DashChargeIcon
 
 # Vertical movement variables
 const JUMP_HEIGHT: float = -300.0
@@ -68,9 +68,9 @@ func _process(delta: float) -> void:
 	x_input = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
 	
 	if can_dash: 
-		test_rect.color.a = 1
+		dash_charge_icon.frame = 0
 	else:
-		test_rect.color.a = 0.25
+		dash_charge_icon.frame = 1
 	
 	if velocity.x < 0:
 		body_sprite.flip_h = true

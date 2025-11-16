@@ -2,10 +2,8 @@
 Godot Platformer Project
 
 ## To-do:
-- Code: REFACTOR
-- Dash: Limit/Reset
-- Visuals: Player Dash Animation
-- Visuals: Background extension 
-
-### Known Bugs
-- Left wall-slide visuals are 1 pixel off
+- Collisions: Should dash through enemies but not walls when dashing, but both when not dashing (two collisions? -> collision layers?)
+- Enemy: AI and attack 
+- Character: Health
+- Game: SceneManager
+- Game: Prepare for another playtest?

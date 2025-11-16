@@ -1,7 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://tndtll7cpp4x"]
+[gd_scene load_steps=8 format=3 uid="uid://tndtll7cpp4x"]
 
 [ext_resource type="Texture2D" uid="uid://dlulmg7nwebnk" path="res://Assets/Player/player_dash_effect.png" id="1_h528t"]
 [ext_resource type="Script" uid="uid://cs2mqgo00amoo" path="res://Scripts/Player/dash_strike.gd" id="1_npbam"]
+
+[sub_resource type="Animation" id="Animation_npbam"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_uuncy"]
 resource_name = "dash_strike"
@@ -18,6 +45,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_h528t"]
 resource_name = "inactive"
@@ -33,20 +72,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [5]
 }
-
-[sub_resource type="Animation" id="Animation_npbam"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xt3wi"]
@@ -56,7 +92,12 @@ _data = {
 &"inactive": SubResource("Animation_h528t")
 }
 
-[node name="DashStrike" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npbam"]
+radius = 5.0
+height = 26.0
+
+[node name="DashStrike" type="Area2D"]
+collision_mask = 4
 script = ExtResource("1_npbam")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -71,3 +112,9 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_xt3wi")
 }
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 0)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_npbam")
+debug_color = Color(0.9133767, 0.26985028, 0.30211395, 0.41960785)
