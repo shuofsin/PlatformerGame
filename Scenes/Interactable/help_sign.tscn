@@ -83,7 +83,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_xvvfa"]
-resource_name = "hove_read"
+resource_name = "hover_read"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -125,7 +125,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oovi"]
 _data = {
 &"RESET": SubResource("Animation_2oovi"),
-&"hove_read": SubResource("Animation_xvvfa"),
+&"hover_read": SubResource("Animation_xvvfa"),
 &"hover_unread": SubResource("Animation_xha80")
 }
 
