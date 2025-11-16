@@ -14,4 +14,5 @@ func physics_update(delta: float) -> void:
 	
 	player.coyote_time_activated = false
 	player.gravity = lerp(player.gravity, player.MIN_GRAVITY, player.MIN_GRAVITY * delta)
-	pass
+	
+	player.run_gravity(delta)

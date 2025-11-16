@@ -20,3 +20,10 @@ func physics_update(delta: float) -> void:
 	if !player.is_on_floor() and player.is_on_wall() and player.velocity.x != 0:
 		player.look_dir_x = sign(player.velocity.x)
 		transition.emit(self, "wallslide")
+	
+	# Cut velocity for variable jump height 
+	# Ceiling check to prevent sticking 
+	if (Input.is_action_just_released("move_jump") or player.is_on_ceiling()) and player.velocity.y < 0:
+		player.velocity.y *= 0.5
+
+	player.run_gravity(delta)

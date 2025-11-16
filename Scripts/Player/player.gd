@@ -3,6 +3,7 @@ class_name Player
 
 @onready var state_machine: PlayerStateMachine = %StateMachine
 @onready var weapon: Node2D = %PlayerWeapon
+@onready var dash_strike: DashStrike = %DashStrike
 @onready var camera: Camera2D = %Camera
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
@@ -45,13 +46,19 @@ const MAX_ZOOM: float = 4.0
 const ZOOM_RATE: float = 1.25
 
 # Air Dash
-const DASH_AMOUNT: float = 350
+const DASH_AMOUNT: float = 300
 const DASH_TIME: float = 0.3
 
 var is_dashing: bool = false
 var can_dash: bool = false
 var dash_direction: Vector2 = Vector2.RIGHT
 var dash_timer: float = 0.0
+
+# Ghosting for air dash 
+@export var ghost_sprite: PackedScene
+var ghost_timer: float = 0
+const TIME_BETWEEN_GHOSTS: float = 0.01
+
 
 func _ready() -> void:
 	state_machine.ready()
@@ -100,11 +107,6 @@ func _physics_process(delta: float) -> void:
 		coyote_timer.start()
 		coyote_time_activated = true
 		
-		# Cut velocity for variable jump height 
-		# Ceiling check to prevent sticking 
-		if (Input.is_action_just_released("move_jump") or is_on_ceiling()) and velocity.y < 0:
-			velocity.y *= 0.5
-		
 		gravity = lerp(gravity, MAX_GRAVITY, GRAVITY_ACCELERATION * delta)
 
 	# Handle head nudge
@@ -123,17 +125,17 @@ func _physics_process(delta: float) -> void:
 		if $LedgeHopRightOne.is_colliding() and !$LedgeHopRightTwo.is_colliding() and velocity.x > 0:
 			velocity.y += JUMP_HEIGHT/LEDGE_HOP_FACTOR
 
-	if state_machine.current_state.name != "wallslide":
-		velocity.y += gravity
-		wall_contact_coyote -= delta
-
 	state_machine.physics_process(delta)
 	move_and_slide()
 	pass
 
+func run_gravity(delta: float) -> void: 
+	velocity.y += gravity 
+	wall_contact_coyote -= delta
+
 func _debug(is_on: bool) -> void: 
 	if is_on:
-		debug.text = str(state_machine.current_state.name + ":" + str(is_on_wall()) + ":" + str(int(velocity.x)))
+		debug.text = str(is_dashing)
 	else:
 		debug.text = ""
 

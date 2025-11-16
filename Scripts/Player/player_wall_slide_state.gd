@@ -17,7 +17,7 @@ func exit() -> void:
 	player.body_sprite.offset.x = 0
 	player.head_sprite.offset.x = 0
 
-func physics_update(delta: float) -> void: 
+func physics_update(_delta: float) -> void: 
 	player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME
 	player.velocity.y = player.WALL_GRAVITY
 	player.velocity.x = lerp(player.velocity.x, player.x_input * player.MAX_SPEED, player.x_velocity_weight)

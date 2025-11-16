@@ -10,3 +10,5 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = -player.look_dir_x * player.WALL_JUMP_PUSH_FORCE
 		player.wall_jump_lock = player.WALL_JUMP_LOCK_TIME
 	transition.emit(self, "air")
+	
+	player.run_gravity(delta)
