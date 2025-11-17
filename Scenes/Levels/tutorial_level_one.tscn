@@ -124,3 +124,4 @@ shape = SubResource("WorldBoundaryShape2D_cldte")
 
 [node name="Enemy" parent="." instance=ExtResource("6_x375a")]
 position = Vector2(1376, 536)
+health = 5.0

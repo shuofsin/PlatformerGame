@@ -64,7 +64,7 @@ func _ready() -> void:
 	state_machine.ready()
 	pass 
 
-func _process(delta: float) -> void: 
+func _process(delta: float) -> void:
 	x_input = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
 	
 	if can_dash: 

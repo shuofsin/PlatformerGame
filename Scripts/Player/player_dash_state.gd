@@ -2,6 +2,9 @@ extends PlayerState
 class_name PlayerDashState
 
 func enter() -> void: 
+	
+	player.set_collision_mask_value(3, false)
+	
 	player.can_dash = false 
 	player.is_dashing = true
 	player.dash_timer = player.DASH_TIME
@@ -28,6 +31,7 @@ func enter() -> void:
 	_add_ghost()
 
 func exit() -> void: 
+	player.set_collision_mask_value(3, true)
 	player.sprites.rotation = 0
 	player.body_sprite.flip_v = false
 	player.weapon.visible = true

@@ -307,6 +307,8 @@ _data = {
 size = Vector2(11, 17)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_dd0ac")
 ghost_sprite = ExtResource("2_06tpx")
 

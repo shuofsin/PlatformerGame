@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-var health: float = 2
+@export var health: float = 2
 @onready var health_sprite: Sprite2D = %HealthSprite
 
 func _process(_delta: float) -> void:
