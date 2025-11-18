@@ -1,13 +1,13 @@
 extends Node
-class_name EnemyStateMachine
+class_name BoarStateMachine
 
 var states: Dictionary = {}
-var current_state: EnemyState
-@export var initial_state: EnemyState
+var current_state: BoarState
+@export var initial_state: BoarState
 
 func ready() -> void: 
 	for child in get_children():
-		if child is EnemyState: 
+		if child is BoarState: 
 			states[child.name.to_lower()] = child
 			child.transition.connect(change_state)
 	
@@ -16,7 +16,7 @@ func ready() -> void:
 		current_state = initial_state
 	pass
 
-func change_state(old_state: EnemyState, new_state_name: String) -> void:
+func change_state(old_state: BoarState, new_state_name: String) -> void:
 	if old_state != current_state: 
 		return
 	

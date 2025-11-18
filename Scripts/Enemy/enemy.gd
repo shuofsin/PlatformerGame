@@ -2,12 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var health: float = 2
-@onready var health_sprite: Sprite2D = %HealthSprite
-
-func _process(_delta: float) -> void:
-	health_sprite.frame = health
-	if health <= 0: 
-		queue_free()
+@export var player: Player
 
 func add_health(amount: float) -> void:
 	health += amount

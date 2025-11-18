@@ -8,3 +8,5 @@ enum COLLISION_LAYERS {
 	WEAPON = 4, 
 	INTERACT = 8
 	}
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()

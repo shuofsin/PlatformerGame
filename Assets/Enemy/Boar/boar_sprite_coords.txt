@@ -1,0 +1,4 @@
+Roam: 0 - 3
+Run: 6 - 11
+Idle: 12 - 17
+Attack: 18 - 23
