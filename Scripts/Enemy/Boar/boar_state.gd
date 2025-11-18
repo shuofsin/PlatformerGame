@@ -1,17 +1,4 @@
-extends Node
+extends State
 class_name BoarState
 
-signal transition
 @export var boar: Boar
-
-func enter() -> void: 
-	pass
-
-func exit() -> void: 
-	pass
-
-func update(_delta: float) -> void: 
-	pass
-
-func physics_update(_delta: float) -> void: 
-	pass

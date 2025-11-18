@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var state_machine: PlayerStateMachine = %StateMachine
-@onready var weapon: Node2D = %PlayerWeapon
+@onready var state_machine: StateMachine = %StateMachine
+@onready var weapon: Weapon = %Weapon
 @onready var dash_strike: DashStrike = %DashStrike
 @onready var camera: Camera2D = %Camera
 @onready var coyote_timer: Timer = %CoyoteTimer

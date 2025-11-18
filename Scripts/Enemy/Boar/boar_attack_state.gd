@@ -11,9 +11,7 @@ func update(_delta: float) -> void:
 	else: 
 		boar.body_sprite.flip_h = false
 		boar.x_direction = 1
-	
-	boar.hit_box.position.x = 6.25 * boar.x_direction
-	
+		
 	if boar.distance_to_player > boar.run_distance:
 		transition.emit(self, "idle")
 	

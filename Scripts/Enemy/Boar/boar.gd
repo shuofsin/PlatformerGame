@@ -1,12 +1,14 @@
-extends Enemy
+extends CharacterBody2D
 class_name Boar
 
 @onready var health_sprite: Sprite2D = %HealthSprite
-@onready var state_machine: BoarStateMachine = $StateMachine
+@onready var state_machine: StateMachine = $StateMachine
 @onready var animations: AnimationPlayer = %Animations
 @onready var body_sprite: Sprite2D = %BodySprite
-@onready var hit_box: Area2D = %HitBox
+@onready var health_component: HealthComponent = %HealthComponent
+@onready var healthbox_component: Area2D = %HealthboxComponent
 
+var player: Player
 
 # Horizontal Movement 
 const MAX_SPEED_ROAM: float = 25.0
@@ -45,9 +47,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	health_sprite.frame = health
-	if health <= 0: 
-		queue_free()
+	health_sprite.frame = health_component.health
 	
 	if player: 
 		direction_to_player = global_position.direction_to(player.global_position)

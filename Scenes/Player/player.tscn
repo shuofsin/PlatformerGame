@@ -1,11 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=27 format=3 uid="uid://dbocxh517g6jj"]
 
 [ext_resource type="Script" uid="uid://dfhutr60wutgc" path="res://Scripts/Player/player.gd" id="1_dd0ac"]
 [ext_resource type="Texture2D" uid="uid://c0vsj2mex11rn" path="res://Assets/Player/player_sprite_sheet.png" id="2_3smsa"]
 [ext_resource type="PackedScene" uid="uid://b5aswm2vml7k3" path="res://Scenes/Player/player_ghost_effect.tscn" id="2_06tpx"]
 [ext_resource type="Script" uid="uid://cm2qk1u4ps3qn" path="res://Scripts/Player/player_idle_state.gd" id="3_dd0ac"]
+[ext_resource type="Script" uid="uid://ccmsl3hn6pt17" path="res://Scripts/Components/state_machine.gd" id="3_dey5f"]
 [ext_resource type="Script" uid="uid://d08dojrdgk7o" path="res://Scripts/Player/player_walk_state.gd" id="4_0u5uq"]
-[ext_resource type="Script" uid="uid://cfw0sgedj31oj" path="res://Scripts/Player/player_state_machine.gd" id="5_htcer"]
 [ext_resource type="Script" uid="uid://8hcm3busisjt" path="res://Scripts/Player/player_jump_state.gd" id="5_jlvik"]
 [ext_resource type="Script" uid="uid://cs3uqoc4yd6si" path="res://Scripts/Player/player_air_state.gd" id="6_gk6dx"]
 [ext_resource type="Texture2D" uid="uid://d271mdjdom470" path="res://Assets/Player/player_head.png" id="7_h4iuc"]
@@ -13,8 +13,10 @@
 [ext_resource type="Script" uid="uid://brxygfkjpbb6c" path="res://Scripts/Player/player_wall_jump_state.gd" id="8_74mp2"]
 [ext_resource type="PackedScene" uid="uid://qq4odr15se45" path="res://Scenes/Player/weapon.tscn" id="9_f1ek2"]
 [ext_resource type="Script" uid="uid://cq1tadttthn8h" path="res://Scripts/Player/player_dash_state.gd" id="9_oikmp"]
+[ext_resource type="Script" uid="uid://cbvn561d7kp2c" path="res://Scripts/Player/player_death_state.gd" id="11_r5xpd"]
 [ext_resource type="PackedScene" uid="uid://tndtll7cpp4x" path="res://Scenes/Player/dash_strike.tscn" id="14_7g0yx"]
 [ext_resource type="Texture2D" uid="uid://c6rycqp628erm" path="res://Assets/GUI/dash_charge_hud_icon.png" id="15_dey5f"]
+[ext_resource type="Script" uid="uid://dlxenxeltbjsh" path="res://Scripts/Components/health_component.gd" id="17_ks1b7"]
 
 [sub_resource type="Animation" id="Animation_1uthr"]
 length = 0.001
@@ -327,7 +329,7 @@ drag_right_margin = 0.3
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
-script = ExtResource("5_htcer")
+script = ExtResource("3_dey5f")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
@@ -362,6 +364,11 @@ metadata/_custom_type_script = "uid://b3jif3gct1ipq"
 
 [node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("9_oikmp")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://b3jif3gct1ipq"
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("11_r5xpd")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://b3jif3gct1ipq"
 
@@ -439,7 +446,7 @@ hit_from_inside = true
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_3smsa")
 
-[node name="PlayerWeapon" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f1ek2")]
+[node name="Weapon" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f1ek2")]
 unique_name_in_owner = true
 player = NodePath("..")
 
@@ -456,3 +463,10 @@ texture = ExtResource("15_dey5f")
 centered = false
 hframes = 2
 frame = 1
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("death_state", "state_machine")]
+script = ExtResource("17_ks1b7")
+MAX_HEALTH = 100
+death_state = NodePath("../StateMachine/Death")
+state_machine = NodePath("../StateMachine")
+metadata/_custom_type_script = "uid://dlxenxeltbjsh"
