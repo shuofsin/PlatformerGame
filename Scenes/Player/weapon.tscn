@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://qq4odr15se45"]
 
-[ext_resource type="Script" uid="uid://b8qh65nn7yx0o" path="res://Scripts/weapon.gd" id="1_qv81b"]
+[ext_resource type="Script" uid="uid://b8qh65nn7yx0o" path="res://Scripts/Player/weapon.gd" id="1_qv81b"]
 [ext_resource type="Texture2D" uid="uid://83ncefgtdekp" path="res://Assets/Player/player_weapon.png" id="2_qv81b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv81b"]

@@ -2,7 +2,7 @@ extends PlayerState
 class_name PlayerWallJumpState
 
 func enter() -> void:
-	player.animations.play("jump")
+	player.animations.play(&"jump")
 
 func physics_update(delta: float) -> void: 
 	player.velocity.y = player.JUMP_HEIGHT

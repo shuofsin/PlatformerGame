@@ -1,15 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2sp55knojytm"]
+[gd_scene load_steps=2 format=3 uid="uid://c2sp55knojytm"]
 
 [ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Scripts/Components/hitbox_component.gd" id="1_j3fhl"]
-[ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Scripts/Components/attack.gd" id="2_k0ibp"]
-
-[sub_resource type="Resource" id="Resource_qq5ip"]
-script = ExtResource("2_k0ibp")
-attack_damage = 1.0
-metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
 [node name="HitboxComponent" type="Area2D"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 0
 script = ExtResource("1_j3fhl")
-attack = SubResource("Resource_qq5ip")

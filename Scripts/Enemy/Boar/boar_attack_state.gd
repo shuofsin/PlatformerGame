@@ -2,16 +2,23 @@ extends BoarState
 
 func enter() -> void: 
 	boar.animations.play("attack")
+	boar.is_moving = false
+
+func exit() -> void: 
+	boar.animations.play("RESET")
+	boar.animations.advance(0)
 
 func update(_delta: float) -> void: 
-	boar.direction_to_player = boar.global_position.direction_to(boar.player.global_position)
 	if boar.direction_to_player.x < 0:
 		boar.body_sprite.flip_h = true
 		boar.x_direction = -1
+		
 	else: 
 		boar.body_sprite.flip_h = false
 		boar.x_direction = 1
-		
+	
+	boar.hitbox_component.position.x = boar.HITBOX_OFFSET * boar.x_direction
+	
 	if boar.distance_to_player > boar.run_distance:
 		transition.emit(self, "idle")
 	

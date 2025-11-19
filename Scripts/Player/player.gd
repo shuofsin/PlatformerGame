@@ -12,7 +12,8 @@ class_name Player
 @onready var body_sprite: Sprite2D = %BodySprite
 @onready var head_sprite: Sprite2D = %HeadSprite
 @onready var debug: Label = %Debug
-@onready var dash_charge_icon: Sprite2D = %DashChargeIcon
+@onready var health_component: HealthComponent = %HealthComponent
+@onready var healthbox_component: HealthboxComponent = %HealthboxComponent
 
 # Vertical movement variables
 const JUMP_HEIGHT: float = -300.0
@@ -48,6 +49,7 @@ const ZOOM_RATE: float = 1.25
 # Air Dash
 const DASH_AMOUNT: float = 300
 const DASH_TIME: float = 0.3
+const DASH_BUFFER: float = 0.05
 
 var is_dashing: bool = false
 var can_dash: bool = false
@@ -55,10 +57,9 @@ var dash_direction: Vector2 = Vector2.RIGHT
 var dash_timer: float = 0.0
 
 # Ghosting for air dash 
-@export var ghost_sprite: PackedScene
+var ghost_sprite: PackedScene = preload("res://Scenes/Player/player_ghost_effect.tscn")
 var ghost_timer: float = 0
-const TIME_BETWEEN_GHOSTS: float = 0.01
-
+const TIME_BETWEEN_GHOSTS: float = 0.05
 
 func _ready() -> void:
 	state_machine.ready()
@@ -66,11 +67,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	x_input = (Input.get_action_strength("move_right") - Input.get_action_strength("move_left"))
-	
-	if can_dash: 
-		dash_charge_icon.frame = 0
-	else:
-		dash_charge_icon.frame = 1
 	
 	if velocity.x < 0:
 		body_sprite.flip_h = true

@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="PlatformerGame"
-run/main_scene="uid://biv0ajuhtrxop"
+run/main_scene="uid://c71lq6a52btg2"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/global.gd"
+Global="*res://Scripts/System/global.gd"
 
 [display]
 

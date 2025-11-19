@@ -15,7 +15,7 @@ func enter() -> void:
 	player.weapon.reset()
 	player.weapon.visible = false
 	
-	player.animations.play("dash")
+	player.animations.play(&"dash")
 	player.sprites.rotation = player.dash_direction.angle()
 	player.head_sprite.rotation = 0
 	player.body_sprite.flip_h = false 
@@ -31,12 +31,15 @@ func enter() -> void:
 	_add_ghost()
 
 func exit() -> void: 
+	player.animations.play(&"RESET")
+	player.animations.advance(0)
 	player.set_collision_mask_value(3, true)
 	player.sprites.rotation = 0
 	player.body_sprite.flip_v = false
 	player.weapon.visible = true
 	player.ghost_timer = 0
 	player.is_dashing = false
+	player.dash_strike.cancel_dash_strike()
 
 func update(delta: float) -> void: 
 	if (player.ghost_timer >= 0):
@@ -49,6 +52,12 @@ func physics_update(delta: float) -> void:
 	player.dash_timer -= delta
 	if player.dash_timer <= 0: 
 		player.dash_timer = 0
+		transition.emit(self, "air")
+	
+	if player.dash_timer > player.DASH_TIME - player.DASH_BUFFER: 
+		return 
+	
+	if player.is_on_ceiling() || player.is_on_floor() || player.is_on_wall(): 
 		transition.emit(self, "air")
 
 func _add_ghost():

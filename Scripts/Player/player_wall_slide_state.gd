@@ -2,7 +2,7 @@ extends PlayerState
 class_name PlayerWallSlideState
 
 func update(_delta: float) -> void: 
-	player.animations.play("wall")
+	player.animations.play(&"wall")
 	if (player.look_dir_x == -1):
 		player.body_sprite.offset.x = -1
 		if player.head_sprite.flip_v:

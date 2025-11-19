@@ -2,7 +2,7 @@ extends PlayerState
 class_name PlayerIdleState
 
 func enter() -> void:
-	player.animations.play("idle")
+	player.animations.play(&"idle")
 
 func update(_delta: float) -> void: 
 	if player.x_input != 0: 

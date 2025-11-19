@@ -2,7 +2,7 @@ extends PlayerState
 class_name PlayerWalkState
 
 func enter() -> void:
-	player.animations.play("walk")
+	player.animations.play(&"walk")
 
 func update(_delta: float) -> void: 
 	if player.x_input == 0: 

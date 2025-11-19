@@ -2,9 +2,9 @@ extends BoarState
 
 func enter() -> void: 
 	boar.animations.play("run")
+	boar.is_moving = true
 
 func update(_delta: float) -> void:
-	boar.direction_to_player = boar.global_position.direction_to(boar.player.global_position)
 	if boar.direction_to_player.x < 0:
 		boar.body_sprite.flip_h = true
 		boar.x_direction = -1

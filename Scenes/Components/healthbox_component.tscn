@@ -3,4 +3,6 @@
 [ext_resource type="Script" uid="uid://bb77m4wl0jll4" path="res://Scripts/Components/healthbox_component.gd" id="1_deb4x"]
 
 [node name="HealthboxComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_deb4x")

@@ -3,9 +3,9 @@ class_name PlayerAirState
 
 func update(_delta: float) -> void: 
 	if (player.velocity.y <= 0):
-		player.animations.play("jump")
+		player.animations.play(&"jump")
 	else:
-		player.animations.play("fall")
+		player.animations.play(&"fall")
 
 func physics_update(delta: float) -> void: 
 	if player.wall_jump_lock > 0.0:

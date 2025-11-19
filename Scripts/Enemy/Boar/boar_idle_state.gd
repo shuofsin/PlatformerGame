@@ -2,7 +2,7 @@ extends BoarState
 class_name BoarIdleState
 
 func enter() -> void: 
-	boar.x_direction = 0
+	boar.is_moving = false
 	boar.time_to_idle = Global.rng.randf_range(3, 5)
 	boar.idle_timer = boar.time_to_idle
 	boar.animations.play("idle")

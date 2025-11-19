@@ -73,5 +73,5 @@ func _release() -> void:
 	new_arrow.global_position = global_position + (direction * offset)
 	new_arrow.velocity = direction * arrow_speed * (charge_amount / 100)
 	new_arrow.weapon = self
-	get_tree().current_scene.add_child(new_arrow)
+	Global.game_manager.world.add_child(new_arrow)
 	current_state = IDLE

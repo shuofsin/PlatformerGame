@@ -10,6 +10,8 @@ func set_properties(new_position: Vector2, new_scale: Vector2, new_rotation: flo
 	position = new_position
 	scale = new_scale
 	rotation = new_rotation
+	if rotation > (PI/2) || rotation < (-PI/2):
+		flip_v = true
 
 func ghosting() -> void: 
 	var tween_fade = create_tween()

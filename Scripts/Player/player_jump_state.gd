@@ -2,7 +2,7 @@ extends PlayerState
 class_name PlayerJumpState
 
 func enter() -> void:
-	player.animations.play("jump")
+	player.animations.play(&"jump")
 
 func physics_update(delta: float) -> void: 
 	player.velocity.x = lerp(player.velocity.x, player.x_input * player.MAX_SPEED, player.x_velocity_weight)

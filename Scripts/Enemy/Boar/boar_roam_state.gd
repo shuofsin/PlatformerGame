@@ -2,8 +2,9 @@ extends BoarState
 class_name BoarRoamState
 
 func enter() -> void: 
-	boar.body_sprite.flip_h = !boar.body_sprite.flip_h
-	boar.x_direction = -1 if boar.body_sprite.flip_h else 1
+	boar.is_moving = true
+	boar.x_direction = boar.x_direction * -1
+	boar.body_sprite.flip_h = true if boar.x_direction < 0 else false 
 	boar.animations.play("roam")
 	boar.time_to_roam = Global.rng.randf_range(2, 3)
 	boar.roam_timer = boar.time_to_roam

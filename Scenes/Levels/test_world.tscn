@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://biv0ajuhtrxop"]
+[gd_scene load_steps=11 format=4 uid="uid://biv0ajuhtrxop"]
 
 [ext_resource type="PackedScene" uid="uid://du144nstua4bo" path="res://Scenes/Environment/forest_background.tscn" id="1_hox4v"]
+[ext_resource type="Script" uid="uid://bufy1j1qlkbtu" path="res://Scripts/Level/world.gd" id="1_owoyi"]
 [ext_resource type="PackedScene" uid="uid://25x8aeiu8ns0" path="res://Scenes/Environment/forest_tiles.tscn" id="2_jd30c"]
-[ext_resource type="PackedScene" uid="uid://dbocxh517g6jj" path="res://Scenes/Player/player.tscn" id="3_lxvb0"]
 [ext_resource type="PackedScene" uid="uid://beufrqwh7gtju" path="res://Scenes/Interactable/help_sign.tscn" id="4_jd30c"]
 [ext_resource type="PackedScene" uid="uid://c1d423b2d3cxl" path="res://Scenes/Environment/forest_spikes.tscn" id="4_lxvb0"]
 [ext_resource type="PackedScene" uid="uid://stlht8n3ip4q" path="res://Scenes/Enemy/Boar/Boar.tscn" id="6_x375a"]
+[ext_resource type="PackedScene" uid="uid://bkanfq88uav5g" path="res://Scenes/Levels/world_transition.tscn" id="7_5mxrb"]
+[ext_resource type="PackedScene" uid="uid://c0f0knvmq12ls" path="res://Scenes/Levels/playtest_world_one.tscn" id="8_ful3d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fod47"]
 normal = Vector2(1, 0)
@@ -13,7 +15,9 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cldte"]
 normal = Vector2(-1, 0)
 
-[node name="TutorialWorld" type="Node2D"]
+[node name="TestWorld" type="Node2D"]
+script = ExtResource("1_owoyi")
+spawn_position = Vector2(10, 500)
 
 [node name="ForestBackground" parent="." instance=ExtResource("1_hox4v")]
 
@@ -100,9 +104,6 @@ position = Vector2(776, 536)
 [node name="ForestSpikes16" parent="Spikes" instance=ExtResource("4_lxvb0")]
 position = Vector2(792, 536)
 
-[node name="Player" parent="." instance=ExtResource("3_lxvb0")]
-position = Vector2(74, 497)
-
 [node name="BorderLeft" type="StaticBody2D" parent="."]
 position = Vector2(0, 544)
 
@@ -123,5 +124,12 @@ rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_cldte")
 
 [node name="Boar" parent="." instance=ExtResource("6_x375a")]
-position = Vector2(1445, 534)
+position = Vector2(1474, 536)
+
+[node name="Boar2" parent="." instance=ExtResource("6_x375a")]
+position = Vector2(1246, 536)
 x_direction = -1.0
+
+[node name="WorldTransition" parent="." instance=ExtResource("7_5mxrb")]
+position = Vector2(1549, 527)
+world_to_go = ExtResource("8_ful3d")
