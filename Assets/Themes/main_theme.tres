@@ -18,5 +18,6 @@ Button/styles/hover = ExtResource("2_y6uoh")
 Button/styles/hover_pressed = ExtResource("4_3xkjg")
 Button/styles/normal = ExtResource("2_jf340")
 Button/styles/pressed = ExtResource("4_3xkjg")
+Label/constants/paragraph_spacing = 5
 Label/font_sizes/font_size = 8
 Label/fonts/font = ExtResource("1_5lvsy")

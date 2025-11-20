@@ -5,4 +5,5 @@
 [node name="RoomZoneCamera" type="Camera2D" groups=["Camera"]]
 limit_smoothed = true
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("1_7sqai")

@@ -155,7 +155,9 @@ size_flags_horizontal = 4
 theme = ExtResource("2_xvvfa")
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -4
-text = "Hello World"
+text = "Hello World
+This is 
+Extra text"
 horizontal_alignment = 1
 
 [node name="Animations" type="AnimationPlayer" parent="."]
