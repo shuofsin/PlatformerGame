@@ -9,3 +9,7 @@ enum SCENE_CHANGE_MODE {
 	HIDE = 2, # In memory, running
 	REMOVE = 3 # In memory, not running
 }
+var worlds: Dictionary = {
+	"playtest_world_one": "res://Scenes/Levels/playtest_world_one.tscn",
+	"playtest_world_two": "res://Scenes/Levels/playtest_world_two.tscn"
+}

@@ -9,11 +9,11 @@ class_name GameManager
 @export var player: Player
 
 func _ready() -> void: 
-	Global.game_manager = self 
+	Global.game_manager = self
 	Global.player = player
 	current_world.spawn_player()
 
-func change_world(new_scene: PackedScene, mode: int) -> void: 
+func change_world(new_scene: String, mode: int) -> void: 
 	if current_world: 
 		if mode == Global.SCENE_CHANGE_MODE.DELETE: 
 			current_world.queue_free()
@@ -21,12 +21,12 @@ func change_world(new_scene: PackedScene, mode: int) -> void:
 			current_world.visible = false # Should almost never be used, will cause issues
 		elif mode == Global.SCENE_CHANGE_MODE.REMOVE:
 			world.remove_child(current_world)
-	var new_world = new_scene.instantiate()
+	var new_world = load(new_scene).instantiate()
 	world.add_child(new_world)
 	current_world = new_world
 	current_world.spawn_player()
 
-func change_gui(new_scene: PackedScene, mode: int) -> void: 
+func change_gui(new_scene: String, mode: int) -> void: 
 	if current_gui:
 		if mode == Global.SCENE_CHANGE_MODE.DELETE: 
 			current_gui.queue_free()
@@ -34,6 +34,6 @@ func change_gui(new_scene: PackedScene, mode: int) -> void:
 			current_gui.visible = false
 		elif mode == Global.SCENE_CHANGE_MODE.REMOVE:
 			gui.remove_child(current_gui)
-	var new_gui = new_scene.instantiate()
+	var new_gui = load(new_scene).instantiate()
 	gui.add_child(new_gui)
 	current_gui = new_gui

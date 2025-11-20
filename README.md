@@ -2,10 +2,8 @@
 Godot Platformer Project
 
 ## To-do:
-- Game: SceneManager
 - Game: Componentization of Bow/Dash
 - Game: Prepare for playtest
-
 
 ### Componentization Stuff
 - HitBox

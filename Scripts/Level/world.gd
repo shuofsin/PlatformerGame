@@ -1,7 +1,8 @@
 extends Node2D
 class_name World
 
-@export var spawn_position: Vector2
+@export var spawn: Node2D
 
 func spawn_player() -> void: 
-	Global.player.global_position = spawn_position
+	await spawn
+	Global.player.global_position = spawn.global_position
