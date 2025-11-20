@@ -3,6 +3,7 @@ extends Control
 @onready var dash_charge_icon: Sprite2D = %DashChargeIcon
 @onready var health_icon: Sprite2D = %HealthIcon
 
+
 func _process(_delta: float) -> void:
 	if !Global.player:
 		return

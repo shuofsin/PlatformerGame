@@ -11,7 +11,10 @@ class_name GameManager
 func _ready() -> void: 
 	Global.game_manager = self
 	Global.player = player
-	current_world.spawn_player()
+	Global.player.set_process(false)
+	Global.player.set_physics_process(false)
+	if current_world: 
+		current_world.spawn_player()
 
 func change_world(new_scene: String, mode: int) -> void: 
 	if current_world: 
@@ -21,7 +24,7 @@ func change_world(new_scene: String, mode: int) -> void:
 			current_world.visible = false # Should almost never be used, will cause issues
 		elif mode == Global.SCENE_CHANGE_MODE.REMOVE:
 			world.remove_child(current_world)
-	var new_world = load(new_scene).instantiate()
+	var new_world = load(Global.worlds[new_scene]).instantiate()
 	world.add_child(new_world)
 	current_world = new_world
 	current_world.spawn_player()
@@ -34,6 +37,6 @@ func change_gui(new_scene: String, mode: int) -> void:
 			current_gui.visible = false
 		elif mode == Global.SCENE_CHANGE_MODE.REMOVE:
 			gui.remove_child(current_gui)
-	var new_gui = load(new_scene).instantiate()
+	var new_gui = load(Global.guis[new_scene]).instantiate()
 	gui.add_child(new_gui)
 	current_gui = new_gui

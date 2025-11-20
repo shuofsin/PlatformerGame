@@ -13,3 +13,7 @@ var worlds: Dictionary = {
 	"playtest_world_one": "res://Scenes/Levels/playtest_world_one.tscn",
 	"playtest_world_two": "res://Scenes/Levels/playtest_world_two.tscn"
 }
+var guis: Dictionary = {
+	"playtest_menu": "res://Scenes/GUI/playtest_menu.tscn",
+	"player_hud": "res://Scenes/GUI/player_hud.tscn"
+}

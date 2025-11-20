@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://imfd681dmdh4"]
+
+[ext_resource type="Theme" uid="uid://bbuaqaqb413jb" path="res://Assets/Themes/main_theme.tres" id="1_8ra75"]
+[ext_resource type="Script" uid="uid://ciq31n46ejg0m" path="res://Scripts/GUI/playtest_menu.gd" id="1_k1kmp"]
+[ext_resource type="Texture2D" uid="uid://ii3xdy3ctkbf" path="res://Assets/GUI/menu_panel.png" id="2_r2k3f"]
+
+[node name="PlaytestMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_k1kmp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5568628, 0.75686276, 0.6745098, 1)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -125.0
+offset_right = 111.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8ra75")
+texture = ExtResource("2_r2k3f")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -72.0
+offset_right = 71.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Play" type="Button" parent="CanvasLayer/NinePatchRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Play"
+
+[node name="Quit" type="Button" parent="CanvasLayer/NinePatchRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Quit
+"

@@ -1,20 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c71lq6a52btg2"]
+[gd_scene load_steps=4 format=3 uid="uid://c71lq6a52btg2"]
 
 [ext_resource type="Script" uid="uid://bwdy5mdv4oysq" path="res://Scripts/System/game_manager.gd" id="1_28177"]
 [ext_resource type="PackedScene" uid="uid://dbocxh517g6jj" path="res://Scenes/Player/player.tscn" id="2_sh06h"]
-[ext_resource type="PackedScene" uid="uid://bpvkaceob18fp" path="res://Scenes/Levels/playtest_world_one.tscn" id="2_ubtl4"]
-[ext_resource type="PackedScene" uid="uid://kxw37j7ud0nj" path="res://Scenes/GUI/player_hud.tscn" id="4_ubtl4"]
+[ext_resource type="PackedScene" uid="uid://imfd681dmdh4" path="res://Scenes/GUI/playtest_menu.tscn" id="3_sh06h"]
 
-[node name="GameManager" type="Node" node_paths=PackedStringArray("current_world", "current_gui", "player")]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("current_gui", "player")]
 script = ExtResource("1_28177")
-current_world = NodePath("World/PlaytestWorldOne")
-current_gui = NodePath("GUI/PlayerHud")
+current_gui = NodePath("GUI/PlaytestMenu")
 player = NodePath("World/Player")
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
-
-[node name="PlaytestWorldOne" parent="World" instance=ExtResource("2_ubtl4")]
 
 [node name="Player" parent="World" instance=ExtResource("2_sh06h")]
 position = Vector2(272, 309)
@@ -26,5 +22,5 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlayerHud" parent="GUI" instance=ExtResource("4_ubtl4")]
-layout_mode = 0
+[node name="PlaytestMenu" parent="GUI" instance=ExtResource("3_sh06h")]
+layout_mode = 1

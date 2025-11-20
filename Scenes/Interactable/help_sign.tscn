@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://beufrqwh7gtju"]
+[gd_scene load_steps=9 format=3 uid="uid://beufrqwh7gtju"]
 
 [ext_resource type="Script" uid="uid://c56i3c0hr77x4" path="res://Scripts/Interactable/help_sign.gd" id="1_2oovi"]
 [ext_resource type="Texture2D" uid="uid://dlfrprd3sm07b" path="res://Assets/Interactable/help_sign.png" id="1_xha80"]
+[ext_resource type="Theme" uid="uid://bbuaqaqb413jb" path="res://Assets/Themes/main_theme.tres" id="2_xvvfa"]
 
 [sub_resource type="Animation" id="Animation_2oovi"]
 length = 0.001
@@ -144,16 +145,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -49.0
-offset_top = -34.0
-offset_right = 49.0
-offset_bottom = -11.0
+offset_left = -72.0
+offset_top = -48.0
+offset_right = 72.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
+theme = ExtResource("2_xvvfa")
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -4
-theme_override_font_sizes/font_size = 10
+text = "Hello World"
 horizontal_alignment = 1
 
 [node name="Animations" type="AnimationPlayer" parent="."]
