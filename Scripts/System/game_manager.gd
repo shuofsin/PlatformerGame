@@ -11,10 +11,7 @@ class_name GameManager
 func _ready() -> void: 
 	Global.game_manager = self
 	Global.player = player
-	Global.player.set_process(false)
-	Global.player.set_physics_process(false)
-	if current_world: 
-		current_world.spawn_player()
+	Global.player.set_player_active(false)
 
 func change_world(new_scene: String, mode: int) -> void: 
 	if current_world: 

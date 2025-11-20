@@ -3,11 +3,11 @@ class_name DashStrike
 
 @onready var animations: AnimationPlayer = %Animations
 @onready var sprite: Sprite2D = %Sprite
-@export var player: Player
+var player: Player
 
 func _ready() -> void:
 	animations.play("inactive")
-	animations.animation_finished.connect(cancel_dash_strike)
+	animations.animation_finished.connect(func (current_animation: String) : cancel_dash_strike())
 
 func activate_dash_strike(new_rotation: float) -> void:
 	animations.play("dash_strike")

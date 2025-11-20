@@ -12,8 +12,7 @@ func enter() -> void:
 	player.dash_direction = player.global_position.direction_to(player.get_global_mouse_position()).normalized()
 	player.velocity = player.dash_direction * player.DASH_AMOUNT
 	
-	player.weapon.reset()
-	player.weapon.visible = false
+	player.set_weapon_active(false)
 	
 	player.animations.play(&"dash")
 	player.sprites.rotation = player.dash_direction.angle()
@@ -36,7 +35,7 @@ func exit() -> void:
 	player.set_collision_mask_value(3, true)
 	player.sprites.rotation = 0
 	player.body_sprite.flip_v = false
-	player.weapon.visible = true
+	player.set_weapon_active(true)
 	player.ghost_timer = 0
 	player.is_dashing = false
 	player.dash_strike.cancel_dash_strike()

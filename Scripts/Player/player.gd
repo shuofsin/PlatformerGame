@@ -4,7 +4,6 @@ class_name Player
 @onready var state_machine: StateMachine = %StateMachine
 @onready var weapon: Weapon = %Weapon
 @onready var dash_strike: DashStrike = %DashStrike
-@onready var camera: Camera2D = %Camera
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
 @onready var sprites: Sprite2D = %Sprites
@@ -40,11 +39,6 @@ const WALL_CONTACT_COYOTE_TIME: float = 0.2
 var wall_jump_lock: float = 0.0
 const WALL_JUMP_LOCK_TIME: float = 0.5
 var look_dir_x: int = 1
-
-# Camera motion
-const MIN_ZOOM: float = 3.0
-const MAX_ZOOM: float = 4.0
-const ZOOM_RATE: float = 1.25
 
 # Air Dash
 const DASH_AMOUNT: float = 300
@@ -92,7 +86,7 @@ func _process(delta: float) -> void:
 	
 	state_machine.process(delta)
 	if (!is_dashing):
-		_weapon_logic(delta)
+		_weapon_logic()
 		_head_rotation_logic()
 	_debug(Global.debug)
 
@@ -125,6 +119,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	pass
 
+func set_player_active(is_active: bool) -> void: 
+	self.set_process(is_active)
+	self.set_physics_process(is_active)
+	set_weapon_active(is_active)
+
 func run_gravity(delta: float) -> void: 
 	velocity.y += gravity 
 	wall_contact_coyote -= delta
@@ -135,17 +134,14 @@ func _debug(is_on: bool) -> void:
 	else:
 		debug.text = ""
 
-func _is_dashing(delta: float) -> void: 
-	camera.zoom = lerp(camera.zoom, Vector2(MAX_ZOOM, MAX_ZOOM), ZOOM_RATE * delta)
-	weapon.visible = false
-	weapon.reset()
+func set_weapon_active(is_active: bool) -> void: 
+	weapon.set_process(is_active)
+	weapon.set_physics_process(is_active)
+	weapon.visible = is_active
+	if !is_active:
+		weapon.reset()
 
-func _weapon_logic(delta: float) -> void: 
-	if weapon.is_drawn(): 
-		camera.zoom = lerp(camera.zoom, Vector2(MIN_ZOOM, MIN_ZOOM), ZOOM_RATE * delta) 
-	else: 
-		camera.zoom = lerp(camera.zoom, Vector2(MAX_ZOOM, MAX_ZOOM), ZOOM_RATE * delta)
-	
+func _weapon_logic() -> void: 
 	if Input.is_action_pressed("shoot"):
 		weapon.draw_weapon()
 	if Input.is_action_just_released("shoot"):

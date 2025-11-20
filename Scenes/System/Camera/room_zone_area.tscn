@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://camehfciyxhmb"]
+
+[ext_resource type="Script" uid="uid://bkm6atbucvq8j" path="res://Scripts/System/Camera/room_zone_area.gd" id="1_cooeg"]
+
+[node name="RoomZoneArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_cooeg")

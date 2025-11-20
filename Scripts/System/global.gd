@@ -11,7 +11,8 @@ enum SCENE_CHANGE_MODE {
 }
 var worlds: Dictionary = {
 	"playtest_world_one": "res://Scenes/Levels/playtest_world_one.tscn",
-	"playtest_world_two": "res://Scenes/Levels/playtest_world_two.tscn"
+	"playtest_world_two": "res://Scenes/Levels/playtest_world_two.tscn",
+	"playtest_world_three": "res://Scenes/Levels/playtest_world_three.tscn"
 }
 var guis: Dictionary = {
 	"playtest_menu": "res://Scenes/GUI/playtest_menu.tscn",

@@ -7,4 +7,4 @@ func _ready() -> void:
 
 func _is_player_entered(body_entered: Node2D):
 	if body_entered is Player: 
-		get_tree().reload_current_scene.call_deferred()
+		body_entered.state_machine.force_change_state("death")

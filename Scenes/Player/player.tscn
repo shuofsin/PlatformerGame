@@ -551,7 +551,7 @@ height = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
 size = Vector2(11, 17)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dd0ac")
@@ -560,14 +560,6 @@ script = ExtResource("1_dd0ac")
 unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="Camera" type="Camera2D" parent="."]
-unique_name_in_owner = true
-zoom = Vector2(3, 3)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.3
-drag_right_margin = 0.3
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
