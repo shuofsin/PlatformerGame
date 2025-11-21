@@ -13,7 +13,8 @@ config_version=5
 config/name="PlatformerGame"
 run/main_scene="uid://c71lq6a52btg2"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="uid://b5581jsuiwpkd"
 
 [autoload]
 
@@ -22,6 +23,8 @@ FadeTransition="*res://Scenes/GUI/fade_transition.tscn"
 
 [display]
 
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [global_group]

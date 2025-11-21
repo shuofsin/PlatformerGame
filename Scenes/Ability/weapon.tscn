@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cup5g1ql0qo1u"]
+
+[ext_resource type="Script" uid="uid://b0f7psem8whtk" path="res://Scripts/Ability/weapon.gd" id="1_rq8qv"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_rq8qv")
+charge_amount = null
+charge_rate = null
+max_charge = null

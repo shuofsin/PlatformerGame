@@ -16,5 +16,6 @@ var worlds: Dictionary = {
 }
 var guis: Dictionary = {
 	"playtest_menu": "res://Scenes/GUI/playtest_menu.tscn",
-	"player_hud": "res://Scenes/GUI/player_hud.tscn"
+	"player_hud": "res://Scenes/GUI/player_hud.tscn",
+	"splash_screen": "res://Scenes/GUI/splash_screen.tscn"
 }

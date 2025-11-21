@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://tndtll7cpp4x"]
 
 [ext_resource type="Texture2D" uid="uid://dlulmg7nwebnk" path="res://Assets/Player/player_dash_effect.png" id="1_h528t"]
-[ext_resource type="Script" uid="uid://cs2mqgo00amoo" path="res://Scripts/Player/dash_strike.gd" id="1_npbam"]
+[ext_resource type="Script" uid="uid://cs2mqgo00amoo" path="res://Scripts/Ability/test_dash_strike.gd" id="1_npbam"]
 [ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Scripts/Components/hitbox_component.gd" id="3_tf7ls"]
 [ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Scripts/Components/attack.gd" id="4_n656h"]
 

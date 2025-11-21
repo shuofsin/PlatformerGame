@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @onready var state_machine: StateMachine = %StateMachine
-@onready var weapon: Weapon = %Weapon
-@onready var dash_strike: DashStrike = %DashStrike
+@onready var weapon: TestWeapon = %Weapon
+@onready var dash_strike: TestDashStrike = %DashStrike
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
 @onready var sprites: Sprite2D = %Sprites
@@ -142,7 +142,7 @@ func set_weapon_active(is_active: bool) -> void:
 		weapon.reset()
 
 func _weapon_logic() -> void: 
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot"):
 		weapon.draw_weapon()
 	if Input.is_action_just_released("shoot"):
 		weapon.release_weapon()

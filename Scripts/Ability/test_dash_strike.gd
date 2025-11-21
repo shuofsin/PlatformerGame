@@ -1,5 +1,5 @@
 extends Node2D
-class_name DashStrike
+class_name TestDashStrike
 
 @onready var animations: AnimationPlayer = %Animations
 @onready var sprite: Sprite2D = %Sprite

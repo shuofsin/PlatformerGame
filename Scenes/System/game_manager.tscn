@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bwdy5mdv4oysq" path="res://Scripts/System/game_manager.gd" id="1_28177"]
 [ext_resource type="PackedScene" uid="uid://dbocxh517g6jj" path="res://Scenes/Player/player.tscn" id="2_sh06h"]
-[ext_resource type="PackedScene" uid="uid://imfd681dmdh4" path="res://Scenes/GUI/playtest_menu.tscn" id="3_sh06h"]
+[ext_resource type="PackedScene" uid="uid://b2cun3himkt4o" path="res://Scenes/GUI/splash_screen.tscn" id="3_sh06h"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("current_gui", "player")]
 script = ExtResource("1_28177")
-current_gui = NodePath("GUI/PlaytestMenu")
+current_gui = NodePath("GUI/SplashScreen")
 player = NodePath("World/Player")
 
 [node name="World" type="Node2D" parent="."]
@@ -22,5 +22,5 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlaytestMenu" parent="GUI" instance=ExtResource("3_sh06h")]
+[node name="SplashScreen" parent="GUI" instance=ExtResource("3_sh06h")]
 layout_mode = 1
