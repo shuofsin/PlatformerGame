@@ -63,16 +63,15 @@ func _charging(delta: float) -> void:
 	weapon_texture.play_animation("charging")
 
 func _charged() -> void: 
+	weapon_texture.rotation = direction.angle()
+	weapon_texture.position.y = origin_y
 	weapon_texture.play_animation("holding")
 
 func _release() -> void: 
 	var new_arrow: Arrow = arrow_type.instantiate()
 	var offset: float = weapon_texture.get_offset()
 	new_arrow.global_position = global_position + (direction * offset)
-	new_arrow.set_velocity(direction, charge_amount / max_charge)
+	new_arrow.velocity = direction * new_arrow.initial_speed * (charge_amount / max_charge)
 	new_arrow.weapon = self
-	if !Global.game_manager: 
-		get_tree().current_scene.add_child(new_arrow)
-	else:
-		Global.game_manager.world.add_child(new_arrow)
+	Global.game_manager.world.add_child(new_arrow)
 	current_state = IDLE

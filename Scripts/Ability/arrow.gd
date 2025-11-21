@@ -10,7 +10,7 @@ var _gravity: float = 9.8
 @export var mass: float = 0.25
 var velocity: Vector2 = Vector2.ZERO
 var gravity_vector: Vector2 = Vector2.DOWN
-@export var inital_speed: float
+@export var initial_speed: float = 600
 
 var has_hit: bool = false
 @export var time_to_despawn: float = 2
@@ -19,6 +19,7 @@ const TIME_TO_FADE: float = 1
 
 ## Set continous collisions
 func _ready() -> void: 
+	z_index = -1
 	arrow_texture.play_animation("RESET")
 	collision.body_entered.connect(_on_body_entered)
 
@@ -47,14 +48,15 @@ func _stop_moving() -> void:
 
 func _on_body_entered(body: Node2D) -> void: 
 	_stop_moving()
+	hitbox_component.set_collision_mask_value(3, false)
+	collision.set_collision_layer_value(3, false)
 	if body.is_in_group("Enemy"):
-		hitbox_component.set_collision_mask_value(3, false)
-		collision.set_collision_layer_value(3, false)
+		print("hit!")
 		self.reparent.call_deferred(body)
 		weapon.add_dash_charge()
 
 func set_velocity(direction: Vector2, power: float) -> void: 
-	velocity = direction * power * inital_speed
+	velocity = direction * power * initial_speed
 
 func _extra_process() -> void: 
 	pass

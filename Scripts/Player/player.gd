@@ -1,8 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var state_machine: StateMachine = %StateMachine
-@onready var weapon: TestWeapon = %Weapon
+@onready var state_machine: StateMachine = %StateMachine 
 @onready var dash_strike: TestDashStrike = %DashStrike
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
@@ -13,6 +12,9 @@ class_name Player
 @onready var debug: Label = %Debug
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var healthbox_component: HealthboxComponent = %HealthboxComponent
+
+# Abilities
+@export var weapon: Weapon
 
 # Vertical movement variables
 const JUMP_HEIGHT: float = -300.0

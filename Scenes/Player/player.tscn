@@ -10,11 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://d271mdjdom470" path="res://Assets/Player/player_head.png" id="7_h4iuc"]
 [ext_resource type="Script" uid="uid://bis2qlftmyus5" path="res://Scripts/Player/player_wall_slide_state.gd" id="7_jhyir"]
 [ext_resource type="Script" uid="uid://brxygfkjpbb6c" path="res://Scripts/Player/player_wall_jump_state.gd" id="8_74mp2"]
-[ext_resource type="PackedScene" uid="uid://qq4odr15se45" path="res://Scenes/Ability/test_weapon.tscn" id="9_f1ek2"]
 [ext_resource type="Script" uid="uid://cq1tadttthn8h" path="res://Scripts/Player/player_dash_state.gd" id="9_oikmp"]
 [ext_resource type="Script" uid="uid://cbvn561d7kp2c" path="res://Scripts/Player/player_death_state.gd" id="11_r5xpd"]
 [ext_resource type="PackedScene" uid="uid://bg4v14wuqkcnp" path="res://Scenes/Components/healthbox_component.tscn" id="13_hnuln"]
 [ext_resource type="PackedScene" uid="uid://tndtll7cpp4x" path="res://Scenes/Ability/test_dash_strike.tscn" id="14_7g0yx"]
+[ext_resource type="PackedScene" uid="uid://b8u7lr2a1ph8i" path="res://Scenes/Ability/Bows/basic_bow.tscn" id="15_r5xpd"]
 [ext_resource type="Script" uid="uid://dlxenxeltbjsh" path="res://Scripts/Components/health_component.gd" id="17_ks1b7"]
 
 [sub_resource type="Animation" id="Animation_1uthr"]
@@ -551,10 +551,11 @@ height = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
 size = Vector2(11, 17)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dd0ac")
+weapon = NodePath("BasicBow")
 
 [node name="Debug" type="Label" parent="."]
 unique_name_in_owner = true
@@ -697,9 +698,7 @@ hit_from_inside = true
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_3smsa")
 
-[node name="Weapon" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_f1ek2")]
-unique_name_in_owner = true
-player = NodePath("..")
+[node name="BasicBow" parent="." instance=ExtResource("15_r5xpd")]
 
 [node name="DashStrike" parent="." instance=ExtResource("14_7g0yx")]
 unique_name_in_owner = true

@@ -10,4 +10,4 @@ func play_animation(animation_name: String) -> void:
 	animations.play(animation_name)
 
 func get_offset() -> float: 
-	return sprite.texture.get_width()
+	return sprite.texture.get_width() / float(sprite.hframes)
