@@ -51,7 +51,6 @@ func _on_body_entered(body: Node2D) -> void:
 	hitbox_component.set_collision_mask_value(3, false)
 	collision.set_collision_layer_value(3, false)
 	if body.is_in_group("Enemy"):
-		print("hit!")
 		self.reparent.call_deferred(body)
 		weapon.add_dash_charge()
 

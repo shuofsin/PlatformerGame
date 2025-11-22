@@ -19,3 +19,8 @@ var guis: Dictionary = {
 	"player_hud": "res://Scenes/GUI/player_hud.tscn",
 	"splash_screen": "res://Scenes/GUI/splash_screen.tscn"
 }
+var weapons: Dictionary = {
+	"basic_bow": "res://Scenes/Ability/Bows/basic_bow.tscn",
+	"faster_bow": "res://Scenes/Ability/Bows/faster_bow.tscn"
+}
+var dashes: Dictionary = {}

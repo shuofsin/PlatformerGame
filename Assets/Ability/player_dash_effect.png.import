@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://83ncefgtdekp"
-path="res://.godot/imported/player_weapon.png-2a06cfa48c5b3ab6ee1af38f64cec4a4.ctex"
+uid="uid://dlulmg7nwebnk"
+path="res://.godot/imported/player_dash_effect.png-b906df306ed591d16837eee57a3fae21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/player_weapon.png"
-dest_files=["res://.godot/imported/player_weapon.png-2a06cfa48c5b3ab6ee1af38f64cec4a4.ctex"]
+source_file="res://Assets/Ability/player_dash_effect.png"
+dest_files=["res://.godot/imported/player_dash_effect.png-b906df306ed591d16837eee57a3fae21.ctex"]
 
 [params]
 

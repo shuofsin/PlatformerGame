@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlulmg7nwebnk"
-path="res://.godot/imported/player_dash_effect.png-43f67139477de1e3481395257eedad7f.ctex"
+uid="uid://hrwfrub5o73c"
+path="res://.godot/imported/player_arrow.png-aec09bae8ffea492988d442e2791b2df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/player_dash_effect.png"
-dest_files=["res://.godot/imported/player_dash_effect.png-43f67139477de1e3481395257eedad7f.ctex"]
+source_file="res://Assets/Ability/player_arrow.png"
+dest_files=["res://.godot/imported/player_arrow.png-aec09bae8ffea492988d442e2791b2df.ctex"]
 
 [params]
 

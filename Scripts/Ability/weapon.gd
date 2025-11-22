@@ -36,6 +36,7 @@ func add_dash_charge():
 
 func draw_weapon() -> void: 
 	current_state = CHARGING 
+	weapon_texture.play_animation("charging")
 
 func release_weapon() -> void: 
 	current_state = RELEASE
@@ -60,7 +61,6 @@ func _charging(delta: float) -> void:
 	
 	weapon_texture.rotation = direction.angle()
 	weapon_texture.position.y = origin_y
-	weapon_texture.play_animation("charging")
 
 func _charged() -> void: 
 	weapon_texture.rotation = direction.angle()

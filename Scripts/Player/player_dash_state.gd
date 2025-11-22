@@ -25,7 +25,7 @@ func enter() -> void:
 		player.body_sprite.flip_v = false
 		player.head_sprite.flip_v = false
 	
-	player.dash_strike.activate_dash_strike(player.body_sprite.global_rotation)
+	player.ability_manager.dash.activate_dash_strike(player.body_sprite.global_rotation)
 	player.ghost_timer = player.TIME_BETWEEN_GHOSTS
 	_add_ghost()
 
@@ -38,7 +38,7 @@ func exit() -> void:
 	player.set_weapon_active(true)
 	player.ghost_timer = 0
 	player.is_dashing = false
-	player.dash_strike.cancel_dash_strike()
+	player.ability_manager.dash.cancel_dash_strike()
 
 func update(delta: float) -> void: 
 	if (player.ghost_timer >= 0):

@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://b0f7psem8whtk" path="res://Scripts/Ability/weapon.gd" id="2_8su7x"]
 [ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Scripts/Ability/ability_texture.gd" id="3_wi643"]
 [ext_resource type="PackedScene" uid="uid://v8n48veyq74y" path="res://Scenes/Ability/Arrows/basic_arrow.tscn" id="3_wjqfh"]
-[ext_resource type="Texture2D" uid="uid://83ncefgtdekp" path="res://Assets/Player/player_weapon.png" id="4_qhxts"]
-[ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Assets/Player/player_arrow.png" id="5_qhxts"]
+[ext_resource type="Texture2D" uid="uid://83ncefgtdekp" path="res://Assets/Ability/player_weapon.png" id="4_qhxts"]
+[ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Assets/Ability/player_arrow.png" id="5_qhxts"]
 [ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Scripts/Ability/bar_texture.gd" id="6_wjqfh"]
 
 [sub_resource type="Animation" id="Animation_w4uv7"]

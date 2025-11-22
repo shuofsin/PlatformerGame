@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=28 format=3 uid="uid://dbocxh517g6jj"]
 
 [ext_resource type="Script" uid="uid://dfhutr60wutgc" path="res://Scripts/Player/player.gd" id="1_dd0ac"]
 [ext_resource type="Texture2D" uid="uid://c0vsj2mex11rn" path="res://Assets/Player/player_sprite_sheet.png" id="2_3smsa"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cbvn561d7kp2c" path="res://Scripts/Player/player_death_state.gd" id="11_r5xpd"]
 [ext_resource type="PackedScene" uid="uid://bg4v14wuqkcnp" path="res://Scenes/Components/healthbox_component.tscn" id="13_hnuln"]
 [ext_resource type="PackedScene" uid="uid://tndtll7cpp4x" path="res://Scenes/Ability/test_dash_strike.tscn" id="14_7g0yx"]
+[ext_resource type="Script" uid="uid://cpgw5mnurs3xc" path="res://Scripts/Player/ability_manager.gd" id="15_ks1b7"]
 [ext_resource type="PackedScene" uid="uid://b8u7lr2a1ph8i" path="res://Scenes/Ability/Bows/basic_bow.tscn" id="15_r5xpd"]
 [ext_resource type="Script" uid="uid://dlxenxeltbjsh" path="res://Scripts/Components/health_component.gd" id="17_ks1b7"]
 
@@ -551,11 +552,10 @@ height = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
 size = Vector2(11, 17)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_dd0ac")
-weapon = NodePath("BasicBow")
 
 [node name="Debug" type="Label" parent="."]
 unique_name_in_owner = true
@@ -698,7 +698,12 @@ hit_from_inside = true
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_3smsa")
 
-[node name="BasicBow" parent="." instance=ExtResource("15_r5xpd")]
-
-[node name="DashStrike" parent="." instance=ExtResource("14_7g0yx")]
+[node name="AbilityManager" type="Node2D" parent="." node_paths=PackedStringArray("weapon", "dash")]
 unique_name_in_owner = true
+script = ExtResource("15_ks1b7")
+weapon = NodePath("BasicBow")
+dash = NodePath("DashStrike")
+
+[node name="BasicBow" parent="AbilityManager" instance=ExtResource("15_r5xpd")]
+
+[node name="DashStrike" parent="AbilityManager" instance=ExtResource("14_7g0yx")]

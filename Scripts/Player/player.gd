@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 @onready var state_machine: StateMachine = %StateMachine 
-@onready var dash_strike: TestDashStrike = %DashStrike
 @onready var coyote_timer: Timer = %CoyoteTimer
 @onready var jump_buffer_timer: Timer = %JumpBufferTimer
 @onready var sprites: Sprite2D = %Sprites
@@ -12,9 +11,8 @@ class_name Player
 @onready var debug: Label = %Debug
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var healthbox_component: HealthboxComponent = %HealthboxComponent
+@onready var ability_manager: Node2D = %AbilityManager
 
-# Abilities
-@export var weapon: Weapon
 
 # Vertical movement variables
 const JUMP_HEIGHT: float = -300.0
@@ -137,17 +135,17 @@ func _debug(is_on: bool) -> void:
 		debug.text = ""
 
 func set_weapon_active(is_active: bool) -> void: 
-	weapon.set_process(is_active)
-	weapon.set_physics_process(is_active)
-	weapon.visible = is_active
+	ability_manager.weapon.set_process(is_active)
+	ability_manager.weapon.set_physics_process(is_active)
+	ability_manager.weapon.visible = is_active
 	if !is_active:
-		weapon.reset()
+		ability_manager.weapon.reset()
 
 func _weapon_logic() -> void: 
 	if Input.is_action_just_pressed("shoot"):
-		weapon.draw_weapon()
+		ability_manager.weapon.draw_weapon()
 	if Input.is_action_just_released("shoot"):
-		weapon.release_weapon()
+		ability_manager.weapon.release_weapon()
 
 func _head_rotation_logic() -> void: 
 	head_sprite.rotation = head_sprite.global_position.direction_to(get_global_mouse_position()).angle()
