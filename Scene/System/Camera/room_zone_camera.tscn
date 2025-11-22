@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://q78bagmut14j" path="res://Script/System/Camera/room_zone_camera.gd" id="1_7sqai"]
 
 [node name="RoomZoneCamera" type="Camera2D" groups=["Camera"]]
+process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0

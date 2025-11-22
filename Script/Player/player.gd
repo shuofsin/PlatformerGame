@@ -15,7 +15,7 @@ class_name Player
 
 
 # Vertical movement variables
-const JUMP_HEIGHT: float = -300.0
+const JUMP_HEIGHT: float = -225.0
 const MIN_GRAVITY: float = 8.0
 const MAX_GRAVITY: float = 12.5 
 const GRAVITY_ACCELERATION: float = 7.5
@@ -25,7 +25,7 @@ const LEDGE_HOP_FACTOR: float = 7
 var coyote_time_activated: bool = false 
 
 # Horizontal movement variables
-const MAX_SPEED: float = 150.0
+const MAX_SPEED: float = 115.0
 const ACCELERATION: float = 12.0
 const FRICTION: float = 10
 var x_input: float = 0
