@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://ceckw6mhwh55"]
+
+[ext_resource type="Script" uid="uid://jev5iw0hcula" path="res://Script/Level/ability_test_scene.gd" id="1_6ceml"]
+[ext_resource type="Script" uid="uid://b0f7psem8whtk" path="res://Script/Ability/Bow/weapon.gd" id="2_8su7x"]
+[ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Script/Component/ability_texture.gd" id="3_wi643"]
+[ext_resource type="PackedScene" uid="uid://v8n48veyq74y" path="res://Scene/Ability/Arrow/basic_arrow.tscn" id="3_wjqfh"]
+[ext_resource type="Texture2D" uid="uid://83ncefgtdekp" path="res://Asset/Ability/player_weapon.png" id="4_qhxts"]
+[ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Asset/Ability/player_arrow.png" id="5_qhxts"]
+[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="6_wjqfh"]
+
+[sub_resource type="Animation" id="Animation_w4uv7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ppx50"]
+resource_name = "charging"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_355lt"]
+resource_name = "holding"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_wjqfh"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k60la"]
+_data = {
+&"RESET": SubResource("Animation_w4uv7"),
+&"charging": SubResource("Animation_ppx50"),
+&"holding": SubResource("Animation_355lt"),
+&"idle": SubResource("Animation_wjqfh")
+}
+
+[node name="AbilityTestScene" type="Node2D"]
+script = ExtResource("1_6ceml")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(584, 319)
+zoom = Vector2(4, 4)
+
+[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("weapon_texture", "charge_bar_texture")]
+unique_name_in_owner = true
+position = Vector2(550, 311)
+script = ExtResource("2_8su7x")
+arrow_type = ExtResource("3_wjqfh")
+weapon_texture = NodePath("AbilityTexture")
+charge_bar_texture = NodePath("BarTexture")
+metadata/_custom_type_script = "uid://b0f7psem8whtk"
+
+[node name="AbilityTexture" type="Node2D" parent="Weapon" node_paths=PackedStringArray("animations", "sprite")]
+script = ExtResource("3_wi643")
+animations = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://j4ewsd0pheac"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/AbilityTexture"]
+libraries = {
+&"": SubResource("AnimationLibrary_k60la")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon/AbilityTexture"]
+texture = ExtResource("4_qhxts")
+hframes = 7
+
+[node name="BarTexture" type="Sprite2D" parent="Weapon"]
+position = Vector2(-1, -14)
+scale = Vector2(2, 2)
+texture = ExtResource("5_qhxts")
+script = ExtResource("6_wjqfh")
+metadata/_custom_type_script = "uid://c0iiccrnxgt4y"

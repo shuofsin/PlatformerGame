@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1oaun288qnsa"]
+
+[ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Script/Component/ability_texture.gd" id="1_b2fes"]
+
+[node name="AbilityTexture" type="Node2D"]
+script = ExtResource("1_b2fes")

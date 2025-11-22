@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://by0hyquymkthh"]
+
+[ext_resource type="Script" uid="uid://b272bshipbu34" path="res://Script/Environment/moving_platform.gd" id="1_anqd2"]
+[ext_resource type="Texture2D" uid="uid://b5wnhyc55rfbw" path="res://Asset/Test/temp_tile.png" id="2_anqd2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anqd2"]
+size = Vector2(96, 32)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_anqd2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.8146973e-06, -9.536743e-07)
+scale = Vector2(6.0000005, 1.9999999)
+texture = ExtResource("2_anqd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_anqd2")
+
+[node name="RayRight" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(45, 0)
+target_position = Vector2(10, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-45, 0)
+target_position = Vector2(-10, 0)

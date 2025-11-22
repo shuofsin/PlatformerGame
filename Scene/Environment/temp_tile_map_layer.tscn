@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhhtyhycl3lao"]
+
+[ext_resource type="Texture2D" uid="uid://b5wnhyc55rfbw" path="res://Asset/Test/temp_tile.png" id="1_jwive"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwive"]
+texture = ExtResource("1_jwive")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_maa6y"]
+physics_layer_0/collision_layer = 3
+sources/0 = SubResource("TileSetAtlasSource_jwive")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_maa6y")

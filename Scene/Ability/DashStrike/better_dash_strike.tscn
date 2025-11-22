@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkbkmscw7npjf"]
+
+[ext_resource type="Script" uid="uid://b70em753mxofx" path="res://Script/Ability/DashStrike/dash_strike.gd" id="1_qxlg8"]
+[ext_resource type="PackedScene" uid="uid://d1oaun288qnsa" path="res://Scene/Component/ability_texture.tscn" id="2_m2nwb"]
+[ext_resource type="Texture2D" uid="uid://dlulmg7nwebnk" path="res://Asset/Ability/player_dash_effect.png" id="3_7bjeq"]
+[ext_resource type="PackedScene" uid="uid://c2sp55knojytm" path="res://Scene/Component/hitbox_component.tscn" id="3_wlbtq"]
+[ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="5_7ktcq"]
+
+[sub_resource type="Animation" id="Animation_npbam"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AbilityTexture/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_uuncy"]
+resource_name = "dash_strike"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AbilityTexture/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_h528t"]
+resource_name = "inactive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AbilityTexture/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xt3wi"]
+_data = {
+&"RESET": SubResource("Animation_npbam"),
+&"dash_strike": SubResource("Animation_uuncy"),
+&"inactive": SubResource("Animation_h528t")
+}
+
+[sub_resource type="Resource" id="Resource_7bjeq"]
+script = ExtResource("5_7ktcq")
+attack_damage = 1.0
+metadata/_custom_type_script = "uid://bsqrlaath6rv7"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wlbtq"]
+radius = 7.0
+height = 74.0
+
+[node name="BetterDashStrike" type="Node2D" node_paths=PackedStringArray("dash_texture", "hitbox_component")]
+script = ExtResource("1_qxlg8")
+dash_texture = NodePath("AbilityTexture")
+hitbox_component = NodePath("HitboxComponent")
+dash_time = 0.45
+dash_amount = 450.0
+metadata/_custom_type_script = "uid://b70em753mxofx"
+
+[node name="AbilityTexture" parent="." node_paths=PackedStringArray("animations", "sprite") instance=ExtResource("2_m2nwb")]
+animations = NodePath("Animations")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="AbilityTexture"]
+modulate = Color(0.35686275, 1, 1, 1)
+position = Vector2(-5, 0)
+scale = Vector2(3, 1.5)
+texture = ExtResource("3_7bjeq")
+offset = Vector2(-6, 0)
+hframes = 6
+
+[node name="Animations" type="AnimationPlayer" parent="AbilityTexture"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_xt3wi")
+}
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_wlbtq")]
+collision_mask = 4
+attack = SubResource("Resource_7bjeq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-18, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_wlbtq")
+disabled = true
+debug_color = Color(0.99898285, 0, 0.13976958, 0.41960785)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm1wapdfb3h17"]
+
+[ext_resource type="Texture2D" uid="uid://lks2tbsre1fc" path="res://Asset/GUI/default_bar.png" id="1_8koad"]
+[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="2_7nh85"]
+
+[node name="BarTexture" type="Sprite2D"]
+texture = ExtResource("1_8koad")
+region_enabled = true
+script = ExtResource("2_7nh85")

@@ -18,8 +18,8 @@ config/icon="uid://b5581jsuiwpkd"
 
 [autoload]
 
-Global="*res://Scripts/System/global.gd"
-FadeTransition="*res://Scenes/GUI/fade_transition.tscn"
+Global="*res://Script/System/global.gd"
+FadeTransition="*res://Scene/GUI/fade_transition.tscn"
 
 [display]
 

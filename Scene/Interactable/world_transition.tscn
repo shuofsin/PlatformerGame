@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkanfq88uav5g"]
+
+[ext_resource type="Script" uid="uid://dhxq6p5hn07gl" path="res://Script/Level/level_transition.gd" id="1_jxgnp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjopc"]
+radius = 17.029387
+
+[node name="WorldTransition" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jxgnp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xjopc")
+debug_color = Color(0.67630583, 0.3069459, 0.9952876, 0.41960785)

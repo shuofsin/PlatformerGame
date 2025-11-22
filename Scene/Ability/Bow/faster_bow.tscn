@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3nrprrxd5rob"]
+
+[ext_resource type="Script" uid="uid://b0f7psem8whtk" path="res://Script/Ability/Bow/weapon.gd" id="1_m5m6v"]
+[ext_resource type="PackedScene" uid="uid://bogvksej1vxw3" path="res://Scene/Ability/Arrow/faster_arrow.tscn" id="2_boibm"]
+[ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Script/Component/ability_texture.gd" id="2_s13ha"]
+[ext_resource type="Texture2D" uid="uid://83ncefgtdekp" path="res://Asset/Ability/player_weapon.png" id="3_1ajyr"]
+[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="3_ny647"]
+[ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Asset/Ability/player_arrow.png" id="4_boibm"]
+
+[sub_resource type="Animation" id="Animation_1ajyr"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_boibm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cffcc"]
+resource_name = "charging"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ynohi"]
+resource_name = "holding"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ynohi"]
+_data = {
+&"RESET": SubResource("Animation_boibm"),
+&"charging": SubResource("Animation_cffcc"),
+&"holding": SubResource("Animation_ynohi"),
+&"idle": SubResource("Animation_1ajyr")
+}
+
+[node name="FasterBow" type="Node2D" node_paths=PackedStringArray("weapon_texture", "charge_bar_texture")]
+script = ExtResource("1_m5m6v")
+arrow_type = ExtResource("2_boibm")
+weapon_texture = NodePath("AbilityTexture")
+charge_bar_texture = NodePath("BarTexture")
+metadata/_custom_type_script = "uid://b0f7psem8whtk"
+
+[node name="AbilityTexture" type="Node2D" parent="." node_paths=PackedStringArray("animations", "sprite")]
+script = ExtResource("2_s13ha")
+animations = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://j4ewsd0pheac"
+
+[node name="Sprite2D" type="Sprite2D" parent="AbilityTexture"]
+modulate = Color(0, 0.8553589, 0.8387838, 1)
+texture = ExtResource("3_1ajyr")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AbilityTexture"]
+libraries = {
+&"": SubResource("AnimationLibrary_ynohi")
+}
+
+[node name="BarTexture" type="Sprite2D" parent="."]
+modulate = Color(0, 0.85490197, 0.8392157, 1)
+position = Vector2(0, -17)
+scale = Vector2(2, 2)
+texture = ExtResource("4_boibm")
+script = ExtResource("3_ny647")
+metadata/_custom_type_script = "uid://c0iiccrnxgt4y"
