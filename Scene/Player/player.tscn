@@ -14,9 +14,9 @@
 [ext_resource type="Script" uid="uid://cbvn561d7kp2c" path="res://Script/Player/player_death_state.gd" id="11_r5xpd"]
 [ext_resource type="PackedScene" uid="uid://bg4v14wuqkcnp" path="res://Scene/Component/healthbox_component.tscn" id="13_hnuln"]
 [ext_resource type="Script" uid="uid://cpgw5mnurs3xc" path="res://Script/Player/ability_manager.gd" id="15_ks1b7"]
-[ext_resource type="PackedScene" uid="uid://b8u7lr2a1ph8i" path="res://Scene/Ability/Bow/basic_bow.tscn" id="15_r5xpd"]
-[ext_resource type="PackedScene" uid="uid://cjx6sug787x4b" path="res://Scene/Ability/DashStrike/basic_dash_strike.tscn" id="17_hnuln"]
+[ext_resource type="PackedScene" uid="uid://c65ci35u571ef" path="res://Scene/Ability/DashStrike/empty_dash_strike.tscn" id="16_w02sr"]
 [ext_resource type="Script" uid="uid://dlxenxeltbjsh" path="res://Script/Component/health_component.gd" id="17_ks1b7"]
+[ext_resource type="PackedScene" uid="uid://cwgi8eycq8cs3" path="res://Scene/Ability/Bow/empty_bow.tscn" id="17_w02sr"]
 
 [sub_resource type="Animation" id="Animation_1uthr"]
 length = 0.001
@@ -701,9 +701,9 @@ shape = SubResource("RectangleShape2D_3smsa")
 [node name="AbilityManager" type="Node2D" parent="." node_paths=PackedStringArray("weapon", "dash")]
 unique_name_in_owner = true
 script = ExtResource("15_ks1b7")
-weapon = NodePath("BasicBow")
-dash = NodePath("BasicDashStrike")
+weapon = NodePath("EmptyBow")
+dash = NodePath("EmptyDashStrike")
 
-[node name="BasicBow" parent="AbilityManager" instance=ExtResource("15_r5xpd")]
+[node name="EmptyDashStrike" parent="AbilityManager" instance=ExtResource("16_w02sr")]
 
-[node name="BasicDashStrike" parent="AbilityManager" instance=ExtResource("17_hnuln")]
+[node name="EmptyBow" parent="AbilityManager" instance=ExtResource("17_w02sr")]

@@ -9,19 +9,23 @@ var direction: Vector2 = Vector2.RIGHT
 @export var charge_amount: float = 0
 @export var charge_rate: float = 100
 @export var max_charge: float = 100
-const IDLE_OFFSET: float = 2
-var origin_y: float = 0.0
 enum {IDLE, CHARGING, CHARGED, RELEASE}
 var current_state: int = IDLE 
+var is_active: bool = true
 
 func _ready() -> void: 
 	weapon_texture.play_animation("RESET")
-	charge_bar_texture.set_value(charge_amount / max_charge)
-	origin_y = position.y 
+	if charge_bar_texture: charge_bar_texture.set_value(charge_amount / max_charge)
+	_extra_ready()
 
 func _process(delta: float) -> void:
+	_extra_process(delta)
+	if !is_active:
+		return
+	
 	direction = global_position.direction_to(get_global_mouse_position()).normalized()
-	charge_bar_texture.set_value(charge_amount / max_charge)
+	if charge_bar_texture: charge_bar_texture.set_value(charge_amount / max_charge)
+	
 	if (current_state == IDLE):
 		_idle()
 	if (current_state == CHARGING):
@@ -30,6 +34,9 @@ func _process(delta: float) -> void:
 		_charged()
 	if (current_state == RELEASE):
 		_release() 
+
+func _physics_process(delta: float) -> void:
+	_extra_physics_process(delta)
 
 func add_dash_charge(): 
 	Global.player.can_dash = true
@@ -49,8 +56,7 @@ func reset() -> void:
 
 func _idle() -> void: 
 	charge_amount = 0
-	weapon_texture.rotation = Vector2.DOWN.angle() 
-	weapon_texture.position.y = origin_y + IDLE_OFFSET
+	weapon_texture.rotation = 0.0
 	weapon_texture.play_animation("idle")
 
 func _charging(delta: float) -> void: 
@@ -60,14 +66,14 @@ func _charging(delta: float) -> void:
 		current_state = CHARGED
 	
 	weapon_texture.rotation = direction.angle()
-	weapon_texture.position.y = origin_y
 
 func _charged() -> void: 
 	weapon_texture.rotation = direction.angle()
-	weapon_texture.position.y = origin_y
 	weapon_texture.play_animation("holding")
 
 func _release() -> void: 
+	if !arrow_type: 
+		return 
 	var new_arrow: Arrow = arrow_type.instantiate()
 	var offset: float = weapon_texture.get_offset()
 	new_arrow.global_position = global_position + (direction * offset)
@@ -75,3 +81,12 @@ func _release() -> void:
 	new_arrow.weapon = self
 	Global.game_manager.world.add_child(new_arrow)
 	current_state = IDLE
+
+func _extra_ready() -> void: 
+	pass
+
+func _extra_process(_delta: float) -> void:
+	pass
+	
+func _extra_physics_process(_delta: float) -> void:
+	pass

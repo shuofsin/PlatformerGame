@@ -17,3 +17,9 @@ func flip_animation_on_rotate(new_rotation: float):
 		sprite.flip_v = true
 	else:
 		sprite.flip_v = false
+
+func connect_animation_finished(function: Callable):
+	if !animations:
+		return
+	
+	animations.animation_finished.connect(function)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c65ci35u571ef"]
+
+[ext_resource type="Script" uid="uid://dgvi0ev0y1k0q" path="res://Script/Ability/DashStrike/empty_dash_strike.gd" id="1_3sslp"]
+[ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Script/Component/ability_texture.gd" id="2_u3jp8"]
+
+[node name="EmptyDashStrike" type="Node2D" node_paths=PackedStringArray("dash_texture")]
+script = ExtResource("1_3sslp")
+dash_texture = NodePath("AbilityTexture")
+metadata/_custom_type_script = "uid://b70em753mxofx"
+
+[node name="AbilityTexture" type="Node2D" parent="."]
+script = ExtResource("2_u3jp8")
+metadata/_custom_type_script = "uid://j4ewsd0pheac"
