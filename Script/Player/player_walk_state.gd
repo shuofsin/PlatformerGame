@@ -2,15 +2,22 @@ extends PlayerState
 class_name PlayerWalkState
 
 func enter() -> void:
-	player.animations.play(&"walk")
+	if player.is_weapon_charging: 
+		player.animations.play(&"walk")
+		return 
+	player.animations.play(&"run")
 
 func update(_delta: float) -> void: 
 	if player.x_input == 0: 
 		transition.emit(self, "idle")
-	pass
+	if player.is_weapon_charging && player.animations.current_animation == "run":
+		player.animations.play(&"walk")
+		return
+	if !player.is_weapon_charging && player.animations.current_animation == "walk":
+		player.animations.play(&"run")
 
 func physics_update(delta: float) -> void: 
-	player.velocity.x = lerp(player.velocity.x, player.x_input * player.MAX_SPEED, player.x_velocity_weight)
+	player.velocity.x = lerp(player.velocity.x, player.x_input * player.max_speed, player.x_velocity_weight)
 	
 	player.coyote_time_activated = false
 	player.gravity = lerp(player.gravity, player.MIN_GRAVITY, player.MIN_GRAVITY * delta)

@@ -12,7 +12,7 @@ func physics_update(delta: float) -> void:
 		player.wall_jump_lock -= delta
 		player.velocity.x += player.x_input * delta
 	else:  
-		player.velocity.x = lerp(player.velocity.x, player.x_input * player.MAX_SPEED, player.x_velocity_weight)
+		player.velocity.x = lerp(player.velocity.x, player.x_input * player.max_speed, player.x_velocity_weight)
 		
 	if player.is_on_floor(): 
 		transition.emit(self, "idle")

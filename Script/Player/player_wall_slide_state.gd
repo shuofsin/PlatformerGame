@@ -20,6 +20,6 @@ func exit() -> void:
 func physics_update(_delta: float) -> void: 
 	player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME
 	player.velocity.y = player.WALL_GRAVITY
-	player.velocity.x = lerp(player.velocity.x, player.x_input * player.MAX_SPEED, player.x_velocity_weight)
+	player.velocity.x = lerp(player.velocity.x, player.x_input * player.max_speed, player.x_velocity_weight)
 	if !player.is_on_wall():
 		transition.emit(self, "air")

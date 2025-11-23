@@ -25,7 +25,9 @@ const LEDGE_HOP_FACTOR: float = 7
 var coyote_time_activated: bool = false 
 
 # Horizontal movement variables
-const MAX_SPEED: float = 115.0
+const MAX_SPEED_NORMAL: float = 115.0
+const MAX_SPEED_WEAPON: float = 50.0
+var max_speed: float = MAX_SPEED_NORMAL
 const ACCELERATION: float = 12.0
 const FRICTION: float = 10
 var x_input: float = 0
@@ -52,6 +54,9 @@ var dash_timer: float = 0.0
 var ghost_sprite: PackedScene = preload("res://Scene/Player/player_ghost_effect.tscn")
 var ghost_timer: float = 0
 var time_between_ghosts: float = 0.05
+
+# Weapon tracking
+var is_weapon_charging: bool = false
 
 func _ready() -> void:
 	state_machine.ready()
@@ -140,10 +145,16 @@ func set_weapon_active(is_active: bool) -> void:
 		ability_manager.weapon.reset()
 
 func _weapon_logic() -> void: 
+	if ability_manager.weapon.name.to_lower() == "emptybow":
+		return
 	if Input.is_action_just_pressed("shoot"):
 		ability_manager.weapon.draw_weapon()
+		max_speed = MAX_SPEED_WEAPON
+		is_weapon_charging = true
 	if Input.is_action_just_released("shoot"):
 		ability_manager.weapon.release_weapon()
+		max_speed = MAX_SPEED_NORMAL
+		is_weapon_charging = false
 
 func _head_rotation_logic() -> void: 
 	head_sprite.rotation = head_sprite.global_position.direction_to(get_global_mouse_position()).angle()
