@@ -11,7 +11,7 @@ class_name Boar
 
 # Horizontal Movement 
 const MAX_SPEED_ROAM: float = 25.0
-const MAX_SPEED_RUN: float = 155.0
+const MAX_SPEED_RUN: float = 120.0
 const ACCELERATION: float = 12.0
 const FRICTION: float = 10
 @export_range(-1, 1, 1) var x_direction: float = 0
@@ -33,8 +33,12 @@ var idle_timer: float = 0
 var roam_timer: float = 0
 @onready var roam_left: RayCast2D = %RoamLeft
 @onready var roam_right: RayCast2D = %RoamRight
-@onready var attack_left: RayCast2D = %AttackLeft
-@onready var attack_right: RayCast2D = %AttackRight
+@onready var attack_rays: Array[RayCast2D] = [
+	%AttackLeft,
+	%AttackRight,
+	%AttackLeft2,
+	%AttackRight2
+]
 
 # Run 
 @export var run_distance: float = 100.0
@@ -43,6 +47,8 @@ var distance_to_player: float = INF
 
 # Attack
 const HITBOX_OFFSET: float = 6.25
+const TOTAL_ATTACK_TIME: float = 1
+var attack_timer: float = TOTAL_ATTACK_TIME
 
 func _ready() -> void:
 	state_machine.ready()
@@ -67,6 +73,12 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.y += gravity
 	state_machine.physics_process(delta)
+	
+	if state_machine.current_state.name.to_lower() != "attack":
+		attack_timer -= delta
+		if attack_timer <= 0: 
+			attack_timer = TOTAL_ATTACK_TIME
+	
 	move_and_slide()
 
 func _check_for_player_run() -> void: 
@@ -74,5 +86,6 @@ func _check_for_player_run() -> void:
 		state_machine.force_change_state("run")
 
 func _check_for_player_attack() -> void: 
-	if attack_left.is_colliding() || attack_right.is_colliding():
-		state_machine.force_change_state("attack")
+	for ray in attack_rays:
+		if ray.is_colliding():
+			state_machine.force_change_state("attack")

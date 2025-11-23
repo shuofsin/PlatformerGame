@@ -13,6 +13,7 @@ func enter() -> void:
 	player.velocity = player.dash_direction * player.ability_manager.dash.dash_amount
 	
 	player.set_weapon_active(false)
+	player.weapon.visible = false
 	
 	player.animations.play(&"dash")
 	player.sprites.rotation = player.dash_direction.angle()
@@ -37,6 +38,7 @@ func exit() -> void:
 	player.sprites.rotation = 0
 	player.body_sprite.flip_v = false
 	player.set_weapon_active(true)
+	player.weapon.visible = true
 	player.ghost_timer = 0
 	player.is_dashing = false
 	player.ability_manager.dash.cancel_dash_strike()

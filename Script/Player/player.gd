@@ -118,8 +118,9 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func set_player_active(is_active: bool) -> void: 
-	self.set_process(is_active)
-	self.set_physics_process(is_active)
+	state_machine.force_change_state("idle")
+	set_process(is_active)
+	set_physics_process(is_active)
 	set_weapon_active(is_active)
 
 func run_gravity(delta: float) -> void: 
@@ -135,7 +136,6 @@ func _debug(is_on: bool) -> void:
 func set_weapon_active(is_active: bool) -> void: 
 	ability_manager.weapon.set_process(is_active)
 	ability_manager.weapon.set_physics_process(is_active)
-	ability_manager.weapon.visible = is_active
 	if !is_active:
 		ability_manager.weapon.reset()
 

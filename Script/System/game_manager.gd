@@ -3,6 +3,7 @@ class_name GameManager
 
 @onready var world: Node2D = %World
 @onready var gui: Control = %GUI
+@onready var fade_transition: Control = %FadeTransition
 
 @export var current_world: World
 @export var current_gui: Control
@@ -11,6 +12,7 @@ class_name GameManager
 func _ready() -> void: 
 	Global.game_manager = self
 	Global.player = player
+	Global.fade_transition = fade_transition
 	Global.player.set_player_active(false)
 
 func change_world(new_scene: String, mode: int) -> void: 

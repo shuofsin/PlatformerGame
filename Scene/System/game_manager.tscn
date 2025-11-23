@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c71lq6a52btg2"]
+[gd_scene load_steps=5 format=3 uid="uid://c71lq6a52btg2"]
 
 [ext_resource type="Script" uid="uid://bwdy5mdv4oysq" path="res://Script/System/game_manager.gd" id="1_28177"]
 [ext_resource type="PackedScene" uid="uid://dbocxh517g6jj" path="res://Scene/Player/player.tscn" id="2_sh06h"]
+[ext_resource type="PackedScene" uid="uid://r1everic86t6" path="res://Scene/GUI/fade_transition.tscn" id="3_p76fu"]
 [ext_resource type="PackedScene" uid="uid://b2cun3himkt4o" path="res://Scene/GUI/splash_screen.tscn" id="3_sh06h"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("current_gui", "player")]
 script = ExtResource("1_28177")
 current_gui = NodePath("GUI/SplashScreen")
 player = NodePath("World/Player")
+
+[node name="FadeTransition" parent="." instance=ExtResource("3_p76fu")]
+unique_name_in_owner = true
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true

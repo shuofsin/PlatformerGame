@@ -1,13 +1,15 @@
-[gd_scene load_steps=18 format=4 uid="uid://bpvkaceob18fp"]
+[gd_scene load_steps=22 format=4 uid="uid://bpvkaceob18fp"]
 
 [ext_resource type="Script" uid="uid://bufy1j1qlkbtu" path="res://Script/Level/world.gd" id="1_0x6r7"]
 [ext_resource type="PackedScene" uid="uid://25x8aeiu8ns0" path="res://Scene/Environment/forest_tiles.tscn" id="2_pkbpt"]
 [ext_resource type="PackedScene" uid="uid://du144nstua4bo" path="res://Scene/Environment/forest_background.tscn" id="3_l6mdb"]
-[ext_resource type="PackedScene" uid="uid://bkanfq88uav5g" path="res://Scene/Interactable/world_transition.tscn" id="4_pkbpt"]
 [ext_resource type="PackedScene" uid="uid://c1d423b2d3cxl" path="res://Scene/Environment/forest_spikes.tscn" id="5_l6mdb"]
 [ext_resource type="PackedScene" uid="uid://beufrqwh7gtju" path="res://Scene/Interactable/help_sign.tscn" id="6_mw7qi"]
 [ext_resource type="Script" uid="uid://bkm6atbucvq8j" path="res://Script/System/Camera/room_zone_area.gd" id="7_wsy8t"]
+[ext_resource type="PackedScene" uid="uid://stlht8n3ip4q" path="res://Scene/Enemy/Boar/Boar.tscn" id="8_c4rbx"]
 [ext_resource type="PackedScene" uid="uid://ckk8pxor8e2fl" path="res://Scene/System/Camera/room_zone_camera.tscn" id="8_rv23w"]
+[ext_resource type="PackedScene" uid="uid://hup0gv5vy0p6" path="res://Scene/Interactable/Bow/basic_bow_pickup.tscn" id="9_4oqsr"]
+[ext_resource type="PackedScene" uid="uid://bkanfq88uav5g" path="res://Scene/Interactable/world_transition.tscn" id="10_uudkx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffbts"]
 size = Vector2(288, 160)
@@ -22,7 +24,7 @@ size = Vector2(288, 160)
 size = Vector2(144, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uudkx"]
-size = Vector2(320, 176)
+size = Vector2(288, 176)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpgxt"]
 size = Vector2(144, 176)
@@ -35,6 +37,12 @@ size = Vector2(144, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4wel"]
 size = Vector2(288, 120)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_47s13"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c4rbx"]
+normal = Vector2(-1, 0)
 
 [node name="PlaytestWorldOne" type="Node2D" node_paths=PackedStringArray("spawn")]
 script = ExtResource("1_0x6r7")
@@ -50,7 +58,10 @@ tile_map_data = PackedByteArray("AAAAACEAAAABAAAAAAABACEAAAABAAAAAAACACEAAAABAAA
 [node name="ForestBackground" parent="." instance=ExtResource("3_l6mdb")]
 
 [node name="SpawnPosition" type="Node2D" parent="."]
-position = Vector2(64, 392)
+position = Vector2(64, 464)
+
+[node name="SpawnPosition2" type="Node2D" parent="."]
+position = Vector2(64, 464)
 
 [node name="Spikes" type="Node2D" parent="."]
 
@@ -213,7 +224,7 @@ follow_player = true
 metadata/_custom_type_script = "uid://bkm6atbucvq8j"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MultiCamera/SpikeSectionTwoFollow"]
-position = Vector2(16, -8)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_uudkx")
 debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
 
@@ -225,14 +236,15 @@ camera_position_node = NodePath("Node2D")
 metadata/_custom_type_script = "uid://bkm6atbucvq8j"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MultiCamera/SpikeSectionTwoEnd"]
-position = Vector2(72, -8)
+position = Vector2(40, -8)
 shape = SubResource("RectangleShape2D_qpgxt")
 debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
 
 [node name="Node2D" type="Node2D" parent="MultiCamera/SpikeSectionTwoEnd"]
+position = Vector2(-32, -8)
 
 [node name="WallJumpEntry" type="Area2D" parent="MultiCamera" node_paths=PackedStringArray("camera_position_node")]
-position = Vector2(1616, 432)
+position = Vector2(1584, 432)
 script = ExtResource("7_wsy8t")
 zoom = Vector2(4, 4)
 camera_position_node = NodePath("Node2D")
@@ -270,7 +282,27 @@ debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
 
 [node name="Node2D" type="Node2D" parent="MultiCamera/WorldEnd"]
 
-[node name="WorldTransition" parent="." instance=ExtResource("4_pkbpt")]
-position = Vector2(1784, 232)
+[node name="WorldBorderLeft" type="StaticBody2D" parent="."]
+position = Vector2(0, 526)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorderLeft"]
+shape = SubResource("WorldBoundaryShape2D_47s13")
+
+[node name="WorldBorderRight" type="StaticBody2D" parent="."]
+position = Vector2(1808, 229)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorderRight"]
+shape = SubResource("WorldBoundaryShape2D_c4rbx")
+
+[node name="Boar" parent="." instance=ExtResource("8_c4rbx")]
+position = Vector2(1641, 472)
+
+[node name="BasicBowPickup" parent="." instance=ExtResource("9_4oqsr")]
+position = Vector2(1398, 465)
+
+[node name="WorldTransition" parent="." instance=ExtResource("10_uudkx")]
+position = Vector2(1790, 235)
 world_to_go = "playtest_world_two"
 world_change_mode = 1

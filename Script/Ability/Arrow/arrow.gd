@@ -49,7 +49,8 @@ func _stop_moving() -> void:
 func _on_body_entered(body: Node2D) -> void: 
 	_stop_moving()
 	hitbox_component.set_collision_mask_value(3, false)
-	collision.set_collision_layer_value(3, false)
+	collision.set_collision_mask_value(3, false)
+	collision.set_collision_mask_value(1, false)
 	if body.is_in_group("Enemy"):
 		self.reparent.call_deferred(body)
 		weapon.add_dash_charge()

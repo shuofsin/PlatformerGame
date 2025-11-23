@@ -11,4 +11,6 @@ func _ready() -> void:
 func _on_player_entered(body: Node2D) -> void: 
 	if body is Player: 
 		set_collision_mask_value(2, false)
-		Global.game_manager.change_world(world_to_go, world_change_mode)
+		Global.player.set_player_active(false)
+		Global.fade_transition.change_world(world_to_go, world_change_mode)
+		

@@ -9,7 +9,7 @@ func _ready() -> void:
 	quit.button_up.connect(_quit_game)
 
 func _play_game() -> void: 
-	FadeTransition.change_scene("playtest_world_one", Global.SCENE_CHANGE_MODE.DELETE, "player_hud", Global.SCENE_CHANGE_MODE.DELETE)
+	Global.fade_transition.change_scene("playtest_world_one", Global.SCENE_CHANGE_MODE.DELETE, "player_hud", Global.SCENE_CHANGE_MODE.DELETE)
 
 func _quit_game() -> void:
 	get_tree().quit()

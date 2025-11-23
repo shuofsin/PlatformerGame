@@ -6,16 +6,17 @@
 [ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Script/Component/hitbox_component.gd" id="4_fx3jd"]
 [ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="5_44qjb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_36t44"]
-size = Vector2(3, 4)
+[sub_resource type="CircleShape2D" id="CircleShape2D_h13a2"]
+radius = 1.0
 
 [sub_resource type="Resource" id="Resource_nf28x"]
 script = ExtResource("5_44qjb")
 attack_damage = 1.0
+knockback_force = 100.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx3jd"]
-size = Vector2(3, 4)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3uucl"]
+radius = 1.0
 
 [node name="BasicArrow" type="Node2D" node_paths=PackedStringArray("hitbox_component", "collision", "arrow_texture")]
 script = ExtResource("1_4pkde")
@@ -40,8 +41,7 @@ collision_layer = 0
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_36t44")
+shape = SubResource("CircleShape2D_h13a2")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 0
@@ -51,6 +51,5 @@ attack = SubResource("Resource_nf28x")
 metadata/_custom_type_script = "uid://bxit1feq0lsq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_fx3jd")
+shape = SubResource("CircleShape2D_3uucl")
 debug_color = Color(0.99792165, 0, 0.16542414, 0.41960785)
