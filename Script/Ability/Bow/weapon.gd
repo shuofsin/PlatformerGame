@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	if charge_bar_texture: charge_bar_texture.set_value(charge_amount / max_charge)
 	
 	if (current_state == IDLE):
-		_idle()
+		reset()
 	if (current_state == CHARGING):
 		_charging(delta)
 	if (current_state == CHARGED):
@@ -52,9 +52,6 @@ func is_drawn() -> bool:
 	return current_state == CHARGING || current_state == CHARGED
 
 func reset() -> void: 
-	current_state = IDLE
-
-func _idle() -> void: 
 	charge_amount = 0
 	weapon_texture.rotation = 0.0
 	weapon_texture.play_animation("idle")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bpvkaceob18fp"]
+[gd_scene load_steps=20 format=4 uid="uid://bpvkaceob18fp"]
 
 [ext_resource type="Script" uid="uid://bufy1j1qlkbtu" path="res://Script/Level/world.gd" id="1_0x6r7"]
 [ext_resource type="PackedScene" uid="uid://25x8aeiu8ns0" path="res://Scene/Environment/forest_tiles.tscn" id="2_pkbpt"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c1d423b2d3cxl" path="res://Scene/Environment/forest_spikes.tscn" id="5_l6mdb"]
 [ext_resource type="PackedScene" uid="uid://beufrqwh7gtju" path="res://Scene/Interactable/help_sign.tscn" id="6_mw7qi"]
 [ext_resource type="Script" uid="uid://bkm6atbucvq8j" path="res://Script/System/Camera/room_zone_area.gd" id="7_wsy8t"]
-[ext_resource type="PackedScene" uid="uid://stlht8n3ip4q" path="res://Scene/Enemy/Boar/Boar.tscn" id="8_c4rbx"]
 [ext_resource type="PackedScene" uid="uid://ckk8pxor8e2fl" path="res://Scene/System/Camera/room_zone_camera.tscn" id="8_rv23w"]
-[ext_resource type="PackedScene" uid="uid://hup0gv5vy0p6" path="res://Scene/Interactable/Bow/basic_bow_pickup.tscn" id="9_4oqsr"]
 [ext_resource type="PackedScene" uid="uid://bkanfq88uav5g" path="res://Scene/Interactable/world_transition.tscn" id="10_uudkx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffbts"]
@@ -295,12 +293,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorderRight"]
 shape = SubResource("WorldBoundaryShape2D_c4rbx")
-
-[node name="Boar" parent="." instance=ExtResource("8_c4rbx")]
-position = Vector2(1641, 472)
-
-[node name="BasicBowPickup" parent="." instance=ExtResource("9_4oqsr")]
-position = Vector2(1398, 465)
 
 [node name="WorldTransition" parent="." instance=ExtResource("10_uudkx")]
 position = Vector2(1790, 235)
