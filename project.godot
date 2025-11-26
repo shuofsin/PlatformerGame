@@ -23,7 +23,6 @@ Global="*res://Script/System/global.gd"
 [display]
 
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [global_group]
