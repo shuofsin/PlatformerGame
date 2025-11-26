@@ -191,7 +191,7 @@ position = Vector2(1768, 536)
 
 [node name="WorldTransition" parent="." instance=ExtResource("9_h2pur")]
 position = Vector2(1928, 520)
-world_to_go = "playtest_world_one"
+world_to_go = "playtest_world_three"
 world_change_mode = 1
 
 [node name="CameraSystem" type="Node2D" parent="."]

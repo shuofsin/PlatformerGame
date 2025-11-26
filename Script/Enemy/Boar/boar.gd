@@ -50,7 +50,11 @@ const HITBOX_OFFSET: float = 6.25
 const TOTAL_ATTACK_TIME: float = 1
 var attack_timer: float = TOTAL_ATTACK_TIME
 
+
+@export var total_health: float = 2.0
+
 func _ready() -> void:
+	health_component.health = total_health
 	state_machine.ready()
 
 

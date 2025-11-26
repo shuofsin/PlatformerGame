@@ -31,6 +31,7 @@ func _input(event: InputEvent) -> void:
 		Global.player.ability_manager.equip_weapon(itemName)
 	if itemType == Global.ITEM_TYPE.DASH:
 		Global.player.ability_manager.equip_dash(itemName)
+		Global.player.can_dash = true
 	_remove_item()
 
 func _remove_item() -> void:
