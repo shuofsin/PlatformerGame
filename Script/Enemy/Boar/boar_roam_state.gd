@@ -1,5 +1,4 @@
 extends BoarState
-class_name BoarRoamState
 
 func enter() -> void: 
 	boar.is_moving = true

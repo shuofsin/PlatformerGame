@@ -1,5 +1,4 @@
 extends PlayerState
-class_name PlayerWalkState
 
 func enter() -> void:
 	if player.is_weapon_charging: 

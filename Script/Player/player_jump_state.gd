@@ -1,5 +1,4 @@
 extends PlayerState
-class_name PlayerJumpState
 
 func enter() -> void:
 	player.animations.play(&"jump")

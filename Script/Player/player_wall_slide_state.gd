@@ -1,5 +1,5 @@
 extends PlayerState
-class_name PlayerWallSlideState
+
 
 func update(_delta: float) -> void: 
 	player.animations.play(&"wall")

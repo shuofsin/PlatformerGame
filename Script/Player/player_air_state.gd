@@ -1,5 +1,4 @@
 extends PlayerState
-class_name PlayerAirState
 
 func update(_delta: float) -> void: 
 	if (player.velocity.y <= 0):

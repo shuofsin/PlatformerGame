@@ -11,6 +11,13 @@ func _ready():
 
 func damage(attack: Attack):
 	health -= attack.attack_damage
+	
+	if !death_state: 
+		return 
+	
+	if !state_machine:
+		return 
+	
 	if get_parent().velocity != null:
 		var knockback_direction = 1 if attack.attack_position.x < global_position.x else -1
 		get_parent().velocity = Vector2(attack.knockback_force * knockback_direction * 1.5, -attack.knockback_force)

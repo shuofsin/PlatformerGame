@@ -2,13 +2,10 @@
 Godot Platformer Project
 
 ## To-do:
-- Game: Componentization of Bow/Dash
-- Game: Prepare for playtest
-
-### Componentization Stuff
-- HitBox
-	- Arrow, Boar, DashStrike
-- HealthBox
- 	- Player, Boar
-- Attack
-	- Arrow, DashStrike, Player, Boar
+- Game: Add final boss
+- Game: Add title 
+- Boar: Improve AI
+- Characters: Add better healthbar
+- Tataka: Add basic state machine
+- Tataka: Add boss fight
+- Items: Brainstorm and design basic upgrades
