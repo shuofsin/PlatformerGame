@@ -55,9 +55,6 @@ func _on_body_entered(body: Node2D) -> void:
 		self.reparent.call_deferred(body)
 		weapon.add_dash_charge()
 
-func set_velocity(direction: Vector2, power: float) -> void: 
-	velocity = direction * power * initial_speed
-
 func _extra_process() -> void: 
 	pass
 
