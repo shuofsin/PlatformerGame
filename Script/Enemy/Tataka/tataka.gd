@@ -23,7 +23,7 @@ class_name Tataka
 
 # Horizontal Movement 
 const MAX_SPEED: float = 25
-const MAX_SPEED_JUMP: float = 200.0
+const MAX_SPEED_JUMP: float = 400.0
 const ACCELERATION: float = 12.0
 const FRICTION: float = 10
 var x_direction: float = 1
@@ -45,6 +45,8 @@ var distance_to_player: float = INF
 
 # Throw
 var rock: PackedScene = preload("res://Scene/Enemy/rock.tscn")
+const MAX_ROCK_THROWS: int = 3
+var rocks_thrown: int = 0 
 
 func _ready() -> void: 
 	health_component.health = total_health
@@ -56,6 +58,18 @@ func _process(delta: float) -> void:
 	if Global.player: 
 		direction_to_player = global_position.direction_to(Global.player.global_position)
 		distance_to_player = global_position.distance_to(Global.player.global_position)
+
+	if (direction_to_player.angle() < PI / 2) && (direction_to_player.angle() > -PI / 2):
+		x_direction = 1
+	else:
+		x_direction = -1
+	
+	if x_direction < 0: 
+		for sprite in sprites: 
+			sprite.flip_h = true
+	else: 
+		for sprite in sprites: 
+			sprite.flip_h = false
 
 	state_machine.process(delta)
 
