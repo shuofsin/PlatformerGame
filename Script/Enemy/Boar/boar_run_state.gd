@@ -12,10 +12,15 @@ func update(_delta: float) -> void:
 		boar.body_sprite.flip_h = false
 		boar.x_direction = 1
 	
-	if boar.distance_to_player > boar.run_distance:
+	if boar.distance_to_player > (boar.run_distance * 2):
 		transition.emit(self, "idle")
 		
 	boar._check_for_player_attack()
 
 func physics_update(_delta: float) -> void:
+	if boar.x_direction == -1 && !boar.ledge_left.is_colliding():
+		return
+	if boar.x_direction == 1 && !boar.ledge_right.is_colliding():
+		return
+
 	boar.velocity.x = lerp(boar.velocity.x, boar.x_direction * boar.MAX_SPEED_RUN, boar.x_velocity_weight)

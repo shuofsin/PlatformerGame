@@ -152,7 +152,7 @@ _data = {
 [sub_resource type="Resource" id="Resource_gaukh"]
 script = ExtResource("11_gaukh")
 attack_damage = 1.0
-knockback_force = 100.0
+knockback_force = 300.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gaukh"]
@@ -277,3 +277,13 @@ position = Vector2(1, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_5drtv")
 debug_color = Color(0, 0.6406879, 0.35085, 0.41960785)
+
+[node name="LedgeLeft" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-9, 0)
+target_position = Vector2(0, 15)
+
+[node name="LedgeRight" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(8, 0)
+target_position = Vector2(0, 15)

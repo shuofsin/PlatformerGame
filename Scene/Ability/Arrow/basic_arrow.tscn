@@ -12,7 +12,7 @@ radius = 1.0
 [sub_resource type="Resource" id="Resource_nf28x"]
 script = ExtResource("5_44qjb")
 attack_damage = 1.0
-knockback_force = 100.0
+knockback_force = 300.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3uucl"]

@@ -17,7 +17,8 @@ enum ITEM_TYPE {
 var worlds: Dictionary = {
 	"playtest_world_one": "res://Scene/Level/playtest_world_one.tscn",
 	"playtest_world_two": "res://Scene/Level/playtest_world_two.tscn",
-	"playtest_world_three": "res://Scene/Level/playtest_world_three.tscn"
+	"playtest_world_three": "res://Scene/Level/playtest_world_three.tscn",
+	"playtest_world_four": "res://Scene/Level/playtest_world_four.tscn"
 }
 var guis: Dictionary = {
 	"playtest_menu": "res://Scene/GUI/playtest_menu.tscn",

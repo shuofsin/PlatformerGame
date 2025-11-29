@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bxwoyrax2hte6"]
+[gd_scene load_steps=27 format=3 uid="uid://bxwoyrax2hte6"]
 
 [ext_resource type="Script" uid="uid://ccmsl3hn6pt17" path="res://Script/Component/state_machine.gd" id="1_12xx7"]
 [ext_resource type="Texture2D" uid="uid://pj2fyjf7r1v7" path="res://Asset/Enemy/Tataka/Tataka.png" id="1_ackai"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bb77m4wl0jll4" path="res://Script/Component/healthbox_component.gd" id="11_1i751"]
 [ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Script/Component/hitbox_component.gd" id="12_t5c8o"]
 [ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="13_3htwu"]
+[ext_resource type="Texture2D" uid="uid://c4cdfahyhk4pj" path="res://Asset/Enemy/Tataka/tataka_stomp.png" id="15_t5c8o"]
 
 [sub_resource type="Animation" id="Animation_owhpj"]
 length = 0.001
@@ -220,6 +221,30 @@ tracks/16/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("HitboxComponent/StompSprite:frame")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_wqcs2"]
@@ -630,8 +655,6 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id="Animation_kuhm1"]
 resource_name = "stomp"
-length = 0.8
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -727,6 +750,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -0.2617994, -0.7853982, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HitboxComponent/StompSprite:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 0, 1, 2, 3, 4, 5, 6, 6]
 }
 
 [sub_resource type="Animation" id="Animation_weyvf"]
@@ -921,12 +968,12 @@ height = 26.0
 
 [sub_resource type="Resource" id="Resource_1i751"]
 script = ExtResource("13_3htwu")
-attack_damage = 2.0
+attack_damage = 1.0
 knockback_force = 400.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3htwu"]
-radius = 3.0
+radius = 5.0
 height = 32.0
 
 [node name="Tataka" type="CharacterBody2D" groups=["Enemy"]]
@@ -1060,11 +1107,17 @@ attack = SubResource("Resource_1i751")
 metadata/_custom_type_script = "uid://bxit1feq0lsq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 9)
+position = Vector2(0, 7)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_3htwu")
-disabled = true
 debug_color = Color(0.9940278, 0, 0.23568305, 0.41960785)
+
+[node name="StompSprite" type="Sprite2D" parent="HitboxComponent"]
+position = Vector2(0, 8)
+scale = Vector2(2, 2)
+texture = ExtResource("15_t5c8o")
+hframes = 7
+frame = 6
 
 [node name="LeftWalkRay" type="RayCast2D" parent="."]
 unique_name_in_owner = true
@@ -1085,3 +1138,15 @@ target_position = Vector2(0, 10)
 unique_name_in_owner = true
 position = Vector2(-10, 6)
 target_position = Vector2(0, 10)
+
+[node name="StompRayRight" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 7)
+target_position = Vector2(16, 0)
+collision_mask = 2
+
+[node name="StompRayLeft" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 7)
+target_position = Vector2(-16, 0)
+collision_mask = 2

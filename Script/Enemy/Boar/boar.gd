@@ -17,6 +17,8 @@ const FRICTION: float = 10
 @export_range(-1, 1, 1) var x_direction: float = 0
 var x_velocity_weight: float = 0
 var is_moving: bool = false
+@onready var ledge_left: RayCast2D = %LedgeLeft
+@onready var ledge_right: RayCast2D = %LedgeRight
 
 # Vertical Movement 
 const MIN_GRAVITY: float = 8.0
@@ -55,6 +57,7 @@ var attack_timer: float = TOTAL_ATTACK_TIME
 
 func _ready() -> void:
 	health_component.health = total_health
+	healthbox_component.area_entered.connect(_on_attacked)
 	state_machine.ready()
 
 
@@ -93,3 +96,6 @@ func _check_for_player_attack() -> void:
 	for ray in attack_rays:
 		if ray.is_colliding():
 			state_machine.force_change_state("attack")
+
+func _on_attacked(area_entered: Area2D) -> void: 
+	state_machine.force_change_state("run")

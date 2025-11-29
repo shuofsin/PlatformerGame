@@ -23,3 +23,8 @@ func connect_animation_finished(function: Callable):
 		return
 	
 	animations.animation_finished.connect(function)
+
+func reset_animation() -> void: 
+	if animations.has_animation("RESET"):
+		animations.play("RESET")
+		animations.advance(0)

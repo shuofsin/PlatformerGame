@@ -42,6 +42,8 @@ var gravity: float = MIN_GRAVITY
 # Player tracking
 var direction_to_player: Vector2 = Vector2.ZERO
 var distance_to_player: float = INF
+@onready var stomp_ray_right: RayCast2D = %StompRayRight
+@onready var stomp_ray_left: RayCast2D = %StompRayLeft
 
 # Throw
 var rock: PackedScene = preload("res://Scene/Enemy/rock.tscn")
@@ -54,15 +56,13 @@ func _ready() -> void:
 	state_machine.ready()
 
 func _process(delta: float) -> void:
+	state_machine.process(delta)
 	
 	if Global.player: 
 		direction_to_player = global_position.direction_to(Global.player.global_position)
 		distance_to_player = global_position.distance_to(Global.player.global_position)
 
-	if (direction_to_player.angle() < PI / 2) && (direction_to_player.angle() > -PI / 2):
-		x_direction = 1
-	else:
-		x_direction = -1
+	x_direction = sign(direction_to_player.x) if state_machine.current_state.name.to_lower() != "air" else x_direction
 	
 	if x_direction < 0: 
 		for sprite in sprites: 
@@ -71,9 +71,10 @@ func _process(delta: float) -> void:
 		for sprite in sprites: 
 			sprite.flip_h = false
 
-	state_machine.process(delta)
+	
 
 func _physics_process(delta: float) -> void:
+	state_machine.physics_process(delta)
 	x_velocity_weight = delta * (ACCELERATION if is_moving else FRICTION)
 	
 	if is_on_floor():
@@ -82,8 +83,7 @@ func _physics_process(delta: float) -> void:
 		gravity = lerp(gravity, MAX_GRAVITY, GRAVITY_ACCELERATION * delta)
 	
 	velocity.y += gravity
-	
-	state_machine.physics_process(delta)
+
 	move_and_slide()
 
 func reset_animation() -> void: 

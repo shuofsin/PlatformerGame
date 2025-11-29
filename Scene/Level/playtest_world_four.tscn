@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr2heda0utqy2"]
+
+[ext_resource type="Script" uid="uid://bufy1j1qlkbtu" path="res://Script/Level/world.gd" id="1_0731o"]
+
+[node name="PlaytestWorldFour" type="Node2D"]
+script = ExtResource("1_0731o")
+metadata/_custom_type_script = "uid://bufy1j1qlkbtu"

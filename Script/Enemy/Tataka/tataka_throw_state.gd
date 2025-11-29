@@ -9,6 +9,9 @@ func enter() -> void:
 func _process(_delta: float) -> void: 
 	if (tataka.rocks_thrown == tataka.MAX_ROCK_THROWS):
 		transition.emit(self, "jump")
+	
+	if tataka.stomp_ray_left.is_colliding() || tataka.stomp_ray_right.is_colliding():
+		transition.emit(self, "stomp")
 
 func _throw_rock(animation_name: String) -> void: 
 	if animation_name == "throw":

@@ -20,8 +20,8 @@ func update(delta: float) -> void:
 func physics_update(_delta: float) -> void:
 	boar.velocity.x = lerp(boar.velocity.x, boar.x_direction * boar.MAX_SPEED_ROAM, boar.x_velocity_weight)
 	
-	if boar.x_direction == -1 && boar.roam_left.is_colliding(): 
+	if boar.x_direction == -1 && (boar.roam_left.is_colliding() || !boar.ledge_left.is_colliding()): 
 		transition.emit(self, "idle")
 	
-	if boar.x_direction == 1 && boar.roam_right.is_colliding():
+	if boar.x_direction == 1 && (boar.roam_right.is_colliding() || !boar.ledge_right.is_colliding()):
 		transition.emit(self, "idle")

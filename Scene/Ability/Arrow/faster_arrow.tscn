@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bogvksej1vxw3"]
+[gd_scene load_steps=9 format=3 uid="uid://bogvksej1vxw3"]
 
 [ext_resource type="Script" uid="uid://5slrkmwitukl" path="res://Script/Ability/Arrow/arrow.gd" id="1_p1wt6"]
 [ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Script/Component/hitbox_component.gd" id="2_h40pi"]
 [ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Script/Component/ability_texture.gd" id="3_7a273"]
+[ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="3_ydhas"]
 [ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Asset/Ability/player_arrow.png" id="4_3vw3u"]
+
+[sub_resource type="Resource" id="Resource_cho5d"]
+script = ExtResource("3_ydhas")
+attack_damage = 1.0
+knockback_force = 200.0
+metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h40pi"]
 size = Vector2(3, 4)
@@ -22,6 +29,7 @@ metadata/_custom_type_script = "uid://5slrkmwitukl"
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 script = ExtResource("2_h40pi")
+attack = SubResource("Resource_cho5d")
 metadata/_custom_type_script = "uid://bxit1feq0lsq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
