@@ -58,7 +58,11 @@ var time_between_ghosts: float = 0.05
 # Weapon tracking
 var is_weapon_charging: bool = false
 
+# Health
+var total_health: float = 100.0
+
 func _ready() -> void:
+	health_component.health = total_health
 	state_machine.ready()
 	pass 
 
@@ -162,3 +166,6 @@ func _head_rotation_logic() -> void:
 		head_sprite.flip_v = true
 	else: 
 		head_sprite.flip_v = false
+
+func get_health_percentage() -> float:
+	return health_component.health / total_health

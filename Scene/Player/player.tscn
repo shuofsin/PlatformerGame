@@ -656,7 +656,7 @@ libraries = {
 [node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("death_state", "state_machine")]
 unique_name_in_owner = true
 script = ExtResource("17_ks1b7")
-MAX_HEALTH = 5
+MAX_HEALTH = 100
 death_state = NodePath("../StateMachine/Death")
 state_machine = NodePath("../StateMachine")
 metadata/_custom_type_script = "uid://dlxenxeltbjsh"

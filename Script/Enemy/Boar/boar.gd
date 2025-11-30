@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Boar
 
-@onready var health_sprite: Sprite2D = %HealthSprite
+@onready var health_bar: BarTexture = %HealthBar
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animations: AnimationPlayer = %Animations
 @onready var body_sprite: Sprite2D = %BodySprite
@@ -53,7 +53,7 @@ const TOTAL_ATTACK_TIME: float = 1
 var attack_timer: float = TOTAL_ATTACK_TIME
 
 
-@export var total_health: float = 2.0
+@export var total_health: float = 50
 
 func _ready() -> void:
 	health_component.health = total_health
@@ -62,7 +62,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	health_sprite.frame = health_component.health
+	health_bar.set_value(health_component.health / total_health)
 	
 	if Global.player: 
 		direction_to_player = global_position.direction_to(Global.player.global_position)

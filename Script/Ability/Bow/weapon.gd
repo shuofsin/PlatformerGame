@@ -75,6 +75,7 @@ func _release() -> void:
 	var offset: float = weapon_texture.get_offset()
 	new_arrow.global_position = global_position + (direction * offset)
 	new_arrow.velocity = direction * new_arrow.initial_speed * (charge_amount / max_charge)
+	new_arrow.hitbox_component.attack.attack_damage *= (charge_amount / max_charge)
 	new_arrow.weapon = self
 	Global.game_manager.world.add_child(new_arrow)
 	current_state = IDLE

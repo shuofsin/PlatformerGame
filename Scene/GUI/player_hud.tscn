@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://kxw37j7ud0nj"]
+[gd_scene load_steps=5 format=3 uid="uid://kxw37j7ud0nj"]
 
 [ext_resource type="Script" uid="uid://dkxgjk7ijyj2" path="res://Script/GUI/player_hud.gd" id="1_btnvo"]
-[ext_resource type="Texture2D" uid="uid://c32x8b7vbek46" path="res://Asset/Enemy/enemy_heart.png" id="2_y8me7"]
-[ext_resource type="Texture2D" uid="uid://c6rycqp628erm" path="res://Asset/GUI/dash_charge_hud_icon.png" id="3_wbm7y"]
+[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="2_qgr8y"]
+[ext_resource type="Texture2D" uid="uid://cmqbefkx110fb" path="res://Asset/GUI/health_bar_player.png" id="2_qmh4f"]
+[ext_resource type="Texture2D" uid="uid://dfidqd51liuc" path="res://Asset/GUI/dash_charge.png" id="4_mhtex"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -13,38 +14,37 @@ script = ExtResource("1_btnvo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-offset_right = 236.0
-offset_bottom = 66.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="MarginDash" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="HealthContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 18
 
-[node name="DashChargeIcon" type="Sprite2D" parent="CanvasLayer/VBoxContainer/MarginDash"]
+[node name="HealthBar" type="Sprite2D" parent="CanvasLayer/VBoxContainer/HealthContainer"]
 unique_name_in_owner = true
-scale = Vector2(3, 3)
-texture = ExtResource("3_wbm7y")
+scale = Vector2(6, 6)
+texture = ExtResource("2_qmh4f")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 6)
+script = ExtResource("2_qgr8y")
+metadata/_custom_type_script = "uid://c0iiccrnxgt4y"
+
+[node name="DashContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 12
+
+[node name="DashBar" type="Sprite2D" parent="CanvasLayer/VBoxContainer/DashContainer"]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+texture = ExtResource("4_mhtex")
 centered = false
 hframes = 2
-
-[node name="MarginHealth" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/margin_left = 159
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 156
-theme_override_constants/margin_bottom = 20
-
-[node name="HealthIcon" type="Sprite2D" parent="CanvasLayer/VBoxContainer/MarginHealth"]
-unique_name_in_owner = true
-position = Vector2(-1, 0)
-scale = Vector2(8, 8)
-texture = ExtResource("2_y8me7")
-centered = false
-hframes = 6
-frame = 5

@@ -12,6 +12,9 @@ class_name Tataka
 @onready var right_ledge_ray: RayCast2D = %RightLedgeRay
 @onready var left_ledge_ray: RayCast2D = %LeftLedgeRay
 
+@onready var health_bar: BarTexture = %HealthBar
+@export var total_health: float = 150.0
+
 @onready var sprites: Array[Sprite2D] = [
 	%LegBehind, 
 	%LegFront, 
@@ -37,8 +40,6 @@ const MAX_GRAVITY: float = 14.5
 const GRAVITY_ACCELERATION: float = 7.5
 var gravity: float = MIN_GRAVITY
 
-@export var total_health: float = 5.0
-
 # Player tracking
 var direction_to_player: Vector2 = Vector2.ZERO
 var distance_to_player: float = INF
@@ -52,11 +53,11 @@ var rocks_thrown: int = 0
 
 func _ready() -> void: 
 	health_component.health = total_health
-	
 	state_machine.ready()
 
 func _process(delta: float) -> void:
 	state_machine.process(delta)
+	health_bar.set_value(health_component.health / total_health)
 	
 	if Global.player: 
 		direction_to_player = global_position.direction_to(Global.player.global_position)
@@ -95,4 +96,5 @@ func throw_rock() -> void:
 	var offset: float = 10
 	new_rock.global_position = global_position + (direction_to_player * offset)
 	new_rock.velocity = direction_to_player * new_rock.initial_speed
+	new_rock.velocity.y -= distance_to_player * 0.35
 	Global.game_manager.world.add_child(new_rock)

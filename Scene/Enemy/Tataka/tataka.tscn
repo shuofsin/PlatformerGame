@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bxwoyrax2hte6"]
+[gd_scene load_steps=29 format=3 uid="uid://bxwoyrax2hte6"]
 
 [ext_resource type="Script" uid="uid://ccmsl3hn6pt17" path="res://Script/Component/state_machine.gd" id="1_12xx7"]
 [ext_resource type="Texture2D" uid="uid://pj2fyjf7r1v7" path="res://Asset/Enemy/Tataka/Tataka.png" id="1_ackai"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://b127mmqd0m730" path="res://Script/Enemy/Tataka/tataka_throw_state.gd" id="7_3c71h"]
 [ext_resource type="Script" uid="uid://cbtv2trmiqv12" path="res://Script/Enemy/Tataka/tataka_death_state.gd" id="8_kf1x2"]
 [ext_resource type="Script" uid="uid://dlxenxeltbjsh" path="res://Script/Component/health_component.gd" id="10_3htwu"]
+[ext_resource type="Texture2D" uid="uid://dp2mvsdw3lca5" path="res://Asset/GUI/health_bar.png" id="10_hr008"]
 [ext_resource type="Script" uid="uid://bb77m4wl0jll4" path="res://Script/Component/healthbox_component.gd" id="11_1i751"]
+[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="11_bloxk"]
 [ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Script/Component/hitbox_component.gd" id="12_t5c8o"]
 [ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="13_3htwu"]
 [ext_resource type="Texture2D" uid="uid://c4cdfahyhk4pj" path="res://Asset/Enemy/Tataka/tataka_stomp.png" id="15_t5c8o"]
@@ -968,7 +970,7 @@ height = 26.0
 
 [sub_resource type="Resource" id="Resource_1i751"]
 script = ExtResource("13_3htwu")
-attack_damage = 1.0
+attack_damage = 25.0
 knockback_force = 400.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
@@ -1020,6 +1022,17 @@ metadata/_custom_type_script = "uid://r47mtyftfjkp"
 script = ExtResource("8_kf1x2")
 tataka = NodePath("../..")
 metadata/_custom_type_script = "uid://r47mtyftfjkp"
+
+[node name="HealthBar" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.7907221, 0.41558614, 0, 1)
+position = Vector2(-16, -24)
+texture = ExtResource("10_hr008")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 6)
+script = ExtResource("11_bloxk")
+metadata/_custom_type_script = "uid://c0iiccrnxgt4y"
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2(4, -4)

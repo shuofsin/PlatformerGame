@@ -1,15 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://stlht8n3ip4q"]
+[gd_scene load_steps=26 format=3 uid="uid://stlht8n3ip4q"]
 
 [ext_resource type="Script" uid="uid://dqrth2ykf57a2" path="res://Script/Enemy/Boar/boar.gd" id="1_eqh40"]
 [ext_resource type="Texture2D" uid="uid://bldexysby81t3" path="res://Asset/Enemy/Boar/boar.png" id="2_nvvbs"]
 [ext_resource type="Script" uid="uid://ccmsl3hn6pt17" path="res://Script/Component/state_machine.gd" id="2_sbg87"]
 [ext_resource type="Script" uid="uid://6bxb40ub8q5l" path="res://Script/Enemy/Boar/boar_idle_state.gd" id="3_r8nra"]
 [ext_resource type="Script" uid="uid://l55sxg06wi12" path="res://Script/Enemy/Boar/boar_roam_state.gd" id="4_0n0j6"]
-[ext_resource type="Texture2D" uid="uid://c32x8b7vbek46" path="res://Asset/Enemy/enemy_heart.png" id="5_d40jh"]
 [ext_resource type="Script" uid="uid://ci4dyyvi2xpt2" path="res://Script/Enemy/Boar/boar_run_state.gd" id="5_ekrjj"]
 [ext_resource type="Script" uid="uid://dyxi1dxq7adra" path="res://Script/Enemy/Boar/boar_attack_state.gd" id="6_sbg87"]
 [ext_resource type="Script" uid="uid://wwvg2nsehi8p" path="res://Script/Enemy/Boar/boar_death_state.gd" id="7_skphb"]
 [ext_resource type="PackedScene" uid="uid://cn0kgmlc8e887" path="res://Scene/Component/health_component.tscn" id="9_5drtv"]
+[ext_resource type="Texture2D" uid="uid://dp2mvsdw3lca5" path="res://Asset/GUI/health_bar.png" id="9_i5eda"]
+[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="10_6qj56"]
 [ext_resource type="PackedScene" uid="uid://bg4v14wuqkcnp" path="res://Scene/Component/healthbox_component.tscn" id="10_skphb"]
 [ext_resource type="PackedScene" uid="uid://c2sp55knojytm" path="res://Scene/Component/hitbox_component.tscn" id="10_vu5fv"]
 [ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="11_gaukh"]
@@ -151,7 +152,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_gaukh"]
 script = ExtResource("11_gaukh")
-attack_damage = 1.0
+attack_damage = 15.0
 knockback_force = 300.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
@@ -202,12 +203,15 @@ texture = ExtResource("2_nvvbs")
 hframes = 6
 vframes = 4
 
-[node name="HealthSprite" type="Sprite2D" parent="."]
+[node name="HealthBar" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -9)
-texture = ExtResource("5_d40jh")
-hframes = 6
-frame = 2
+position = Vector2(-16, -13)
+texture = ExtResource("9_i5eda")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 6)
+script = ExtResource("10_6qj56")
+metadata/_custom_type_script = "uid://c0iiccrnxgt4y"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
@@ -263,7 +267,7 @@ debug_color = Color(0.946732, 0.22020167, 0.19805482, 0.41960785)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("death_state", "state_machine") instance=ExtResource("9_5drtv")]
 unique_name_in_owner = true
-MAX_HEALTH = 5
+MAX_HEALTH = 50
 death_state = NodePath("../StateMachine/Death")
 state_machine = NodePath("../StateMachine")
 

@@ -6,7 +6,7 @@ class_name Rock
 @onready var collision: Area2D = %Collision
 
 
-@export var mass: float = 0.01
+@export var mass: float = 0.25
 @export var initial_speed: float = 300
 
 var gravity: float = 9.8

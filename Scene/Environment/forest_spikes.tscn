@@ -1,18 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1d423b2d3cxl"]
+[gd_scene load_steps=7 format=3 uid="uid://c1d423b2d3cxl"]
 
 [ext_resource type="Texture2D" uid="uid://lf8hl1c3idbb" path="res://Asset/Environment/forest_spikes.png" id="1_t70nq"]
 [ext_resource type="Script" uid="uid://btb4yn8jd8mk3" path="res://Script/Environment/forest_spikes.gd" id="1_xkmpr"]
+[ext_resource type="Script" uid="uid://bxit1feq0lsq" path="res://Script/Component/hitbox_component.gd" id="3_282c2"]
+[ext_resource type="Script" uid="uid://bsqrlaath6rv7" path="res://Script/Component/attack.gd" id="4_pyyxx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t70nq"]
+[sub_resource type="Resource" id="Resource_6q7sc"]
+script = ExtResource("4_pyyxx")
+attack_damage = 10.0
+knockback_force = 200.0
+metadata/_custom_type_script = "uid://bsqrlaath6rv7"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_282c2"]
 size = Vector2(16, 12)
 
-[node name="ForestSpikes" type="Area2D"]
-collision_mask = 2
+[node name="ForestSpikes" type="Node2D"]
 script = ExtResource("1_xkmpr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_t70nq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_282c2")
+attack = SubResource("Resource_6q7sc")
+metadata/_custom_type_script = "uid://bxit1feq0lsq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_t70nq")
+shape = SubResource("RectangleShape2D_282c2")
+debug_color = Color(0.69390446, 0, 0.14841413, 0.41960785)
