@@ -17,7 +17,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dmwl5"]
 radius = 6.0
-height = 20.0
+height = 26.0
 
 [sub_resource type="Animation" id="Animation_gx76c"]
 length = 0.001
@@ -241,7 +241,7 @@ collision_mask = 2
 
 [node name="AttackLeft2" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-target_position = Vector2(-17, -17)
+target_position = Vector2(-18, -17)
 collision_mask = 2
 
 [node name="AttackRight" type="RayCast2D" parent="."]
@@ -251,7 +251,7 @@ collision_mask = 2
 
 [node name="AttackRight2" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-target_position = Vector2(17, -17)
+target_position = Vector2(18, -17)
 collision_mask = 2
 
 [node name="HitboxComponent" parent="." instance=ExtResource("10_vu5fv")]

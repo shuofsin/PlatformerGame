@@ -2,11 +2,13 @@ extends BoarState
 
 func enter() -> void: 
 	boar.animations.play("attack_hold")
+	boar.animations.animation_finished.connect(_attack_end)
 	boar.is_moving = false
 
 func exit() -> void: 
 	boar.animations.play("RESET")
 	boar.animations.advance(0)
+	boar.animations.animation_finished.disconnect(_attack_end)
 
 func update(_delta: float) -> void: 
 	
@@ -22,11 +24,6 @@ func update(_delta: float) -> void:
 	
 	if boar.distance_to_player > boar.run_distance:
 		transition.emit(self, "idle")
-	
-	for ray in boar.attack_rays:
-		if ray.is_colliding():
-			return
-	transition.emit(self, "run")
 
 func physics_update(delta: float) -> void:
 	boar.velocity.x = lerp(boar.velocity.x, 0.0, boar.x_velocity_weight)
@@ -34,3 +31,10 @@ func physics_update(delta: float) -> void:
 	if boar.attack_timer <= 0: 
 		boar.attack_timer = boar.TOTAL_ATTACK_TIME
 		boar.animations.play("attack")
+
+func _attack_end(animation_name: String) -> void:
+	if animation_name == "attack" || animation_name == "attack_hold":
+		for ray in boar.attack_rays:
+			if ray.is_colliding():
+				return
+		transition.emit(self, "run")

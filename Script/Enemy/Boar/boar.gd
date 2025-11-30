@@ -11,7 +11,7 @@ class_name Boar
 
 # Horizontal Movement 
 const MAX_SPEED_ROAM: float = 25.0
-const MAX_SPEED_RUN: float = 120.0
+const MAX_SPEED_RUN: float = 150.0
 const ACCELERATION: float = 12.0
 const FRICTION: float = 10
 @export_range(-1, 1, 1) var x_direction: float = 0
@@ -48,7 +48,7 @@ var direction_to_player: Vector2
 var distance_to_player: float = INF
 
 # Attack
-const HITBOX_OFFSET: float = 6.25
+const HITBOX_OFFSET: float = 7.25
 const TOTAL_ATTACK_TIME: float = 1
 var attack_timer: float = TOTAL_ATTACK_TIME
 

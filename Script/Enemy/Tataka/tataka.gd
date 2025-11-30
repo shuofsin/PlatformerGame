@@ -6,6 +6,7 @@ class_name Tataka
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var healthbox_component: HealthboxComponent = %HealthboxComponent
 @onready var hitbox_component: HitboxComponent = %HitboxComponent
+@onready var sprite: Sprite2D = %Sprite
 
 @onready var left_walk_ray: RayCast2D = %LeftWalkRay
 @onready var right_walk_ray: RayCast2D = %RightWalkRay
@@ -14,15 +15,6 @@ class_name Tataka
 
 @onready var health_bar: BarTexture = %HealthBar
 @export var total_health: float = 150.0
-
-@onready var sprites: Array[Sprite2D] = [
-	%LegBehind, 
-	%LegFront, 
-	%ArmBehind, 
-	%Body, 
-	%ArmFront, 
-	%Head
-]
 
 # Horizontal Movement 
 const MAX_SPEED: float = 25
@@ -50,13 +42,17 @@ var distance_to_player: float = INF
 var rock: PackedScene = preload("res://Scene/Enemy/rock.tscn")
 const MAX_ROCK_THROWS: int = 3
 var rocks_thrown: int = 0 
+var throw_range: float = 250
+
+# Inital Idle
+var idle_timer: float = 0
+const MAX_IDLE_TIME: float = 6
 
 func _ready() -> void: 
 	health_component.health = total_health
 	state_machine.ready()
 
 func _process(delta: float) -> void:
-	state_machine.process(delta)
 	health_bar.set_value(health_component.health / total_health)
 	
 	if Global.player: 
@@ -64,18 +60,10 @@ func _process(delta: float) -> void:
 		distance_to_player = global_position.distance_to(Global.player.global_position)
 
 	x_direction = sign(direction_to_player.x) if state_machine.current_state.name.to_lower() != "air" else x_direction
+	sprite.flip_h = true if x_direction < 0 else false
+	state_machine.process(delta)
 	
-	if x_direction < 0: 
-		for sprite in sprites: 
-			sprite.flip_h = true
-	else: 
-		for sprite in sprites: 
-			sprite.flip_h = false
-
-	
-
 func _physics_process(delta: float) -> void:
-	state_machine.physics_process(delta)
 	x_velocity_weight = delta * (ACCELERATION if is_moving else FRICTION)
 	
 	if is_on_floor():
@@ -86,6 +74,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity
 
 	move_and_slide()
+	state_machine.physics_process(delta)
 
 func reset_animation() -> void: 
 	animations.play("RESET")

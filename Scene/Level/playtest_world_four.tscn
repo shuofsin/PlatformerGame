@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dr2heda0utqy2"]
+[gd_scene load_steps=12 format=4 uid="uid://dr2heda0utqy2"]
 
 [ext_resource type="Script" uid="uid://bufy1j1qlkbtu" path="res://Script/Level/world.gd" id="1_0731o"]
 [ext_resource type="PackedScene" uid="uid://du144nstua4bo" path="res://Scene/Environment/forest_background.tscn" id="2_0mi8g"]
@@ -9,7 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://bxwoyrax2hte6" path="res://Scene/Enemy/Tataka/tataka.tscn" id="7_672u1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_672u1"]
-size = Vector2(576, 336)
+size = Vector2(288, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2onje"]
+size = Vector2(288, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avbpi"]
+size = Vector2(288, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tddnt"]
+size = Vector2(288, 160)
 
 [node name="PlaytestWorldFour" type="Node2D" node_paths=PackedStringArray("spawn")]
 script = ExtResource("1_0731o")
@@ -65,18 +74,50 @@ position = Vector2(216, 504)
 [node name="CameraSystem" type="Node2D" parent="."]
 
 [node name="RoomZoneCamera" parent="CameraSystem" instance=ExtResource("5_j3hyo")]
-position = Vector2(288, 408)
-zoom = Vector2(2, 2)
+position = Vector2(144, 496)
+zoom = Vector2(4, 4)
 
-[node name="RoomZoneArea" type="Area2D" parent="CameraSystem"]
-position = Vector2(288, 408)
+[node name="BottomLeft" type="Area2D" parent="CameraSystem"]
+position = Vector2(144, 496)
 script = ExtResource("4_5swi3")
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 metadata/_custom_type_script = "uid://bkm6atbucvq8j"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSystem/RoomZoneArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSystem/BottomLeft"]
 shape = SubResource("RectangleShape2D_672u1")
 debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
 
+[node name="BottomRight" type="Area2D" parent="CameraSystem"]
+position = Vector2(432, 496)
+script = ExtResource("4_5swi3")
+zoom = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkm6atbucvq8j"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSystem/BottomRight"]
+shape = SubResource("RectangleShape2D_2onje")
+debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
+
+[node name="TopRight" type="Area2D" parent="CameraSystem"]
+position = Vector2(432, 336)
+script = ExtResource("4_5swi3")
+zoom = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkm6atbucvq8j"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSystem/TopRight"]
+shape = SubResource("RectangleShape2D_avbpi")
+debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
+
+[node name="TopLeft" type="Area2D" parent="CameraSystem"]
+position = Vector2(144, 336)
+script = ExtResource("4_5swi3")
+zoom = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkm6atbucvq8j"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSystem/TopLeft"]
+shape = SubResource("RectangleShape2D_tddnt")
+debug_color = Color(0.5254902, 0.57254905, 0, 0.09019608)
+
 [node name="Tataka" parent="." instance=ExtResource("7_672u1")]
-position = Vector2(296, 472)
+position = Vector2(240, 472)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
