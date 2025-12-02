@@ -12,14 +12,18 @@ func update(_delta: float) -> void:
 	else: 
 		player.body_sprite.offset.x = 0
 		player.head_sprite.offset.x = 0
+	
+	# Preform wall jump
+	if player.wall_contact_coyote > 0.0:
+		if Input.is_action_just_pressed("move_jump") || (player.x_input == (-1 * player.look_dir_x)):
+			transition.emit(self, "walljump")
 
 func exit() -> void: 
 	player.body_sprite.offset.x = 0
 	player.head_sprite.offset.x = 0
 
+
 func physics_update(_delta: float) -> void: 
 	player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME
 	player.velocity.y = player.WALL_GRAVITY
 	player.velocity.x = lerp(player.velocity.x, player.x_input * player.max_speed, player.x_velocity_weight)
-	if !player.is_on_wall():
-		transition.emit(self, "air")

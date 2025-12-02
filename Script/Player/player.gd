@@ -28,8 +28,8 @@ var coyote_time_activated: bool = false
 const MAX_SPEED_NORMAL: float = 115.0
 const MAX_SPEED_WEAPON: float = 50.0
 var max_speed: float = MAX_SPEED_NORMAL
-const ACCELERATION: float = 12.0
-const FRICTION: float = 10
+const ACCELERATION: float = 14.0
+const FRICTION: float = 12.0
 var x_input: float = 0
 var x_velocity_weight: float = 0
 
@@ -82,11 +82,7 @@ func _process(delta: float) -> void:
 	# Preform jump
 	if !jump_buffer_timer.is_stopped() and (!coyote_timer.is_stopped() or is_on_floor()):
 		state_machine.force_change_state("jump")
-	
-	# Preform wall jump
-	if wall_contact_coyote > 0.0 and state_machine.current_state.name.to_lower() == "wallslide":
-		if Input.is_action_just_pressed("move_jump"):
-			state_machine.force_change_state("walljump")
+
 	
 	if can_dash and Input.is_action_just_pressed("move_dash"):
 		state_machine.force_change_state("dash")
