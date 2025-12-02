@@ -83,10 +83,10 @@ tracks/0/path = NodePath("BodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [23]
+"values": [23, 11, 23, 11]
 }
 
 [sub_resource type="Animation" id="Animation_4ad2a"]
@@ -152,8 +152,8 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_gaukh"]
 script = ExtResource("11_gaukh")
-attack_damage = 15.0
-knockback_force = 300.0
+attack_damage = 25.0
+knockback_force = 400.0
 metadata/_custom_type_script = "uid://bsqrlaath6rv7"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gaukh"]
@@ -167,6 +167,7 @@ height = 26.0
 collision_layer = 4
 script = ExtResource("1_eqh40")
 x_direction = 1.0
+total_health = 35.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_sbg87")
@@ -267,7 +268,7 @@ debug_color = Color(0.946732, 0.22020167, 0.19805482, 0.41960785)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("death_state", "state_machine") instance=ExtResource("9_5drtv")]
 unique_name_in_owner = true
-MAX_HEALTH = 50
+MAX_HEALTH = 35
 death_state = NodePath("../StateMachine/Death")
 state_machine = NodePath("../StateMachine")
 

@@ -11,7 +11,7 @@ class_name Boar
 
 # Horizontal Movement 
 const MAX_SPEED_ROAM: float = 25.0
-const MAX_SPEED_RUN: float = 150.0
+const MAX_SPEED_RUN: float = 175.0
 const ACCELERATION: float = 12.0
 const FRICTION: float = 10
 @export_range(-1, 1, 1) var x_direction: float = 0
@@ -43,15 +43,14 @@ var roam_timer: float = 0
 ]
 
 # Run 
-@export var run_distance: float = 100.0
+@export var run_distance: float = 200.0
 var direction_to_player: Vector2
 var distance_to_player: float = INF
+var run_timer: float = 0.0
+const TIME_TO_RUN: float = 0.75
 
 # Attack
 const HITBOX_OFFSET: float = 7.25
-const TOTAL_ATTACK_TIME: float = 1
-var attack_timer: float = TOTAL_ATTACK_TIME
-
 
 @export var total_health: float = 50
 
@@ -81,21 +80,17 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity
 	state_machine.physics_process(delta)
 	
-	if state_machine.current_state.name.to_lower() != "attack":
-		attack_timer -= delta
-		if attack_timer <= 0: 
-			attack_timer = TOTAL_ATTACK_TIME
-	
 	move_and_slide()
 
-func _check_for_player_run() -> void: 
+func check_for_attack() -> void: 
 	if distance_to_player < run_distance:
 		state_machine.force_change_state("run")
-
-func _check_for_player_attack() -> void: 
+		return
 	for ray in attack_rays:
 		if ray.is_colliding():
-			state_machine.force_change_state("attack")
+			state_machine.force_change_state("run")
+			return 
 
-func _on_attacked(area_entered: Area2D) -> void: 
+func _on_attacked(_area_entered: Area2D) -> void: 
+	print("attacked!")
 	state_machine.force_change_state("run")

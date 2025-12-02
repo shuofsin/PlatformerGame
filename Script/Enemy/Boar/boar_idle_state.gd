@@ -13,8 +13,7 @@ func update(delta: float) -> void:
 	else: 
 		transition.emit(self, "roam")
 	
-	boar._check_for_player_run()
-	boar._check_for_player_attack()
-
+	boar.check_for_attack()
+	
 func physics_update(_delta: float) -> void:
 	boar.velocity.x = lerp(boar.velocity.x, 0.0, boar.x_velocity_weight)
