@@ -1,17 +1,19 @@
 extends PlayerState
 
 func update(_delta: float) -> void: 
-	if (player.velocity.y <= 0):
+	if player.velocity.y < 0:
 		player.animations.play(&"jump")
-	else:
+	elif player.velocity.y > 0:
 		player.animations.play(&"fall")
 
 func physics_update(delta: float) -> void: 
 	if player.wall_jump_lock > 0.0:
 		player.wall_jump_lock -= delta
 		player.velocity.x += player.x_input * delta
-	else:  
+	elif !player.is_weapon_charging:  
 		player.velocity.x = lerp(player.velocity.x, player.x_input * player.max_speed, player.x_velocity_weight)
+	else: 
+		player.velocity.x = lerp(player.velocity.x, 0.0, player.x_velocity_weight)
 		
 	if player.is_on_floor(): 
 		transition.emit(self, "idle")

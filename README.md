@@ -11,3 +11,8 @@ Godot Platformer Project
 -- Weapon: Simple, but responsive 
 -- Enemies: Predictable, but punishing 
 -- Environment: Integrated with combat. i.e. flying enemies harder in the air, walking enemies harder on the ground, etc. etc. 
+
+### Bugs
+- Investigate wall-slide issues
+-- Wallsliding off of arrows?
+-- Stuck wallsliding above ledges?

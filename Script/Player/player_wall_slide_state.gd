@@ -1,6 +1,5 @@
 extends PlayerState
 
-
 func update(_delta: float) -> void: 
 	player.animations.play(&"wall")
 	if (player.look_dir_x == -1):
@@ -21,7 +20,6 @@ func update(_delta: float) -> void:
 func exit() -> void: 
 	player.body_sprite.offset.x = 0
 	player.head_sprite.offset.x = 0
-
 
 func physics_update(_delta: float) -> void: 
 	player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME

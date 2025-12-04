@@ -6,11 +6,8 @@ class_name Arrow
 @export var arrow_texture: AbilityTexture
 var weapon: Weapon
 
-var _gravity: float = 9.8
-@export var mass: float = 0.25
 var velocity: Vector2 = Vector2.ZERO
-var gravity_vector: Vector2 = Vector2.DOWN
-@export var initial_speed: float = 600
+@export var initial_speed: float = 0
 
 var has_hit: bool = false
 @export var time_to_despawn: float = 2
@@ -36,7 +33,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void: 	
 	if (!has_hit): 
-		velocity += gravity_vector * _gravity * mass
 		position += velocity * delta
 		rotation = velocity.angle()
 	_extra_physics_process()

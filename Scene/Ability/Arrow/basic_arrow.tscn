@@ -23,8 +23,7 @@ script = ExtResource("1_4pkde")
 hitbox_component = NodePath("HitboxComponent")
 collision = NodePath("Area2D")
 arrow_texture = NodePath("AbilityTexture")
-mass = 0.3
-initial_speed = 300.0
+initial_speed = 200.0
 metadata/_custom_type_script = "uid://5slrkmwitukl"
 
 [node name="AbilityTexture" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]

@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8u7lr2a1ph8i"]
+[gd_scene load_steps=9 format=3 uid="uid://b8u7lr2a1ph8i"]
 
 [ext_resource type="Script" uid="uid://b0f7psem8whtk" path="res://Script/Ability/Bow/weapon.gd" id="1_1b1hv"]
 [ext_resource type="PackedScene" uid="uid://v8n48veyq74y" path="res://Scene/Ability/Arrow/basic_arrow.tscn" id="2_u77gs"]
 [ext_resource type="Script" uid="uid://j4ewsd0pheac" path="res://Script/Component/ability_texture.gd" id="2_xori8"]
 [ext_resource type="Texture2D" uid="uid://83ncefgtdekp" path="res://Asset/Ability/player_weapon.png" id="3_u77gs"]
-[ext_resource type="Texture2D" uid="uid://hrwfrub5o73c" path="res://Asset/Ability/player_arrow.png" id="4_ihbq5"]
-[ext_resource type="Script" uid="uid://c0iiccrnxgt4y" path="res://Script/Component/bar_texture.gd" id="5_y2bit"]
 
 [sub_resource type="Animation" id="Animation_boibm"]
 length = 0.001
@@ -86,23 +84,6 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ynohi"]
-resource_name = "holding"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [6, 5]
-}
-
 [sub_resource type="Animation" id="Animation_1ajyr"]
 resource_name = "idle"
 length = 1.2
@@ -148,15 +129,13 @@ tracks/2/keys = {
 _data = {
 &"RESET": SubResource("Animation_boibm"),
 &"charging": SubResource("Animation_cffcc"),
-&"holding": SubResource("Animation_ynohi"),
 &"idle": SubResource("Animation_1ajyr")
 }
 
-[node name="BasicBow" type="Node2D" node_paths=PackedStringArray("weapon_texture", "charge_bar_texture")]
+[node name="BasicBow" type="Node2D" node_paths=PackedStringArray("weapon_texture")]
 script = ExtResource("1_1b1hv")
 arrow_type = ExtResource("2_u77gs")
 weapon_texture = NodePath("AbilityTexture")
-charge_bar_texture = NodePath("BarTexture")
 metadata/_custom_type_script = "uid://b0f7psem8whtk"
 
 [node name="AbilityTexture" type="Node2D" parent="." node_paths=PackedStringArray("animations", "sprite")]
@@ -175,10 +154,3 @@ hframes = 7
 libraries = {
 &"": SubResource("AnimationLibrary_ynohi")
 }
-
-[node name="BarTexture" type="Sprite2D" parent="."]
-position = Vector2(-1, -19)
-scale = Vector2(2, 2)
-texture = ExtResource("4_ihbq5")
-script = ExtResource("5_y2bit")
-metadata/_custom_type_script = "uid://c0iiccrnxgt4y"

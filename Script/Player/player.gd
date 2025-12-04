@@ -120,7 +120,6 @@ func _physics_process(delta: float) -> void:
 
 	state_machine.physics_process(delta)
 	move_and_slide()
-	pass
 
 func set_player_active(is_active: bool) -> void: 
 	state_machine.force_change_state("idle")
@@ -128,10 +127,12 @@ func set_player_active(is_active: bool) -> void:
 	set_physics_process(is_active)
 	set_weapon_active(is_active)
 
-func run_gravity(delta: float) -> void: 
+func run_gravity(delta: float) -> void:
+	if is_weapon_charging:
+		return 
 	velocity.y += gravity 
 	wall_contact_coyote -= delta
-
+	
 func _debug(is_on: bool) -> void: 
 	if is_on:
 		debug.text = str(is_dashing)
@@ -148,13 +149,14 @@ func _weapon_logic() -> void:
 	if ability_manager.weapon.name.to_lower() == "emptybow":
 		return
 	if Input.is_action_just_pressed("shoot"):
-		ability_manager.weapon.draw_weapon()
+		ability_manager.weapon.fire_weapon()
 		max_speed = MAX_SPEED_WEAPON
 		is_weapon_charging = true
-	if Input.is_action_just_released("shoot"):
-		ability_manager.weapon.release_weapon()
-		max_speed = MAX_SPEED_NORMAL
-		is_weapon_charging = false
+		velocity.y = 0
+
+func weapon_fired() -> void: 
+	max_speed = MAX_SPEED_NORMAL
+	is_weapon_charging = false
 
 func _head_rotation_logic() -> void: 
 	head_sprite.rotation = head_sprite.global_position.direction_to(get_global_mouse_position()).angle()
