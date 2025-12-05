@@ -20,7 +20,7 @@ func damage(attack: Attack):
 	
 	if get_parent().velocity != null:
 		var knockback_direction = attack.attack_position.direction_to(get_parent().global_position)
-		knockback_direction.rotated(Global.rng.randf_range(-(PI / 4), (PI / 4)))
+		knockback_direction = knockback_direction.rotated(Global.rng.randf_range(-(PI / 6), (PI / 6)))
 		get_parent().velocity = knockback_direction * attack.knockback_force
 	if health <= 0:
 		state_machine.force_change_state(death_state.name)
