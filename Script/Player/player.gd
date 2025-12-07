@@ -159,11 +159,19 @@ func weapon_fired() -> void:
 	is_weapon_charging = false
 
 func _head_rotation_logic() -> void: 
-	head_sprite.rotation = head_sprite.global_position.direction_to(get_global_mouse_position()).angle()
-	if head_sprite.rotation > (PI/2) or head_sprite.rotation < (-PI/2):
-		head_sprite.flip_v = true
-	else: 
+	var angle = global_position.direction_to(get_global_mouse_position()).normalized().angle()
+	if angle > (- PI / 4) && angle < (PI / 4):
+		head_sprite.rotation = Vector2.RIGHT.angle()
 		head_sprite.flip_v = false
+		return
+	if angle > (PI / 4) && angle < (3 * PI / 4):
+		head_sprite.rotation = Vector2.DOWN.angle()
+		return
+	if abs(angle) > (3 * PI / 4):
+		head_sprite.rotation = Vector2.LEFT.angle()
+		head_sprite.flip_v = true
+		return
+	head_sprite.rotation = Vector2.UP.angle()
 
 func get_health_percentage() -> float:
 	return health_component.health / total_health

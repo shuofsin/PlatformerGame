@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dbocxh517g6jj"]
+[gd_scene load_steps=30 format=3 uid="uid://dbocxh517g6jj"]
 
 [ext_resource type="Script" uid="uid://dfhutr60wutgc" path="res://Script/Player/player.gd" id="1_dd0ac"]
 [ext_resource type="Texture2D" uid="uid://c0vsj2mex11rn" path="res://Asset/Player/player_sprite_sheet.png" id="2_3smsa"]
@@ -582,6 +582,9 @@ height = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
 size = Vector2(11, 17)
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_w02sr"]
+loop = false
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
@@ -737,3 +740,6 @@ dash = NodePath("EmptyDashStrike")
 [node name="EmptyDashStrike" parent="AbilityManager" instance=ExtResource("16_w02sr")]
 
 [node name="EmptyBow" parent="AbilityManager" instance=ExtResource("17_w02sr")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_w02sr")

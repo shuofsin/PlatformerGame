@@ -46,7 +46,7 @@ var throw_range: float = 250
 
 # Inital Idle
 var idle_timer: float = 0
-const MAX_IDLE_TIME: float = 6
+const MAX_IDLE_TIME: float = 3
 
 func _ready() -> void: 
 	health_component.health = total_health
