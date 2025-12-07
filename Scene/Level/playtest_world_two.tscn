@@ -63,9 +63,8 @@ shape = SubResource("WorldBoundaryShape2D_1x2ph")
 
 [node name="HelpSign" parent="HelpText" instance=ExtResource("6_0nm36")]
 position = Vector2(176, 256)
-help_text = "Hold Left Mouse to draw
-your bow, release to fire
-an arrow."
+help_text = "Press Left Mouse
+to fire."
 
 [node name="SpikesWall" type="Node2D" parent="."]
 
